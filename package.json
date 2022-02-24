@@ -1,9 +1,9 @@
 {
   "name": "@36node-fcp/ecs-api-sdk-js",
-  "version": "0.0.3",
+  "version": "0.0.0",
   "description": "JS sdk for ecs api.",
   "repository": {
-    "url": "36node/ecs-api-sdk-js",
+    "url": "36node-fcp/ecs-api-sdk-js",
     "type": "git"
   },
   "license": "MIT",
