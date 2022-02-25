@@ -6,6 +6,8 @@ declare class SDK {
   auth: string;
 
   illegal: IllegalAPI;
+  bayonet: BayonetAPI;
+  whitelist: WhitelistAPI;
 }
 
 export interface Options {
@@ -35,6 +37,50 @@ export interface IllegalAPI {
    */
   deleteIllegal(req: DeleteIllegalRequest): Promise<void>;
 }
+export interface BayonetAPI {
+  /**
+   * List bayonets
+   */
+  listBayonets(req: ListBayonetsRequest): Promise<ListBayonetsResponse>;
+  /**
+   * Create a bayonet
+   */
+  createBayonet(req: CreateBayonetRequest): Promise<CreateBayonetResponse>;
+  /**
+   * Find bayonet device by id
+   */
+  getBayonet(req: GetBayonetRequest): Promise<GetBayonetResponse>;
+  /**
+   * Update bayonet device
+   */
+  updateBayonet(req: UpdateBayonetRequest): Promise<UpdateBayonetResponse>;
+  /**
+   * Delete bayonet
+   */
+  deleteBayonet(req: DeleteBayonetRequest): Promise<void>;
+}
+export interface WhitelistAPI {
+  /**
+   * List whitelist
+   */
+  listWhitelist(req: ListWhitelistRequest): Promise<ListWhitelistResponse>;
+  /**
+   * Create a whitelist
+   */
+  createWhitelist(req: CreateWhitelistRequest): Promise<CreateWhitelistResponse>;
+  /**
+   * Find whitelist by id
+   */
+  getWhitelist(req: GetWhitelistRequest): Promise<GetWhitelistResponse>;
+  /**
+   * Update whitelist device
+   */
+  updateWhitelist(req: UpdateWhitelistRequest): Promise<UpdateWhitelistResponse>;
+  /**
+   * Delete whitelist
+   */
+  deleteWhitelist(req: DeleteWhitelistRequest): Promise<void>;
+}
 
 export interface ListIllegalsRequest {
   query?: {
@@ -43,6 +89,8 @@ export interface ListIllegalsRequest {
     _sort?: string;
     _select?: string[];
     plate?: string[];
+    plate_like?: string;
+    state?: string[];
   };
 }
 export interface ListIllegalsResponse {
@@ -370,6 +418,413 @@ export interface UpdateIllegalResponse {
 export interface DeleteIllegalRequest {
   illegalId: string;
 }
+export interface ListBayonetsRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    _select?: string[];
+    name_like?: string;
+    state?: string[];
+    attr?: string[];
+    ns?: string[];
+  };
+}
+export interface ListBayonetsResponse {
+  body: ({
+    /**
+     * 卡口名
+     */
+    name?: string;
+    /**
+     * 所属ns
+     */
+    ns?: string;
+    /**
+     * 卡口所在经度
+     */
+    longitude?: number;
+    /**
+     * 卡口所在纬度
+     */
+    latitude?: number;
+    /**
+     * 上级卡口
+     */
+    parent?: string;
+    /**
+     * 卡口属性
+     */
+    attr?: "HIGHSPEED" | "EXPORT";
+    /**
+     * 卡口状态
+     */
+    state?: "ONLINE" | "OFFLINE";
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  })[];
+  headers: {
+    "x-total-count"?: number;
+  };
+}
+export interface CreateBayonetRequest {
+  /**
+   * 创建卡口详情
+   */
+  body: {
+    /**
+     * 卡口名
+     */
+    name: string;
+    /**
+     * 所属ns
+     */
+    ns: string;
+    /**
+     * 卡口所在经度
+     */
+    longitude: number;
+    /**
+     * 卡口所在纬度
+     */
+    latitude: number;
+    /**
+     * 上级卡口
+     */
+    parent?: string;
+    /**
+     * 卡口属性
+     */
+    attr: "HIGHSPEED" | "EXPORT";
+    /**
+     * 卡口状态
+     */
+    state: "ONLINE" | "OFFLINE";
+  };
+}
+export interface CreateBayonetResponse {
+  /**
+   * 卡口
+   */
+  body: {
+    /**
+     * 卡口名
+     */
+    name?: string;
+    /**
+     * 所属ns
+     */
+    ns?: string;
+    /**
+     * 卡口所在经度
+     */
+    longitude?: number;
+    /**
+     * 卡口所在纬度
+     */
+    latitude?: number;
+    /**
+     * 上级卡口
+     */
+    parent?: string;
+    /**
+     * 卡口属性
+     */
+    attr?: "HIGHSPEED" | "EXPORT";
+    /**
+     * 卡口状态
+     */
+    state?: "ONLINE" | "OFFLINE";
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface GetBayonetRequest {
+  bayonetId: string;
+}
+export interface GetBayonetResponse {
+  /**
+   * 卡口
+   */
+  body: {
+    /**
+     * 卡口名
+     */
+    name?: string;
+    /**
+     * 所属ns
+     */
+    ns?: string;
+    /**
+     * 卡口所在经度
+     */
+    longitude?: number;
+    /**
+     * 卡口所在纬度
+     */
+    latitude?: number;
+    /**
+     * 上级卡口
+     */
+    parent?: string;
+    /**
+     * 卡口属性
+     */
+    attr?: "HIGHSPEED" | "EXPORT";
+    /**
+     * 卡口状态
+     */
+    state?: "ONLINE" | "OFFLINE";
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpdateBayonetRequest {
+  bayonetId: string;
+  /**
+   * 卡口信息详情
+   */
+  body: {
+    /**
+     * 卡口名
+     */
+    name?: string;
+    /**
+     * 所属ns
+     */
+    ns?: string;
+    /**
+     * 卡口所在经度
+     */
+    longitude?: number;
+    /**
+     * 卡口所在纬度
+     */
+    latitude?: number;
+    /**
+     * 上级卡口
+     */
+    parent?: string;
+    /**
+     * 卡口属性
+     */
+    attr?: "HIGHSPEED" | "EXPORT";
+    /**
+     * 卡口状态
+     */
+    state?: "ONLINE" | "OFFLINE";
+  };
+}
+export interface UpdateBayonetResponse {
+  /**
+   * 卡口
+   */
+  body: {
+    /**
+     * 卡口名
+     */
+    name?: string;
+    /**
+     * 所属ns
+     */
+    ns?: string;
+    /**
+     * 卡口所在经度
+     */
+    longitude?: number;
+    /**
+     * 卡口所在纬度
+     */
+    latitude?: number;
+    /**
+     * 上级卡口
+     */
+    parent?: string;
+    /**
+     * 卡口属性
+     */
+    attr?: "HIGHSPEED" | "EXPORT";
+    /**
+     * 卡口状态
+     */
+    state?: "ONLINE" | "OFFLINE";
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface DeleteBayonetRequest {
+  bayonetId: string;
+}
+export interface ListWhitelistRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    _select?: string[];
+    plate_like?: string;
+  };
+}
+export interface ListWhitelistResponse {
+  body: ({
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 备注
+     */
+    remark?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  })[];
+  headers: {
+    "x-total-count"?: number;
+  };
+}
+export interface CreateWhitelistRequest {
+  /**
+   * 创建白名单
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate: string;
+    /**
+     * 备注
+     */
+    remark?: string;
+  };
+}
+export interface CreateWhitelistResponse {
+  /**
+   * 白名单
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 备注
+     */
+    remark?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface GetWhitelistRequest {
+  whitelistId: string;
+}
+export interface GetWhitelistResponse {
+  /**
+   * 白名单
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 备注
+     */
+    remark?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpdateWhitelistRequest {
+  whitelistId: string;
+  /**
+   * 白名单详情
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 备注
+     */
+    remark?: string;
+  };
+}
+export interface UpdateWhitelistResponse {
+  /**
+   * 白名单
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 备注
+     */
+    remark?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface DeleteWhitelistRequest {
+  whitelistId: string;
+}
 export type DateTime = Date;
 
 /**
@@ -533,7 +988,7 @@ export type Illegal = {
 /**
  * 白名单详情
  */
-export interface WhiteListDoc {
+export interface WhitelistDoc {
   /**
    * 车牌
    */
@@ -545,9 +1000,23 @@ export interface WhiteListDoc {
 }
 
 /**
+ * 创建白名单
+ */
+export interface WhitelistCreateBody {
+  /**
+   * 车牌
+   */
+  plate: string;
+  /**
+   * 备注
+   */
+  remark?: string;
+}
+
+/**
  * 白名单
  */
-export type WhiteList = {
+export type Whitelist = {
   /**
    * 车牌
    */
@@ -598,6 +1067,10 @@ export interface BayonetDoc {
    */
   latitude?: number;
   /**
+   * 上级卡口
+   */
+  parent?: string;
+  /**
    * 卡口属性
    */
   attr?: "HIGHSPEED" | "EXPORT";
@@ -605,6 +1078,40 @@ export interface BayonetDoc {
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
+}
+
+/**
+ * 创建卡口详情
+ */
+export interface BayonetCreateBody {
+  /**
+   * 卡口名
+   */
+  name: string;
+  /**
+   * 所属ns
+   */
+  ns: string;
+  /**
+   * 卡口所在经度
+   */
+  longitude: number;
+  /**
+   * 卡口所在纬度
+   */
+  latitude: number;
+  /**
+   * 上级卡口
+   */
+  parent?: string;
+  /**
+   * 卡口属性
+   */
+  attr: "HIGHSPEED" | "EXPORT";
+  /**
+   * 卡口状态
+   */
+  state: "ONLINE" | "OFFLINE";
 }
 
 /**
@@ -627,6 +1134,10 @@ export type Bayonet = {
    * 卡口所在纬度
    */
   latitude?: number;
+  /**
+   * 上级卡口
+   */
+  parent?: string;
   /**
    * 卡口属性
    */

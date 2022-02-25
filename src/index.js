@@ -121,4 +121,181 @@ export default class SDK {
       });
     },
   };
+  /**
+   * bayonet's methods
+   */
+  bayonet = {
+    /**
+     * List bayonets
+     *
+     * @param {ListBayonetsRequest} req listBayonets request
+     * @returns {Promise<ListBayonetsResponse>} A paged array of bayonets
+     */
+    listBayonets: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/bayonets`, {
+        method: "GET",
+        query,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Create a bayonet
+     *
+     * @param {CreateBayonetRequest} req createBayonet request
+     * @returns {Promise<CreateBayonetResponse>} The bayonet created
+     */
+    createBayonet: req => {
+      const { body } = req || {};
+
+      if (!body) throw new Error("requetBody is required for createBayonet");
+
+      return fetch(`${this.base}/bayonets`, {
+        method: "POST",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Find bayonet device by id
+     *
+     * @param {GetBayonetRequest} req getBayonet request
+     * @returns {Promise<GetBayonetResponse>} Expected response to a valid request
+     */
+    getBayonet: req => {
+      const { bayonetId } = req || {};
+
+      if (!bayonetId) throw new Error("bayonetId is required for getBayonet");
+
+      return fetch(`${this.base}/bayonet/${bayonetId}`, {
+        method: "GET",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Update bayonet device
+     *
+     * @param {UpdateBayonetRequest} req updateBayonet request
+     * @returns {Promise<UpdateBayonetResponse>} The bayonet
+     */
+    updateBayonet: req => {
+      const { bayonetId, body } = req || {};
+
+      if (!bayonetId)
+        throw new Error("bayonetId is required for updateBayonet");
+      if (!body) throw new Error("requetBody is required for updateBayonet");
+
+      return fetch(`${this.base}/bayonet/${bayonetId}`, {
+        method: "PUT",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Delete bayonet
+     *
+     * @param {DeleteBayonetRequest} req deleteBayonet request
+     */
+    deleteBayonet: req => {
+      const { bayonetId } = req || {};
+
+      if (!bayonetId)
+        throw new Error("bayonetId is required for deleteBayonet");
+
+      return fetch(`${this.base}/bayonet/${bayonetId}`, {
+        method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+  };
+  /**
+   * whitelist's methods
+   */
+  whitelist = {
+    /**
+     * List whitelist
+     *
+     * @param {ListWhitelistRequest} req listWhitelist request
+     * @returns {Promise<ListWhitelistResponse>} A paged array of whitelist
+     */
+    listWhitelist: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/whitelist`, {
+        method: "GET",
+        query,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Create a whitelist
+     *
+     * @param {CreateWhitelistRequest} req createWhitelist request
+     * @returns {Promise<CreateWhitelistResponse>} The whitelist created
+     */
+    createWhitelist: req => {
+      const { body } = req || {};
+
+      if (!body) throw new Error("requetBody is required for createWhitelist");
+
+      return fetch(`${this.base}/whitelist`, {
+        method: "POST",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Find whitelist by id
+     *
+     * @param {GetWhitelistRequest} req getWhitelist request
+     * @returns {Promise<GetWhitelistResponse>} Expected response to a valid request
+     */
+    getWhitelist: req => {
+      const { whitelistId } = req || {};
+
+      if (!whitelistId)
+        throw new Error("whitelistId is required for getWhitelist");
+
+      return fetch(`${this.base}/whitelist/${whitelistId}`, {
+        method: "GET",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Update whitelist device
+     *
+     * @param {UpdateWhitelistRequest} req updateWhitelist request
+     * @returns {Promise<UpdateWhitelistResponse>} The whitelist
+     */
+    updateWhitelist: req => {
+      const { whitelistId, body } = req || {};
+
+      if (!whitelistId)
+        throw new Error("whitelistId is required for updateWhitelist");
+      if (!body) throw new Error("requetBody is required for updateWhitelist");
+
+      return fetch(`${this.base}/whitelist/${whitelistId}`, {
+        method: "PUT",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Delete whitelist
+     *
+     * @param {DeleteWhitelistRequest} req deleteWhitelist request
+     */
+    deleteWhitelist: req => {
+      const { whitelistId } = req || {};
+
+      if (!whitelistId)
+        throw new Error("whitelistId is required for deleteWhitelist");
+
+      return fetch(`${this.base}/whitelist/${whitelistId}`, {
+        method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+  };
 }
