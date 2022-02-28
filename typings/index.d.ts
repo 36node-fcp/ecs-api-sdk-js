@@ -25,6 +25,10 @@ export interface IllegalAPI {
    */
   createIllegal(req: CreateIllegalRequest): Promise<CreateIllegalResponse>;
   /**
+   * confirm an open illegal
+   */
+  confirmIllegal(req: ConfirmIllegalRequest): Promise<ConfirmIllegalResponse>;
+  /**
    * Find illegal device by id
    */
   getIllegal(req: GetIllegalRequest): Promise<GetIllegalResponse>;
@@ -116,13 +120,25 @@ export interface ListIllegalsResponse {
      */
     at?: Date;
     /**
-     * 违法信息
+     * 违法类型
      */
-    desc?: string;
+    type?: string;
+    /**
+     * 违法代码
+     */
+    code?: number;
+    /**
+     * 处罚次数
+     */
+    count?: number;
     /**
      * 违法地点
      */
     place?: string;
+    /**
+     * 有效时长
+     */
+    effectiveDays?: number;
     /**
      * 图片信息
      */
@@ -135,6 +151,86 @@ export interface ListIllegalsResponse {
      * 状态
      */
     state?: "OPEN" | "CONFIRMED";
+    /**
+     * 过车记录索引号
+     */
+    recordId?: string;
+    /**
+     * 号牌类型
+     */
+    carNumType?: string;
+    /**
+     * 号牌类型(中文)
+     */
+    carNumTypeStr?: string;
+    /**
+     * 过车时间
+     */
+    capTime?: Date;
+    /**
+     * 抓拍相机通道号
+     */
+    channelCode?: string;
+    /**
+     * 抓拍相机名称
+     */
+    channelName?: string;
+    /**
+     * 组织名称
+     */
+    orgName?: string;
+    /**
+     * 入库时间
+     */
+    createTime?: Date;
+    /**
+     * 车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 车道编号（中文）
+     */
+    carWayCodeStr?: string;
+    /**
+     * 车辆速度
+     */
+    carSpeed?: number;
+    /**
+     * 车身颜色
+     */
+    carColor?: number;
+    /**
+     * 车辆品牌编码
+     */
+    carBrand?: string;
+    /**
+     * 车辆品牌名称
+     */
+    carBrandStr?: string;
+    /**
+     * 行驶方向
+     */
+    carDirect?: string;
+    /**
+     * 行驶方向(中文)
+     */
+    carDirectStr?: string;
+    /**
+     * 通道编号
+     */
+    channelId?: string;
+    /**
+     * 经度
+     */
+    lng?: number;
+    /**
+     * 纬度
+     */
+    lat?: number;
+    /**
+     * 所属地市
+     */
+    deptId?: string;
   } & {
     /**
      * mongodb id
@@ -175,13 +271,25 @@ export interface CreateIllegalRequest {
      */
     at: Date;
     /**
-     * 违法信息
+     * 违法类型
      */
-    desc: string;
+    type: string;
+    /**
+     * 违法代码
+     */
+    code: number;
+    /**
+     * 处罚次数
+     */
+    count?: number;
     /**
      * 违法地点
      */
     place: string;
+    /**
+     * 有效时长
+     */
+    effectiveDays?: number;
     /**
      * 图片信息
      */
@@ -194,6 +302,86 @@ export interface CreateIllegalRequest {
      * 状态
      */
     state?: "OPEN" | "CONFIRMED";
+    /**
+     * 过车记录索引号
+     */
+    recordId?: string;
+    /**
+     * 号牌类型
+     */
+    carNumType?: string;
+    /**
+     * 号牌类型(中文)
+     */
+    carNumTypeStr?: string;
+    /**
+     * 过车时间
+     */
+    capTime?: Date;
+    /**
+     * 抓拍相机通道号
+     */
+    channelCode?: string;
+    /**
+     * 抓拍相机名称
+     */
+    channelName?: string;
+    /**
+     * 组织名称
+     */
+    orgName?: string;
+    /**
+     * 入库时间
+     */
+    createTime?: Date;
+    /**
+     * 车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 车道编号（中文）
+     */
+    carWayCodeStr?: string;
+    /**
+     * 车辆速度
+     */
+    carSpeed?: number;
+    /**
+     * 车身颜色
+     */
+    carColor?: number;
+    /**
+     * 车辆品牌编码
+     */
+    carBrand?: string;
+    /**
+     * 车辆品牌名称
+     */
+    carBrandStr?: string;
+    /**
+     * 行驶方向
+     */
+    carDirect?: string;
+    /**
+     * 行驶方向(中文)
+     */
+    carDirectStr?: string;
+    /**
+     * 通道编号
+     */
+    channelId?: string;
+    /**
+     * 经度
+     */
+    lng?: number;
+    /**
+     * 纬度
+     */
+    lat?: number;
+    /**
+     * 所属地市
+     */
+    deptId?: string;
   };
 }
 export interface CreateIllegalResponse {
@@ -222,13 +410,25 @@ export interface CreateIllegalResponse {
      */
     at?: Date;
     /**
-     * 违法信息
+     * 违法类型
      */
-    desc?: string;
+    type?: string;
+    /**
+     * 违法代码
+     */
+    code?: number;
+    /**
+     * 处罚次数
+     */
+    count?: number;
     /**
      * 违法地点
      */
     place?: string;
+    /**
+     * 有效时长
+     */
+    effectiveDays?: number;
     /**
      * 图片信息
      */
@@ -241,6 +441,237 @@ export interface CreateIllegalResponse {
      * 状态
      */
     state?: "OPEN" | "CONFIRMED";
+    /**
+     * 过车记录索引号
+     */
+    recordId?: string;
+    /**
+     * 号牌类型
+     */
+    carNumType?: string;
+    /**
+     * 号牌类型(中文)
+     */
+    carNumTypeStr?: string;
+    /**
+     * 过车时间
+     */
+    capTime?: Date;
+    /**
+     * 抓拍相机通道号
+     */
+    channelCode?: string;
+    /**
+     * 抓拍相机名称
+     */
+    channelName?: string;
+    /**
+     * 组织名称
+     */
+    orgName?: string;
+    /**
+     * 入库时间
+     */
+    createTime?: Date;
+    /**
+     * 车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 车道编号（中文）
+     */
+    carWayCodeStr?: string;
+    /**
+     * 车辆速度
+     */
+    carSpeed?: number;
+    /**
+     * 车身颜色
+     */
+    carColor?: number;
+    /**
+     * 车辆品牌编码
+     */
+    carBrand?: string;
+    /**
+     * 车辆品牌名称
+     */
+    carBrandStr?: string;
+    /**
+     * 行驶方向
+     */
+    carDirect?: string;
+    /**
+     * 行驶方向(中文)
+     */
+    carDirectStr?: string;
+    /**
+     * 通道编号
+     */
+    channelId?: string;
+    /**
+     * 经度
+     */
+    lng?: number;
+    /**
+     * 纬度
+     */
+    lat?: number;
+    /**
+     * 所属地市
+     */
+    deptId?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface ConfirmIllegalRequest {
+  illegalId: string;
+}
+export interface ConfirmIllegalResponse {
+  /**
+   * 违法库
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 车牌颜色
+     */
+    plateColor?: string;
+    /**
+     * 车型
+     */
+    vehicleModel?: string;
+    /**
+     * 车身颜色
+     */
+    vehicleColor?: string;
+    /**
+     * 违法时间
+     */
+    at?: Date;
+    /**
+     * 违法类型
+     */
+    type?: string;
+    /**
+     * 违法代码
+     */
+    code?: number;
+    /**
+     * 处罚次数
+     */
+    count?: number;
+    /**
+     * 违法地点
+     */
+    place?: string;
+    /**
+     * 有效时长
+     */
+    effectiveDays?: number;
+    /**
+     * 图片信息
+     */
+    images?: string[];
+    /**
+     * 视频信息
+     */
+    videos?: string[];
+    /**
+     * 状态
+     */
+    state?: "OPEN" | "CONFIRMED";
+    /**
+     * 过车记录索引号
+     */
+    recordId?: string;
+    /**
+     * 号牌类型
+     */
+    carNumType?: string;
+    /**
+     * 号牌类型(中文)
+     */
+    carNumTypeStr?: string;
+    /**
+     * 过车时间
+     */
+    capTime?: Date;
+    /**
+     * 抓拍相机通道号
+     */
+    channelCode?: string;
+    /**
+     * 抓拍相机名称
+     */
+    channelName?: string;
+    /**
+     * 组织名称
+     */
+    orgName?: string;
+    /**
+     * 入库时间
+     */
+    createTime?: Date;
+    /**
+     * 车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 车道编号（中文）
+     */
+    carWayCodeStr?: string;
+    /**
+     * 车辆速度
+     */
+    carSpeed?: number;
+    /**
+     * 车身颜色
+     */
+    carColor?: number;
+    /**
+     * 车辆品牌编码
+     */
+    carBrand?: string;
+    /**
+     * 车辆品牌名称
+     */
+    carBrandStr?: string;
+    /**
+     * 行驶方向
+     */
+    carDirect?: string;
+    /**
+     * 行驶方向(中文)
+     */
+    carDirectStr?: string;
+    /**
+     * 通道编号
+     */
+    channelId?: string;
+    /**
+     * 经度
+     */
+    lng?: number;
+    /**
+     * 纬度
+     */
+    lat?: number;
+    /**
+     * 所属地市
+     */
+    deptId?: string;
   } & {
     /**
      * mongodb id
@@ -281,13 +712,25 @@ export interface GetIllegalResponse {
      */
     at?: Date;
     /**
-     * 违法信息
+     * 违法类型
      */
-    desc?: string;
+    type?: string;
+    /**
+     * 违法代码
+     */
+    code?: number;
+    /**
+     * 处罚次数
+     */
+    count?: number;
     /**
      * 违法地点
      */
     place?: string;
+    /**
+     * 有效时长
+     */
+    effectiveDays?: number;
     /**
      * 图片信息
      */
@@ -300,6 +743,86 @@ export interface GetIllegalResponse {
      * 状态
      */
     state?: "OPEN" | "CONFIRMED";
+    /**
+     * 过车记录索引号
+     */
+    recordId?: string;
+    /**
+     * 号牌类型
+     */
+    carNumType?: string;
+    /**
+     * 号牌类型(中文)
+     */
+    carNumTypeStr?: string;
+    /**
+     * 过车时间
+     */
+    capTime?: Date;
+    /**
+     * 抓拍相机通道号
+     */
+    channelCode?: string;
+    /**
+     * 抓拍相机名称
+     */
+    channelName?: string;
+    /**
+     * 组织名称
+     */
+    orgName?: string;
+    /**
+     * 入库时间
+     */
+    createTime?: Date;
+    /**
+     * 车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 车道编号（中文）
+     */
+    carWayCodeStr?: string;
+    /**
+     * 车辆速度
+     */
+    carSpeed?: number;
+    /**
+     * 车身颜色
+     */
+    carColor?: number;
+    /**
+     * 车辆品牌编码
+     */
+    carBrand?: string;
+    /**
+     * 车辆品牌名称
+     */
+    carBrandStr?: string;
+    /**
+     * 行驶方向
+     */
+    carDirect?: string;
+    /**
+     * 行驶方向(中文)
+     */
+    carDirectStr?: string;
+    /**
+     * 通道编号
+     */
+    channelId?: string;
+    /**
+     * 经度
+     */
+    lng?: number;
+    /**
+     * 纬度
+     */
+    lat?: number;
+    /**
+     * 所属地市
+     */
+    deptId?: string;
   } & {
     /**
      * mongodb id
@@ -338,13 +861,25 @@ export interface UpdateIllegalRequest {
      */
     at?: Date;
     /**
-     * 违法信息
+     * 违法类型
      */
-    desc?: string;
+    type?: string;
+    /**
+     * 违法代码
+     */
+    code?: number;
+    /**
+     * 处罚次数
+     */
+    count?: number;
     /**
      * 违法地点
      */
     place?: string;
+    /**
+     * 有效时长
+     */
+    effectiveDays?: number;
     /**
      * 图片信息
      */
@@ -357,6 +892,86 @@ export interface UpdateIllegalRequest {
      * 状态
      */
     state?: "OPEN" | "CONFIRMED";
+    /**
+     * 过车记录索引号
+     */
+    recordId?: string;
+    /**
+     * 号牌类型
+     */
+    carNumType?: string;
+    /**
+     * 号牌类型(中文)
+     */
+    carNumTypeStr?: string;
+    /**
+     * 过车时间
+     */
+    capTime?: Date;
+    /**
+     * 抓拍相机通道号
+     */
+    channelCode?: string;
+    /**
+     * 抓拍相机名称
+     */
+    channelName?: string;
+    /**
+     * 组织名称
+     */
+    orgName?: string;
+    /**
+     * 入库时间
+     */
+    createTime?: Date;
+    /**
+     * 车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 车道编号（中文）
+     */
+    carWayCodeStr?: string;
+    /**
+     * 车辆速度
+     */
+    carSpeed?: number;
+    /**
+     * 车身颜色
+     */
+    carColor?: number;
+    /**
+     * 车辆品牌编码
+     */
+    carBrand?: string;
+    /**
+     * 车辆品牌名称
+     */
+    carBrandStr?: string;
+    /**
+     * 行驶方向
+     */
+    carDirect?: string;
+    /**
+     * 行驶方向(中文)
+     */
+    carDirectStr?: string;
+    /**
+     * 通道编号
+     */
+    channelId?: string;
+    /**
+     * 经度
+     */
+    lng?: number;
+    /**
+     * 纬度
+     */
+    lat?: number;
+    /**
+     * 所属地市
+     */
+    deptId?: string;
   };
 }
 export interface UpdateIllegalResponse {
@@ -385,13 +1000,25 @@ export interface UpdateIllegalResponse {
      */
     at?: Date;
     /**
-     * 违法信息
+     * 违法类型
      */
-    desc?: string;
+    type?: string;
+    /**
+     * 违法代码
+     */
+    code?: number;
+    /**
+     * 处罚次数
+     */
+    count?: number;
     /**
      * 违法地点
      */
     place?: string;
+    /**
+     * 有效时长
+     */
+    effectiveDays?: number;
     /**
      * 图片信息
      */
@@ -404,6 +1031,86 @@ export interface UpdateIllegalResponse {
      * 状态
      */
     state?: "OPEN" | "CONFIRMED";
+    /**
+     * 过车记录索引号
+     */
+    recordId?: string;
+    /**
+     * 号牌类型
+     */
+    carNumType?: string;
+    /**
+     * 号牌类型(中文)
+     */
+    carNumTypeStr?: string;
+    /**
+     * 过车时间
+     */
+    capTime?: Date;
+    /**
+     * 抓拍相机通道号
+     */
+    channelCode?: string;
+    /**
+     * 抓拍相机名称
+     */
+    channelName?: string;
+    /**
+     * 组织名称
+     */
+    orgName?: string;
+    /**
+     * 入库时间
+     */
+    createTime?: Date;
+    /**
+     * 车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 车道编号（中文）
+     */
+    carWayCodeStr?: string;
+    /**
+     * 车辆速度
+     */
+    carSpeed?: number;
+    /**
+     * 车身颜色
+     */
+    carColor?: number;
+    /**
+     * 车辆品牌编码
+     */
+    carBrand?: string;
+    /**
+     * 车辆品牌名称
+     */
+    carBrandStr?: string;
+    /**
+     * 行驶方向
+     */
+    carDirect?: string;
+    /**
+     * 行驶方向(中文)
+     */
+    carDirectStr?: string;
+    /**
+     * 通道编号
+     */
+    channelId?: string;
+    /**
+     * 经度
+     */
+    lng?: number;
+    /**
+     * 纬度
+     */
+    lat?: number;
+    /**
+     * 所属地市
+     */
+    deptId?: string;
   } & {
     /**
      * mongodb id
@@ -863,13 +1570,25 @@ export interface IllegalDoc {
    */
   at?: Date;
   /**
-   * 违法信息
+   * 违法类型
    */
-  desc?: string;
+  type?: string;
+  /**
+   * 违法代码
+   */
+  code?: number;
+  /**
+   * 处罚次数
+   */
+  count?: number;
   /**
    * 违法地点
    */
   place?: string;
+  /**
+   * 有效时长
+   */
+  effectiveDays?: number;
   /**
    * 图片信息
    */
@@ -882,6 +1601,86 @@ export interface IllegalDoc {
    * 状态
    */
   state?: "OPEN" | "CONFIRMED";
+  /**
+   * 过车记录索引号
+   */
+  recordId?: string;
+  /**
+   * 号牌类型
+   */
+  carNumType?: string;
+  /**
+   * 号牌类型(中文)
+   */
+  carNumTypeStr?: string;
+  /**
+   * 过车时间
+   */
+  capTime?: Date;
+  /**
+   * 抓拍相机通道号
+   */
+  channelCode?: string;
+  /**
+   * 抓拍相机名称
+   */
+  channelName?: string;
+  /**
+   * 组织名称
+   */
+  orgName?: string;
+  /**
+   * 入库时间
+   */
+  createTime?: Date;
+  /**
+   * 车道编号
+   */
+  carWayCode?: number;
+  /**
+   * 车道编号（中文）
+   */
+  carWayCodeStr?: string;
+  /**
+   * 车辆速度
+   */
+  carSpeed?: number;
+  /**
+   * 车身颜色
+   */
+  carColor?: number;
+  /**
+   * 车辆品牌编码
+   */
+  carBrand?: string;
+  /**
+   * 车辆品牌名称
+   */
+  carBrandStr?: string;
+  /**
+   * 行驶方向
+   */
+  carDirect?: string;
+  /**
+   * 行驶方向(中文)
+   */
+  carDirectStr?: string;
+  /**
+   * 通道编号
+   */
+  channelId?: string;
+  /**
+   * 经度
+   */
+  lng?: number;
+  /**
+   * 纬度
+   */
+  lat?: number;
+  /**
+   * 所属地市
+   */
+  deptId?: string;
 }
 
 /**
@@ -909,13 +1708,25 @@ export interface IllegalCreateBody {
    */
   at: Date;
   /**
-   * 违法信息
+   * 违法类型
    */
-  desc: string;
+  type: string;
+  /**
+   * 违法代码
+   */
+  code: number;
+  /**
+   * 处罚次数
+   */
+  count?: number;
   /**
    * 违法地点
    */
   place: string;
+  /**
+   * 有效时长
+   */
+  effectiveDays?: number;
   /**
    * 图片信息
    */
@@ -928,6 +1739,86 @@ export interface IllegalCreateBody {
    * 状态
    */
   state?: "OPEN" | "CONFIRMED";
+  /**
+   * 过车记录索引号
+   */
+  recordId?: string;
+  /**
+   * 号牌类型
+   */
+  carNumType?: string;
+  /**
+   * 号牌类型(中文)
+   */
+  carNumTypeStr?: string;
+  /**
+   * 过车时间
+   */
+  capTime?: Date;
+  /**
+   * 抓拍相机通道号
+   */
+  channelCode?: string;
+  /**
+   * 抓拍相机名称
+   */
+  channelName?: string;
+  /**
+   * 组织名称
+   */
+  orgName?: string;
+  /**
+   * 入库时间
+   */
+  createTime?: Date;
+  /**
+   * 车道编号
+   */
+  carWayCode?: number;
+  /**
+   * 车道编号（中文）
+   */
+  carWayCodeStr?: string;
+  /**
+   * 车辆速度
+   */
+  carSpeed?: number;
+  /**
+   * 车身颜色
+   */
+  carColor?: number;
+  /**
+   * 车辆品牌编码
+   */
+  carBrand?: string;
+  /**
+   * 车辆品牌名称
+   */
+  carBrandStr?: string;
+  /**
+   * 行驶方向
+   */
+  carDirect?: string;
+  /**
+   * 行驶方向(中文)
+   */
+  carDirectStr?: string;
+  /**
+   * 通道编号
+   */
+  channelId?: string;
+  /**
+   * 经度
+   */
+  lng?: number;
+  /**
+   * 纬度
+   */
+  lat?: number;
+  /**
+   * 所属地市
+   */
+  deptId?: string;
 }
 
 /**
@@ -955,13 +1846,25 @@ export type Illegal = {
    */
   at?: Date;
   /**
-   * 违法信息
+   * 违法类型
    */
-  desc?: string;
+  type?: string;
+  /**
+   * 违法代码
+   */
+  code?: number;
+  /**
+   * 处罚次数
+   */
+  count?: number;
   /**
    * 违法地点
    */
   place?: string;
+  /**
+   * 有效时长
+   */
+  effectiveDays?: number;
   /**
    * 图片信息
    */
@@ -974,6 +1877,86 @@ export type Illegal = {
    * 状态
    */
   state?: "OPEN" | "CONFIRMED";
+  /**
+   * 过车记录索引号
+   */
+  recordId?: string;
+  /**
+   * 号牌类型
+   */
+  carNumType?: string;
+  /**
+   * 号牌类型(中文)
+   */
+  carNumTypeStr?: string;
+  /**
+   * 过车时间
+   */
+  capTime?: Date;
+  /**
+   * 抓拍相机通道号
+   */
+  channelCode?: string;
+  /**
+   * 抓拍相机名称
+   */
+  channelName?: string;
+  /**
+   * 组织名称
+   */
+  orgName?: string;
+  /**
+   * 入库时间
+   */
+  createTime?: Date;
+  /**
+   * 车道编号
+   */
+  carWayCode?: number;
+  /**
+   * 车道编号（中文）
+   */
+  carWayCodeStr?: string;
+  /**
+   * 车辆速度
+   */
+  carSpeed?: number;
+  /**
+   * 车身颜色
+   */
+  carColor?: number;
+  /**
+   * 车辆品牌编码
+   */
+  carBrand?: string;
+  /**
+   * 车辆品牌名称
+   */
+  carBrandStr?: string;
+  /**
+   * 行驶方向
+   */
+  carDirect?: string;
+  /**
+   * 行驶方向(中文)
+   */
+  carDirectStr?: string;
+  /**
+   * 通道编号
+   */
+  channelId?: string;
+  /**
+   * 经度
+   */
+  lng?: number;
+  /**
+   * 纬度
+   */
+  lat?: number;
+  /**
+   * 所属地市
+   */
+  deptId?: string;
 } & {
   /**
    * mongodb id

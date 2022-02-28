@@ -70,6 +70,23 @@ export default class SDK {
       });
     },
     /**
+     * confirm an open illegal
+     *
+     * @param {ConfirmIllegalRequest} req confirmIllegal request
+     * @returns {Promise<ConfirmIllegalResponse>} The illegal
+     */
+    confirmIllegal: req => {
+      const { illegalId } = req || {};
+
+      if (!illegalId)
+        throw new Error("illegalId is required for confirmIllegal");
+
+      return fetch(`${this.base}/illegal/${illegalId}/!confirm`, {
+        method: "PUT",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
      * Find illegal device by id
      *
      * @param {GetIllegalRequest} req getIllegal request

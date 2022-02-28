@@ -24,7 +24,7 @@
   "scripts": {
     "build": "sketch build",
     "format": "prettier --trailing-comma es5 --write 'src/**/*.js'",
-    "gen": "swagen sdk https://api.fcp-ecs.36node.com/v0/openapi.yml && yarn format",
+    "gen": "swagen sdk https://fcp-ecs-uat.36node.com/api/openapi.yml && yarn format",
     "lint": "sketch lint src",
     "release": "standard-version",
     "start": "bin/mock-server.js",
