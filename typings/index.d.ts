@@ -1150,11 +1150,11 @@ export interface ListBayonetsResponse {
     /**
      * 卡口所在经度
      */
-    longitude?: number;
+    lng?: number;
     /**
      * 卡口所在纬度
      */
-    latitude?: number;
+    lat?: number;
     /**
      * 上级卡口
      */
@@ -1162,11 +1162,55 @@ export interface ListBayonetsResponse {
     /**
      * 卡口属性
      */
-    attr?: "HIGHSPEED" | "EXPORT";
+    attr?: "RAMP" | "MAINLINE";
     /**
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 添加方式
+     */
+    addType?: "IP" | "CODE";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 域名称
+     */
+    area?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 设备秘钥
+     */
+    key?: string;
   } & {
     /**
      * mongodb id
@@ -1197,11 +1241,11 @@ export interface CreateBayonetRequest {
     /**
      * 卡口所在经度
      */
-    longitude: number;
+    lng: number;
     /**
      * 卡口所在纬度
      */
-    latitude: number;
+    lat: number;
     /**
      * 上级卡口
      */
@@ -1209,11 +1253,55 @@ export interface CreateBayonetRequest {
     /**
      * 卡口属性
      */
-    attr: "HIGHSPEED" | "EXPORT";
+    attr: "RAMP" | "MAINLINE";
     /**
      * 卡口状态
      */
     state: "ONLINE" | "OFFLINE";
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 添加方式
+     */
+    addType?: "IP" | "CODE";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 域名称
+     */
+    area?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 设备秘钥
+     */
+    key?: string;
   };
 }
 export interface CreateBayonetResponse {
@@ -1232,11 +1320,11 @@ export interface CreateBayonetResponse {
     /**
      * 卡口所在经度
      */
-    longitude?: number;
+    lng?: number;
     /**
      * 卡口所在纬度
      */
-    latitude?: number;
+    lat?: number;
     /**
      * 上级卡口
      */
@@ -1244,11 +1332,55 @@ export interface CreateBayonetResponse {
     /**
      * 卡口属性
      */
-    attr?: "HIGHSPEED" | "EXPORT";
+    attr?: "RAMP" | "MAINLINE";
     /**
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 添加方式
+     */
+    addType?: "IP" | "CODE";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 域名称
+     */
+    area?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 设备秘钥
+     */
+    key?: string;
   } & {
     /**
      * mongodb id
@@ -1279,11 +1411,11 @@ export interface GetBayonetResponse {
     /**
      * 卡口所在经度
      */
-    longitude?: number;
+    lng?: number;
     /**
      * 卡口所在纬度
      */
-    latitude?: number;
+    lat?: number;
     /**
      * 上级卡口
      */
@@ -1291,11 +1423,55 @@ export interface GetBayonetResponse {
     /**
      * 卡口属性
      */
-    attr?: "HIGHSPEED" | "EXPORT";
+    attr?: "RAMP" | "MAINLINE";
     /**
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 添加方式
+     */
+    addType?: "IP" | "CODE";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 域名称
+     */
+    area?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 设备秘钥
+     */
+    key?: string;
   } & {
     /**
      * mongodb id
@@ -1324,11 +1500,11 @@ export interface UpdateBayonetRequest {
     /**
      * 卡口所在经度
      */
-    longitude?: number;
+    lng?: number;
     /**
      * 卡口所在纬度
      */
-    latitude?: number;
+    lat?: number;
     /**
      * 上级卡口
      */
@@ -1336,11 +1512,55 @@ export interface UpdateBayonetRequest {
     /**
      * 卡口属性
      */
-    attr?: "HIGHSPEED" | "EXPORT";
+    attr?: "RAMP" | "MAINLINE";
     /**
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 添加方式
+     */
+    addType?: "IP" | "CODE";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 域名称
+     */
+    area?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 设备秘钥
+     */
+    key?: string;
   };
 }
 export interface UpdateBayonetResponse {
@@ -1359,11 +1579,11 @@ export interface UpdateBayonetResponse {
     /**
      * 卡口所在经度
      */
-    longitude?: number;
+    lng?: number;
     /**
      * 卡口所在纬度
      */
-    latitude?: number;
+    lat?: number;
     /**
      * 上级卡口
      */
@@ -1371,11 +1591,55 @@ export interface UpdateBayonetResponse {
     /**
      * 卡口属性
      */
-    attr?: "HIGHSPEED" | "EXPORT";
+    attr?: "RAMP" | "MAINLINE";
     /**
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 添加方式
+     */
+    addType?: "IP" | "CODE";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 域名称
+     */
+    area?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 设备秘钥
+     */
+    key?: string;
   } & {
     /**
      * mongodb id
@@ -2022,12 +2286,32 @@ export type Whitelist = {
 /**
  * 卡口属性分类
  */
-export type BayonetAttr = "HIGHSPEED" | "EXPORT";
+export type BayonetAttr = "RAMP" | "MAINLINE";
 
 /**
  * 卡口状态分类
  */
 export type BayonetState = "ONLINE" | "OFFLINE";
+
+/**
+ * 卡口协议类型分类
+ */
+export type BayonetProtocolType = "DAHUA" | "HAIKANG";
+
+/**
+ * 卡口厂商分类
+ */
+export type BayonetProduct = "DAHUA" | "HAIKANG";
+
+/**
+ * 卡口添加方式分类
+ */
+export type BayonetAddType = "IP" | "CODE";
+
+/**
+ * 卡口设备类型分类
+ */
+export type BayonetType = "CAMERA";
 
 /**
  * 卡口信息详情
@@ -2044,11 +2328,11 @@ export interface BayonetDoc {
   /**
    * 卡口所在经度
    */
-  longitude?: number;
+  lng?: number;
   /**
    * 卡口所在纬度
    */
-  latitude?: number;
+  lat?: number;
   /**
    * 上级卡口
    */
@@ -2056,11 +2340,55 @@ export interface BayonetDoc {
   /**
    * 卡口属性
    */
-  attr?: "HIGHSPEED" | "EXPORT";
+  attr?: "RAMP" | "MAINLINE";
   /**
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
+  /**
+   * 协议类型
+   */
+  protocolType?: "DAHUA" | "HAIKANG";
+  /**
+   * 厂商
+   */
+  product?: "DAHUA" | "HAIKANG";
+  /**
+   * 添加方式
+   */
+  addType?: "IP" | "CODE";
+  /**
+   * 卡口设备类型
+   */
+  type?: "CAMERA";
+  /**
+   * IP地址
+   */
+  ip?: string;
+  /**
+   * 设备端口
+   */
+  port?: number;
+  /**
+   * 用户
+   */
+  username?: string;
+  /**
+   * 密码
+   */
+  password?: string;
+  /**
+   * 域名称
+   */
+  area?: string;
+  /**
+   * 设备编码
+   */
+  code?: string;
+  /**
+   * 设备秘钥
+   */
+  key?: string;
 }
 
 /**
@@ -2078,11 +2406,11 @@ export interface BayonetCreateBody {
   /**
    * 卡口所在经度
    */
-  longitude: number;
+  lng: number;
   /**
    * 卡口所在纬度
    */
-  latitude: number;
+  lat: number;
   /**
    * 上级卡口
    */
@@ -2090,11 +2418,55 @@ export interface BayonetCreateBody {
   /**
    * 卡口属性
    */
-  attr: "HIGHSPEED" | "EXPORT";
+  attr: "RAMP" | "MAINLINE";
   /**
    * 卡口状态
    */
   state: "ONLINE" | "OFFLINE";
+  /**
+   * 协议类型
+   */
+  protocolType?: "DAHUA" | "HAIKANG";
+  /**
+   * 厂商
+   */
+  product?: "DAHUA" | "HAIKANG";
+  /**
+   * 添加方式
+   */
+  addType?: "IP" | "CODE";
+  /**
+   * 卡口设备类型
+   */
+  type?: "CAMERA";
+  /**
+   * IP地址
+   */
+  ip?: string;
+  /**
+   * 设备端口
+   */
+  port?: number;
+  /**
+   * 用户
+   */
+  username?: string;
+  /**
+   * 密码
+   */
+  password?: string;
+  /**
+   * 域名称
+   */
+  area?: string;
+  /**
+   * 设备编码
+   */
+  code?: string;
+  /**
+   * 设备秘钥
+   */
+  key?: string;
 }
 
 /**
@@ -2112,11 +2484,11 @@ export type Bayonet = {
   /**
    * 卡口所在经度
    */
-  longitude?: number;
+  lng?: number;
   /**
    * 卡口所在纬度
    */
-  latitude?: number;
+  lat?: number;
   /**
    * 上级卡口
    */
@@ -2124,11 +2496,55 @@ export type Bayonet = {
   /**
    * 卡口属性
    */
-  attr?: "HIGHSPEED" | "EXPORT";
+  attr?: "RAMP" | "MAINLINE";
   /**
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
+  /**
+   * 协议类型
+   */
+  protocolType?: "DAHUA" | "HAIKANG";
+  /**
+   * 厂商
+   */
+  product?: "DAHUA" | "HAIKANG";
+  /**
+   * 添加方式
+   */
+  addType?: "IP" | "CODE";
+  /**
+   * 卡口设备类型
+   */
+  type?: "CAMERA";
+  /**
+   * IP地址
+   */
+  ip?: string;
+  /**
+   * 设备端口
+   */
+  port?: number;
+  /**
+   * 用户
+   */
+  username?: string;
+  /**
+   * 密码
+   */
+  password?: string;
+  /**
+   * 域名称
+   */
+  area?: string;
+  /**
+   * 设备编码
+   */
+  code?: string;
+  /**
+   * 设备秘钥
+   */
+  key?: string;
 } & {
   /**
    * mongodb id
