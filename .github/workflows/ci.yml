@@ -35,7 +35,7 @@ jobs:
           token: ${{ secrets.NPM_TOKEN }}
       - name: Feishu send msg to chat
         env:
-          NPM_VERSION: $(echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,')
+          NPM_VERSION: ${{ echo "${{ github.ref }}" | sed -e 's,.*/\(.*\),\1,' }}
           FEISHU_URL: https://open.feishu.cn/open-apis/bot/v2/hook/af6fb18f-106c-450d-8bda-0860d2c20970
         uses: fjogeleit/http-request-action@master
         with:
