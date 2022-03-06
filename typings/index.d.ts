@@ -6,7 +6,7 @@ declare class SDK {
   auth: string;
 
   illegal: IllegalAPI;
-  bayonet: BayonetAPI;
+  gantry: GantryAPI;
   whitelist: WhitelistAPI;
 }
 
@@ -41,27 +41,27 @@ export interface IllegalAPI {
    */
   deleteIllegal(req: DeleteIllegalRequest): Promise<void>;
 }
-export interface BayonetAPI {
+export interface GantryAPI {
   /**
-   * List bayonets
+   * List gantries
    */
-  listBayonets(req: ListBayonetsRequest): Promise<ListBayonetsResponse>;
+  listGantries(req: ListGantriesRequest): Promise<ListGantriesResponse>;
   /**
-   * Create a bayonet
+   * Create a gantry
    */
-  createBayonet(req: CreateBayonetRequest): Promise<CreateBayonetResponse>;
+  createGantry(req: CreateGantryRequest): Promise<CreateGantryResponse>;
   /**
-   * Find bayonet device by id
+   * Find gantry device by id
    */
-  getBayonet(req: GetBayonetRequest): Promise<GetBayonetResponse>;
+  getGantry(req: GetGantryRequest): Promise<GetGantryResponse>;
   /**
-   * Update bayonet device
+   * Update gantry device
    */
-  updateBayonet(req: UpdateBayonetRequest): Promise<UpdateBayonetResponse>;
+  updateGantry(req: UpdateGantryRequest): Promise<UpdateGantryResponse>;
   /**
-   * Delete bayonet
+   * Delete gantry
    */
-  deleteBayonet(req: DeleteBayonetRequest): Promise<void>;
+  deleteGantry(req: DeleteGantryRequest): Promise<void>;
 }
 export interface WhitelistAPI {
   /**
@@ -1125,7 +1125,7 @@ export interface UpdateIllegalResponse {
 export interface DeleteIllegalRequest {
   illegalId: string;
 }
-export interface ListBayonetsRequest {
+export interface ListGantriesRequest {
   query?: {
     _limit?: number;
     _offset?: number;
@@ -1137,7 +1137,7 @@ export interface ListBayonetsRequest {
     ns?: string[];
   };
 }
-export interface ListBayonetsResponse {
+export interface ListGantriesResponse {
   body: ({
     /**
      * 卡口名
@@ -1225,7 +1225,7 @@ export interface ListBayonetsResponse {
     "x-total-count"?: number;
   };
 }
-export interface CreateBayonetRequest {
+export interface CreateGantryRequest {
   /**
    * 创建卡口详情
    */
@@ -1304,7 +1304,7 @@ export interface CreateBayonetRequest {
     key?: string;
   };
 }
-export interface CreateBayonetResponse {
+export interface CreateGantryResponse {
   /**
    * 卡口
    */
@@ -1392,10 +1392,10 @@ export interface CreateBayonetResponse {
     createBy?: string;
   };
 }
-export interface GetBayonetRequest {
-  bayonetId: string;
+export interface GetGantryRequest {
+  gantryId: string;
 }
-export interface GetBayonetResponse {
+export interface GetGantryResponse {
   /**
    * 卡口
    */
@@ -1483,8 +1483,8 @@ export interface GetBayonetResponse {
     createBy?: string;
   };
 }
-export interface UpdateBayonetRequest {
-  bayonetId: string;
+export interface UpdateGantryRequest {
+  gantryId: string;
   /**
    * 卡口信息详情
    */
@@ -1563,7 +1563,7 @@ export interface UpdateBayonetRequest {
     key?: string;
   };
 }
-export interface UpdateBayonetResponse {
+export interface UpdateGantryResponse {
   /**
    * 卡口
    */
@@ -1651,8 +1651,8 @@ export interface UpdateBayonetResponse {
     createBy?: string;
   };
 }
-export interface DeleteBayonetRequest {
-  bayonetId: string;
+export interface DeleteGantryRequest {
+  gantryId: string;
 }
 export interface ListWhitelistRequest {
   query?: {
@@ -2286,37 +2286,37 @@ export type Whitelist = {
 /**
  * 卡口属性分类
  */
-export type BayonetAttr = "RAMP" | "MAINLINE";
+export type GantryAttr = "RAMP" | "MAINLINE";
 
 /**
  * 卡口状态分类
  */
-export type BayonetState = "ONLINE" | "OFFLINE";
+export type GantryState = "ONLINE" | "OFFLINE";
 
 /**
  * 卡口协议类型分类
  */
-export type BayonetProtocolType = "DAHUA" | "HAIKANG";
+export type GantryProtocolType = "DAHUA" | "HAIKANG";
 
 /**
  * 卡口厂商分类
  */
-export type BayonetProduct = "DAHUA" | "HAIKANG";
+export type GantryProduct = "DAHUA" | "HAIKANG";
 
 /**
  * 卡口添加方式分类
  */
-export type BayonetAddType = "IP" | "CODE";
+export type GantryAddType = "IP" | "CODE";
 
 /**
  * 卡口设备类型分类
  */
-export type BayonetType = "CAMERA";
+export type GantryType = "CAMERA";
 
 /**
  * 卡口信息详情
  */
-export interface BayonetDoc {
+export interface GantryDoc {
   /**
    * 卡口名
    */
@@ -2394,7 +2394,7 @@ export interface BayonetDoc {
 /**
  * 创建卡口详情
  */
-export interface BayonetCreateBody {
+export interface GantryCreateBody {
   /**
    * 卡口名
    */
@@ -2472,7 +2472,7 @@ export interface BayonetCreateBody {
 /**
  * 卡口
  */
-export type Bayonet = {
+export type Gantry = {
   /**
    * 卡口名
    */

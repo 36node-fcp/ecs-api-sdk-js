@@ -139,88 +139,86 @@ export default class SDK {
     },
   };
   /**
-   * bayonet's methods
+   * gantry's methods
    */
-  bayonet = {
+  gantry = {
     /**
-     * List bayonets
+     * List gantries
      *
-     * @param {ListBayonetsRequest} req listBayonets request
-     * @returns {Promise<ListBayonetsResponse>} A paged array of bayonets
+     * @param {ListGantriesRequest} req listGantries request
+     * @returns {Promise<ListGantriesResponse>} A paged array of gantries
      */
-    listBayonets: req => {
+    listGantries: req => {
       const { query } = req || {};
 
-      return fetch(`${this.base}/bayonets`, {
+      return fetch(`${this.base}/gantries`, {
         method: "GET",
         query,
         headers: { Authorization: this.auth },
       });
     },
     /**
-     * Create a bayonet
+     * Create a gantry
      *
-     * @param {CreateBayonetRequest} req createBayonet request
-     * @returns {Promise<CreateBayonetResponse>} The bayonet created
+     * @param {CreateGantryRequest} req createGantry request
+     * @returns {Promise<CreateGantryResponse>} The gantry created
      */
-    createBayonet: req => {
+    createGantry: req => {
       const { body } = req || {};
 
-      if (!body) throw new Error("requetBody is required for createBayonet");
+      if (!body) throw new Error("requetBody is required for createGantry");
 
-      return fetch(`${this.base}/bayonets`, {
+      return fetch(`${this.base}/gantries`, {
         method: "POST",
         body,
         headers: { Authorization: this.auth },
       });
     },
     /**
-     * Find bayonet device by id
+     * Find gantry device by id
      *
-     * @param {GetBayonetRequest} req getBayonet request
-     * @returns {Promise<GetBayonetResponse>} Expected response to a valid request
+     * @param {GetGantryRequest} req getGantry request
+     * @returns {Promise<GetGantryResponse>} Expected response to a valid request
      */
-    getBayonet: req => {
-      const { bayonetId } = req || {};
+    getGantry: req => {
+      const { gantryId } = req || {};
 
-      if (!bayonetId) throw new Error("bayonetId is required for getBayonet");
+      if (!gantryId) throw new Error("gantryId is required for getGantry");
 
-      return fetch(`${this.base}/bayonet/${bayonetId}`, {
+      return fetch(`${this.base}/gantry/${gantryId}`, {
         method: "GET",
         headers: { Authorization: this.auth },
       });
     },
     /**
-     * Update bayonet device
+     * Update gantry device
      *
-     * @param {UpdateBayonetRequest} req updateBayonet request
-     * @returns {Promise<UpdateBayonetResponse>} The bayonet
+     * @param {UpdateGantryRequest} req updateGantry request
+     * @returns {Promise<UpdateGantryResponse>} The gantry
      */
-    updateBayonet: req => {
-      const { bayonetId, body } = req || {};
+    updateGantry: req => {
+      const { gantryId, body } = req || {};
 
-      if (!bayonetId)
-        throw new Error("bayonetId is required for updateBayonet");
-      if (!body) throw new Error("requetBody is required for updateBayonet");
+      if (!gantryId) throw new Error("gantryId is required for updateGantry");
+      if (!body) throw new Error("requetBody is required for updateGantry");
 
-      return fetch(`${this.base}/bayonet/${bayonetId}`, {
+      return fetch(`${this.base}/gantry/${gantryId}`, {
         method: "PUT",
         body,
         headers: { Authorization: this.auth },
       });
     },
     /**
-     * Delete bayonet
+     * Delete gantry
      *
-     * @param {DeleteBayonetRequest} req deleteBayonet request
+     * @param {DeleteGantryRequest} req deleteGantry request
      */
-    deleteBayonet: req => {
-      const { bayonetId } = req || {};
+    deleteGantry: req => {
+      const { gantryId } = req || {};
 
-      if (!bayonetId)
-        throw new Error("bayonetId is required for deleteBayonet");
+      if (!gantryId) throw new Error("gantryId is required for deleteGantry");
 
-      return fetch(`${this.base}/bayonet/${bayonetId}`, {
+      return fetch(`${this.base}/gantry/${gantryId}`, {
         method: "DELETE",
         headers: { Authorization: this.auth },
       });
