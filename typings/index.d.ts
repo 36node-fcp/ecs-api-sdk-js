@@ -6,6 +6,7 @@ declare class SDK {
   auth: string;
 
   illegal: IllegalAPI;
+  illegalType: IllegalTypeAPI;
   gantry: GantryAPI;
   whitelist: WhitelistAPI;
 }
@@ -40,6 +41,28 @@ export interface IllegalAPI {
    * Delete illegal device
    */
   deleteIllegal(req: DeleteIllegalRequest): Promise<void>;
+}
+export interface IllegalTypeAPI {
+  /**
+   * List illegalTypes
+   */
+  listIllegalTypes(req: ListIllegalTypesRequest): Promise<ListIllegalTypesResponse>;
+  /**
+   * Create a illegalType
+   */
+  createIllegalType(req: CreateIllegalTypeRequest): Promise<CreateIllegalTypeResponse>;
+  /**
+   * Find illegalType by id
+   */
+  getIllegalType(req: GetIllegalTypeRequest): Promise<GetIllegalTypeResponse>;
+  /**
+   * Update illegalType
+   */
+  updateIllegalType(req: UpdateIllegalTypeRequest): Promise<UpdateIllegalTypeResponse>;
+  /**
+   * Delete illegalType device
+   */
+  deleteIllegalType(req: DeleteIllegalTypeRequest): Promise<void>;
 }
 export interface GantryAPI {
   /**
@@ -1124,6 +1147,173 @@ export interface UpdateIllegalResponse {
 }
 export interface DeleteIllegalRequest {
   illegalId: string;
+}
+export interface ListIllegalTypesRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    _select?: string[];
+    name_like?: string;
+    level?: string;
+  };
+}
+export interface ListIllegalTypesResponse {
+  body: ({
+    /**
+     * 类型名称
+     */
+    name?: string;
+    /**
+     * 违法代码
+     */
+    code?: string;
+    /**
+     * 等级
+     */
+    level?: "1" | "2" | "3";
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  })[];
+  headers: {
+    "x-total-count"?: number;
+  };
+}
+export interface CreateIllegalTypeRequest {
+  /**
+   * 创建违法库类型Body
+   */
+  body: {
+    /**
+     * 类型名称
+     */
+    name: string;
+    /**
+     * 违法代码
+     */
+    code: string;
+    /**
+     * 等级
+     */
+    level: "1" | "2" | "3";
+  };
+}
+export interface CreateIllegalTypeResponse {
+  /**
+   * 违法类型
+   */
+  body: {
+    /**
+     * 类型名称
+     */
+    name?: string;
+    /**
+     * 违法代码
+     */
+    code?: string;
+    /**
+     * 等级
+     */
+    level?: "1" | "2" | "3";
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface GetIllegalTypeRequest {
+  illegalTypeId: string;
+}
+export interface GetIllegalTypeResponse {
+  /**
+   * 违法类型
+   */
+  body: {
+    /**
+     * 类型名称
+     */
+    name?: string;
+    /**
+     * 违法代码
+     */
+    code?: string;
+    /**
+     * 等级
+     */
+    level?: "1" | "2" | "3";
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpdateIllegalTypeRequest {
+  illegalTypeId: string;
+  /**
+   * 违法库类型Doc
+   */
+  body: {
+    /**
+     * 类型名称
+     */
+    name?: string;
+    /**
+     * 违法代码
+     */
+    code?: string;
+    /**
+     * 等级
+     */
+    level?: "1" | "2" | "3";
+  };
+}
+export interface UpdateIllegalTypeResponse {
+  /**
+   * 违法类型
+   */
+  body: {
+    /**
+     * 类型名称
+     */
+    name?: string;
+    /**
+     * 违法代码
+     */
+    code?: string;
+    /**
+     * 等级
+     */
+    level?: "1" | "2" | "3";
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface DeleteIllegalTypeRequest {
+  illegalTypeId: string;
 }
 export interface ListGantriesRequest {
   query?: {
@@ -2221,6 +2411,69 @@ export type Illegal = {
    * 所属地市
    */
   deptId?: string;
+} & {
+  /**
+   * mongodb id
+   */
+  id: string;
+  updateAt?: Date;
+  updateBy?: string;
+  createAt?: Date;
+  createBy?: string;
+};
+
+/**
+ * 违法库类型Doc
+ */
+export interface IllegalTypeDoc {
+  /**
+   * 类型名称
+   */
+  name?: string;
+  /**
+   * 违法代码
+   */
+  code?: string;
+  /**
+   * 等级
+   */
+  level?: "1" | "2" | "3";
+}
+
+/**
+ * 创建违法库类型Body
+ */
+export interface IllegalTypeCreateBody {
+  /**
+   * 类型名称
+   */
+  name: string;
+  /**
+   * 违法代码
+   */
+  code: string;
+  /**
+   * 等级
+   */
+  level: "1" | "2" | "3";
+}
+
+/**
+ * 违法类型
+ */
+export type IllegalType = {
+  /**
+   * 类型名称
+   */
+  name?: string;
+  /**
+   * 违法代码
+   */
+  code?: string;
+  /**
+   * 等级
+   */
+  level?: "1" | "2" | "3";
 } & {
   /**
    * mongodb id

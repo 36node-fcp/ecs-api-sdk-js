@@ -139,6 +139,97 @@ export default class SDK {
     },
   };
   /**
+   * illegalType's methods
+   */
+  illegalType = {
+    /**
+     * List illegalTypes
+     *
+     * @param {ListIllegalTypesRequest} req listIllegalTypes request
+     * @returns {Promise<ListIllegalTypesResponse>} A paged array of illegalTypes
+     */
+    listIllegalTypes: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/illegalTypes`, {
+        method: "GET",
+        query,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Create a illegalType
+     *
+     * @param {CreateIllegalTypeRequest} req createIllegalType request
+     * @returns {Promise<CreateIllegalTypeResponse>} The illegalType created
+     */
+    createIllegalType: req => {
+      const { body } = req || {};
+
+      if (!body)
+        throw new Error("requetBody is required for createIllegalType");
+
+      return fetch(`${this.base}/illegalTypes`, {
+        method: "POST",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Find illegalType by id
+     *
+     * @param {GetIllegalTypeRequest} req getIllegalType request
+     * @returns {Promise<GetIllegalTypeResponse>} Expected response to a valid request
+     */
+    getIllegalType: req => {
+      const { illegalTypeId } = req || {};
+
+      if (!illegalTypeId)
+        throw new Error("illegalTypeId is required for getIllegalType");
+
+      return fetch(`${this.base}/illegalType/${illegalTypeId}`, {
+        method: "GET",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Update illegalType
+     *
+     * @param {UpdateIllegalTypeRequest} req updateIllegalType request
+     * @returns {Promise<UpdateIllegalTypeResponse>} The illegalType
+     */
+    updateIllegalType: req => {
+      const { illegalTypeId, body } = req || {};
+
+      if (!illegalTypeId)
+        throw new Error("illegalTypeId is required for updateIllegalType");
+      if (!body)
+        throw new Error("requetBody is required for updateIllegalType");
+
+      return fetch(`${this.base}/illegalType/${illegalTypeId}`, {
+        method: "PUT",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Delete illegalType device
+     *
+     * @param {DeleteIllegalTypeRequest} req deleteIllegalType request
+     */
+    deleteIllegalType: req => {
+      const { illegalTypeId } = req || {};
+
+      if (!illegalTypeId)
+        throw new Error("illegalTypeId is required for deleteIllegalType");
+
+      return fetch(`${this.base}/illegalType/${illegalTypeId}`, {
+        method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+  };
+  /**
    * gantry's methods
    */
   gantry = {
