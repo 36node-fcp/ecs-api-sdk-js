@@ -1,6 +1,6 @@
 {
   "name": "@36node-fcp/ecs-api-sdk",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "description": "JS sdk for ecs api.",
   "repository": {
     "url": "36node-fcp/ecs-api-sdk-js",
@@ -25,6 +25,7 @@
     "build": "sketch build",
     "format": "prettier --trailing-comma es5 --write 'src/**/*.js'",
     "gen": "swagen sdk https://fcp-ecs-uat.36node.com/api/openapi.yml && yarn format",
+    "gen:local": "swagen sdk ../esc-api/openapi.yml && yarn format",
     "lint": "sketch lint src",
     "release": "standard-version",
     "start": "bin/mock-server.js",
