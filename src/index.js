@@ -404,4 +404,219 @@ export default class SDK {
       });
     },
   };
+  /**
+   * trackRecord's methods
+   */
+  trackRecord = {
+    /**
+     * List trackRecords
+     *
+     * @param {ListTrackRecordsRequest} req listTrackRecords request
+     * @returns {Promise<ListTrackRecordsResponse>} A paged array of trackRecords
+     */
+    listTrackRecords: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/TrackRecords`, {
+        method: "GET",
+        query,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Create a trackRecord
+     *
+     * @param {CreateTrackRecordRequest} req createTrackRecord request
+     * @returns {Promise<CreateTrackRecordResponse>} The trackRecord created
+     */
+    createTrackRecord: req => {
+      const { body } = req || {};
+
+      if (!body)
+        throw new Error("requetBody is required for createTrackRecord");
+
+      return fetch(`${this.base}/TrackRecords`, {
+        method: "POST",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Find trackRecord by id
+     *
+     * @param {GetTrackRecordRequest} req getTrackRecord request
+     * @returns {Promise<GetTrackRecordResponse>} Expected response to a valid request
+     */
+    getTrackRecord: req => {
+      const { trackRecordId } = req || {};
+
+      if (!trackRecordId)
+        throw new Error("trackRecordId is required for getTrackRecord");
+
+      return fetch(`${this.base}/TrackRecords/${trackRecordId}`, {
+        method: "GET",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Update trackRecord device
+     *
+     * @param {UpdateTrackRecordRequest} req updateTrackRecord request
+     * @returns {Promise<UpdateTrackRecordResponse>} The trackRecord
+     */
+    updateTrackRecord: req => {
+      const { trackRecordId, body } = req || {};
+
+      if (!trackRecordId)
+        throw new Error("trackRecordId is required for updateTrackRecord");
+      if (!body)
+        throw new Error("requetBody is required for updateTrackRecord");
+
+      return fetch(`${this.base}/TrackRecords/${trackRecordId}`, {
+        method: "PUT",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Delete trackRecord
+     *
+     * @param {DeleteTrackRecordRequest} req deleteTrackRecord request
+     */
+    deleteTrackRecord: req => {
+      const { trackRecordId } = req || {};
+
+      if (!trackRecordId)
+        throw new Error("trackRecordId is required for deleteTrackRecord");
+
+      return fetch(`${this.base}/TrackRecords/${trackRecordId}`, {
+        method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+  };
+  /**
+   * warning's methods
+   */
+  warning = {
+    /**
+     * List warnings
+     *
+     * @param {ListWarningsRequest} req listWarnings request
+     * @returns {Promise<ListWarningsResponse>} A paged array of warnings
+     */
+    listWarnings: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/Warnings`, {
+        method: "GET",
+        query,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Create a warning
+     *
+     * @param {CreateWarningRequest} req createWarning request
+     * @returns {Promise<CreateWarningResponse>} The warning created
+     */
+    createWarning: req => {
+      const { body } = req || {};
+
+      if (!body) throw new Error("requetBody is required for createWarning");
+
+      return fetch(`${this.base}/Warnings`, {
+        method: "POST",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Find warning by id
+     *
+     * @param {GetWarningRequest} req getWarning request
+     * @returns {Promise<GetWarningResponse>} Expected response to a valid request
+     */
+    getWarning: req => {
+      const { warningId } = req || {};
+
+      if (!warningId) throw new Error("warningId is required for getWarning");
+
+      return fetch(`${this.base}/Warnings/${warningId}`, {
+        method: "GET",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Update warning device
+     *
+     * @param {UpdateWarningRequest} req updateWarning request
+     * @returns {Promise<UpdateWarningResponse>} The warning
+     */
+    updateWarning: req => {
+      const { warningId, body } = req || {};
+
+      if (!warningId)
+        throw new Error("warningId is required for updateWarning");
+      if (!body) throw new Error("requetBody is required for updateWarning");
+
+      return fetch(`${this.base}/Warnings/${warningId}`, {
+        method: "PUT",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Delete warning
+     *
+     * @param {DeleteWarningRequest} req deleteWarning request
+     */
+    deleteWarning: req => {
+      const { warningId } = req || {};
+
+      if (!warningId)
+        throw new Error("warningId is required for deleteWarning");
+
+      return fetch(`${this.base}/Warnings/${warningId}`, {
+        method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+  };
+  /**
+   * settings's methods
+   */
+  settings = {
+    /**
+     * get settings
+     *
+     * @param {GetSettingsRequest} req getSettings request
+     * @returns {Promise<GetSettingsResponse>} setting
+     */
+    getSettings: req => {
+      const {} = req || {};
+
+      return fetch(`${this.base}/settings`, {
+        method: "GET",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * update setting
+     *
+     * @param {UpdateSettingRequest} req updateSetting request
+     * @returns {Promise<UpdateSettingResponse>} The warning
+     */
+    updateSetting: req => {
+      const { body } = req || {};
+
+      if (!body) throw new Error("requetBody is required for updateSetting");
+
+      return fetch(`${this.base}/settings`, {
+        method: "PUT",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+  };
 }

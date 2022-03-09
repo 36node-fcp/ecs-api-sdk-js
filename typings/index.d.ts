@@ -9,6 +9,9 @@ declare class SDK {
   illegalType: IllegalTypeAPI;
   gantry: GantryAPI;
   whitelist: WhitelistAPI;
+  trackRecord: TrackRecordAPI;
+  warning: WarningAPI;
+  settings: SettingsAPI;
 }
 
 export interface Options {
@@ -107,6 +110,60 @@ export interface WhitelistAPI {
    * Delete whitelist
    */
   deleteWhitelist(req: DeleteWhitelistRequest): Promise<void>;
+}
+export interface TrackRecordAPI {
+  /**
+   * List trackRecords
+   */
+  listTrackRecords(req: ListTrackRecordsRequest): Promise<ListTrackRecordsResponse>;
+  /**
+   * Create a trackRecord
+   */
+  createTrackRecord(req: CreateTrackRecordRequest): Promise<CreateTrackRecordResponse>;
+  /**
+   * Find trackRecord by id
+   */
+  getTrackRecord(req: GetTrackRecordRequest): Promise<GetTrackRecordResponse>;
+  /**
+   * Update trackRecord device
+   */
+  updateTrackRecord(req: UpdateTrackRecordRequest): Promise<UpdateTrackRecordResponse>;
+  /**
+   * Delete trackRecord
+   */
+  deleteTrackRecord(req: DeleteTrackRecordRequest): Promise<void>;
+}
+export interface WarningAPI {
+  /**
+   * List warnings
+   */
+  listWarnings(req: ListWarningsRequest): Promise<ListWarningsResponse>;
+  /**
+   * Create a warning
+   */
+  createWarning(req: CreateWarningRequest): Promise<CreateWarningResponse>;
+  /**
+   * Find warning by id
+   */
+  getWarning(req: GetWarningRequest): Promise<GetWarningResponse>;
+  /**
+   * Update warning device
+   */
+  updateWarning(req: UpdateWarningRequest): Promise<UpdateWarningResponse>;
+  /**
+   * Delete warning
+   */
+  deleteWarning(req: DeleteWarningRequest): Promise<void>;
+}
+export interface SettingsAPI {
+  /**
+   * get settings
+   */
+  getSettings(req: GetSettingsRequest): Promise<GetSettingsResponse>;
+  /**
+   * update setting
+   */
+  updateSetting(req: UpdateSettingRequest): Promise<UpdateSettingResponse>;
 }
 
 export interface ListIllegalsRequest {
@@ -1350,6 +1407,14 @@ export interface ListGantriesResponse {
      */
     parent?: string;
     /**
+     * 是否开启
+     */
+    open?: boolean;
+    /**
+     * 所属路段
+     */
+    section?: string;
+    /**
      * 卡口属性
      */
     attr?: "RAMP" | "MAINLINE";
@@ -1357,50 +1422,52 @@ export interface ListGantriesResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    /**
-     * 协议类型
-     */
-    protocolType?: "DAHUA" | "HAIKANG";
-    /**
-     * 厂商
-     */
-    product?: "DAHUA" | "HAIKANG";
-    /**
-     * 添加方式
-     */
-    addType?: "IP" | "CODE";
-    /**
-     * 卡口设备类型
-     */
-    type?: "CAMERA";
-    /**
-     * IP地址
-     */
-    ip?: string;
-    /**
-     * 设备端口
-     */
-    port?: number;
-    /**
-     * 用户
-     */
-    username?: string;
-    /**
-     * 密码
-     */
-    password?: string;
-    /**
-     * 域名称
-     */
-    area?: string;
-    /**
-     * 设备编码
-     */
-    code?: string;
-    /**
-     * 设备秘钥
-     */
-    key?: string;
+    devices?: {
+      /**
+       * id
+       */
+      id?: string;
+      /**
+       * id
+       */
+      name?: string;
+      /**
+       * 设备编码
+       */
+      code?: string;
+      /**
+       * 协议类型
+       */
+      protocolType?: "DAHUA" | "HAIKANG";
+      /**
+       * 厂商
+       */
+      product?: "DAHUA" | "HAIKANG";
+      /**
+       * 卡口设备类型
+       */
+      type?: "CAMERA";
+      /**
+       * IP地址
+       */
+      ip?: string;
+      /**
+       * 设备端口
+       */
+      port?: number;
+      /**
+       * 用户
+       */
+      username?: string;
+      /**
+       * 密码
+       */
+      password?: string;
+      /**
+       * 车道属性
+       */
+      carWayCode?: string;
+    }[];
   } & {
     /**
      * mongodb id
@@ -1441,6 +1508,14 @@ export interface CreateGantryRequest {
      */
     parent?: string;
     /**
+     * 是否开启
+     */
+    open?: boolean;
+    /**
+     * 所属路段
+     */
+    section?: string;
+    /**
      * 卡口属性
      */
     attr: "RAMP" | "MAINLINE";
@@ -1448,50 +1523,52 @@ export interface CreateGantryRequest {
      * 卡口状态
      */
     state: "ONLINE" | "OFFLINE";
-    /**
-     * 协议类型
-     */
-    protocolType?: "DAHUA" | "HAIKANG";
-    /**
-     * 厂商
-     */
-    product?: "DAHUA" | "HAIKANG";
-    /**
-     * 添加方式
-     */
-    addType?: "IP" | "CODE";
-    /**
-     * 卡口设备类型
-     */
-    type?: "CAMERA";
-    /**
-     * IP地址
-     */
-    ip?: string;
-    /**
-     * 设备端口
-     */
-    port?: number;
-    /**
-     * 用户
-     */
-    username?: string;
-    /**
-     * 密码
-     */
-    password?: string;
-    /**
-     * 域名称
-     */
-    area?: string;
-    /**
-     * 设备编码
-     */
-    code?: string;
-    /**
-     * 设备秘钥
-     */
-    key?: string;
+    devices?: {
+      /**
+       * id
+       */
+      id?: string;
+      /**
+       * id
+       */
+      name?: string;
+      /**
+       * 设备编码
+       */
+      code?: string;
+      /**
+       * 协议类型
+       */
+      protocolType?: "DAHUA" | "HAIKANG";
+      /**
+       * 厂商
+       */
+      product?: "DAHUA" | "HAIKANG";
+      /**
+       * 卡口设备类型
+       */
+      type?: "CAMERA";
+      /**
+       * IP地址
+       */
+      ip?: string;
+      /**
+       * 设备端口
+       */
+      port?: number;
+      /**
+       * 用户
+       */
+      username?: string;
+      /**
+       * 密码
+       */
+      password?: string;
+      /**
+       * 车道属性
+       */
+      carWayCode?: string;
+    }[];
   };
 }
 export interface CreateGantryResponse {
@@ -1520,6 +1597,14 @@ export interface CreateGantryResponse {
      */
     parent?: string;
     /**
+     * 是否开启
+     */
+    open?: boolean;
+    /**
+     * 所属路段
+     */
+    section?: string;
+    /**
      * 卡口属性
      */
     attr?: "RAMP" | "MAINLINE";
@@ -1527,50 +1612,52 @@ export interface CreateGantryResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    /**
-     * 协议类型
-     */
-    protocolType?: "DAHUA" | "HAIKANG";
-    /**
-     * 厂商
-     */
-    product?: "DAHUA" | "HAIKANG";
-    /**
-     * 添加方式
-     */
-    addType?: "IP" | "CODE";
-    /**
-     * 卡口设备类型
-     */
-    type?: "CAMERA";
-    /**
-     * IP地址
-     */
-    ip?: string;
-    /**
-     * 设备端口
-     */
-    port?: number;
-    /**
-     * 用户
-     */
-    username?: string;
-    /**
-     * 密码
-     */
-    password?: string;
-    /**
-     * 域名称
-     */
-    area?: string;
-    /**
-     * 设备编码
-     */
-    code?: string;
-    /**
-     * 设备秘钥
-     */
-    key?: string;
+    devices?: {
+      /**
+       * id
+       */
+      id?: string;
+      /**
+       * id
+       */
+      name?: string;
+      /**
+       * 设备编码
+       */
+      code?: string;
+      /**
+       * 协议类型
+       */
+      protocolType?: "DAHUA" | "HAIKANG";
+      /**
+       * 厂商
+       */
+      product?: "DAHUA" | "HAIKANG";
+      /**
+       * 卡口设备类型
+       */
+      type?: "CAMERA";
+      /**
+       * IP地址
+       */
+      ip?: string;
+      /**
+       * 设备端口
+       */
+      port?: number;
+      /**
+       * 用户
+       */
+      username?: string;
+      /**
+       * 密码
+       */
+      password?: string;
+      /**
+       * 车道属性
+       */
+      carWayCode?: string;
+    }[];
   } & {
     /**
      * mongodb id
@@ -1611,6 +1698,14 @@ export interface GetGantryResponse {
      */
     parent?: string;
     /**
+     * 是否开启
+     */
+    open?: boolean;
+    /**
+     * 所属路段
+     */
+    section?: string;
+    /**
      * 卡口属性
      */
     attr?: "RAMP" | "MAINLINE";
@@ -1618,50 +1713,52 @@ export interface GetGantryResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    /**
-     * 协议类型
-     */
-    protocolType?: "DAHUA" | "HAIKANG";
-    /**
-     * 厂商
-     */
-    product?: "DAHUA" | "HAIKANG";
-    /**
-     * 添加方式
-     */
-    addType?: "IP" | "CODE";
-    /**
-     * 卡口设备类型
-     */
-    type?: "CAMERA";
-    /**
-     * IP地址
-     */
-    ip?: string;
-    /**
-     * 设备端口
-     */
-    port?: number;
-    /**
-     * 用户
-     */
-    username?: string;
-    /**
-     * 密码
-     */
-    password?: string;
-    /**
-     * 域名称
-     */
-    area?: string;
-    /**
-     * 设备编码
-     */
-    code?: string;
-    /**
-     * 设备秘钥
-     */
-    key?: string;
+    devices?: {
+      /**
+       * id
+       */
+      id?: string;
+      /**
+       * id
+       */
+      name?: string;
+      /**
+       * 设备编码
+       */
+      code?: string;
+      /**
+       * 协议类型
+       */
+      protocolType?: "DAHUA" | "HAIKANG";
+      /**
+       * 厂商
+       */
+      product?: "DAHUA" | "HAIKANG";
+      /**
+       * 卡口设备类型
+       */
+      type?: "CAMERA";
+      /**
+       * IP地址
+       */
+      ip?: string;
+      /**
+       * 设备端口
+       */
+      port?: number;
+      /**
+       * 用户
+       */
+      username?: string;
+      /**
+       * 密码
+       */
+      password?: string;
+      /**
+       * 车道属性
+       */
+      carWayCode?: string;
+    }[];
   } & {
     /**
      * mongodb id
@@ -1700,6 +1797,14 @@ export interface UpdateGantryRequest {
      */
     parent?: string;
     /**
+     * 是否开启
+     */
+    open?: boolean;
+    /**
+     * 所属路段
+     */
+    section?: string;
+    /**
      * 卡口属性
      */
     attr?: "RAMP" | "MAINLINE";
@@ -1707,50 +1812,52 @@ export interface UpdateGantryRequest {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    /**
-     * 协议类型
-     */
-    protocolType?: "DAHUA" | "HAIKANG";
-    /**
-     * 厂商
-     */
-    product?: "DAHUA" | "HAIKANG";
-    /**
-     * 添加方式
-     */
-    addType?: "IP" | "CODE";
-    /**
-     * 卡口设备类型
-     */
-    type?: "CAMERA";
-    /**
-     * IP地址
-     */
-    ip?: string;
-    /**
-     * 设备端口
-     */
-    port?: number;
-    /**
-     * 用户
-     */
-    username?: string;
-    /**
-     * 密码
-     */
-    password?: string;
-    /**
-     * 域名称
-     */
-    area?: string;
-    /**
-     * 设备编码
-     */
-    code?: string;
-    /**
-     * 设备秘钥
-     */
-    key?: string;
+    devices?: {
+      /**
+       * id
+       */
+      id?: string;
+      /**
+       * id
+       */
+      name?: string;
+      /**
+       * 设备编码
+       */
+      code?: string;
+      /**
+       * 协议类型
+       */
+      protocolType?: "DAHUA" | "HAIKANG";
+      /**
+       * 厂商
+       */
+      product?: "DAHUA" | "HAIKANG";
+      /**
+       * 卡口设备类型
+       */
+      type?: "CAMERA";
+      /**
+       * IP地址
+       */
+      ip?: string;
+      /**
+       * 设备端口
+       */
+      port?: number;
+      /**
+       * 用户
+       */
+      username?: string;
+      /**
+       * 密码
+       */
+      password?: string;
+      /**
+       * 车道属性
+       */
+      carWayCode?: string;
+    }[];
   };
 }
 export interface UpdateGantryResponse {
@@ -1779,6 +1886,14 @@ export interface UpdateGantryResponse {
      */
     parent?: string;
     /**
+     * 是否开启
+     */
+    open?: boolean;
+    /**
+     * 所属路段
+     */
+    section?: string;
+    /**
      * 卡口属性
      */
     attr?: "RAMP" | "MAINLINE";
@@ -1786,50 +1901,52 @@ export interface UpdateGantryResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    /**
-     * 协议类型
-     */
-    protocolType?: "DAHUA" | "HAIKANG";
-    /**
-     * 厂商
-     */
-    product?: "DAHUA" | "HAIKANG";
-    /**
-     * 添加方式
-     */
-    addType?: "IP" | "CODE";
-    /**
-     * 卡口设备类型
-     */
-    type?: "CAMERA";
-    /**
-     * IP地址
-     */
-    ip?: string;
-    /**
-     * 设备端口
-     */
-    port?: number;
-    /**
-     * 用户
-     */
-    username?: string;
-    /**
-     * 密码
-     */
-    password?: string;
-    /**
-     * 域名称
-     */
-    area?: string;
-    /**
-     * 设备编码
-     */
-    code?: string;
-    /**
-     * 设备秘钥
-     */
-    key?: string;
+    devices?: {
+      /**
+       * id
+       */
+      id?: string;
+      /**
+       * id
+       */
+      name?: string;
+      /**
+       * 设备编码
+       */
+      code?: string;
+      /**
+       * 协议类型
+       */
+      protocolType?: "DAHUA" | "HAIKANG";
+      /**
+       * 厂商
+       */
+      product?: "DAHUA" | "HAIKANG";
+      /**
+       * 卡口设备类型
+       */
+      type?: "CAMERA";
+      /**
+       * IP地址
+       */
+      ip?: string;
+      /**
+       * 设备端口
+       */
+      port?: number;
+      /**
+       * 用户
+       */
+      username?: string;
+      /**
+       * 密码
+       */
+      password?: string;
+      /**
+       * 车道属性
+       */
+      carWayCode?: string;
+    }[];
   } & {
     /**
      * mongodb id
@@ -1985,6 +2102,946 @@ export interface UpdateWhitelistResponse {
 }
 export interface DeleteWhitelistRequest {
   whitelistId: string;
+}
+export interface ListTrackRecordsRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    _select?: string[];
+    plate_like?: string;
+    thirdId?: string[];
+    carTypeCode?: string[];
+  };
+}
+export interface ListTrackRecordsResponse {
+  body: ({
+    /**
+     * 第三方Id
+     */
+    thirdId?: string;
+    /**
+     * 过车数据来源
+     */
+    source?: "DAHUA" | "DIRECT";
+    /**
+     * 过车车牌
+     */
+    plate?: string;
+    /**
+     * 过车类型
+     */
+    carType?: string;
+    /**
+     * 过车类型代码
+     */
+    carTypeCode?: string;
+    /**
+     * 过车车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 过车车速
+     */
+    carSpeed?: number;
+    /**
+     * 过车车身颜色
+     */
+    carColor?: string;
+    /**
+     * 过车车身颜色代码
+     */
+    carColorCode?: string;
+    /**
+     * 过车车辆行进方向
+     */
+    carDirect?: 0 | 1 | 2 | 3;
+    /**
+     * 过车数据相机名称
+     */
+    channelName?: string;
+    /**
+     * 过车数据相机编码
+     */
+    channelCode?: string;
+    /**
+     * 过车数据卡口名称
+     */
+    orgName?: string;
+    /**
+     * 过车数据时间戳
+     */
+    capTime?: number;
+    /**
+     * 过车数据过车图片
+     */
+    carImgUrls?: string[];
+    /**
+     * 过车数据车牌图片
+     */
+    plateNumUrls?: string[];
+    /**
+     * 过车数据车辆品牌
+     */
+    carBrand?: string;
+    /**
+     * 过车数据车辆品牌代码
+     */
+    carBrandCode?: string;
+    /**
+     * 过车经度
+     */
+    lng?: string;
+    /**
+     * 过车纬度
+     */
+    lat?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  })[];
+  headers: {
+    "x-total-count"?: number;
+  };
+}
+export interface CreateTrackRecordRequest {
+  /**
+   * 创建过车数据详情
+   */
+  body: {
+    /**
+     * 第三方Id
+     */
+    thirdId?: string;
+    /**
+     * 过车数据来源
+     */
+    source?: "DAHUA" | "DIRECT";
+    /**
+     * 过车车牌
+     */
+    plate: string;
+    /**
+     * 过车类型
+     */
+    carType?: string;
+    /**
+     * 过车类型代码
+     */
+    carTypeCode?: string;
+    /**
+     * 过车车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 过车车速
+     */
+    carSpeed?: number;
+    /**
+     * 过车车身颜色
+     */
+    carColor?: string;
+    /**
+     * 过车车身颜色代码
+     */
+    carColorCode?: string;
+    /**
+     * 过车车辆行进方向
+     */
+    carDirect?: 0 | 1 | 2 | 3;
+    /**
+     * 过车数据相机名称
+     */
+    channelName?: string;
+    /**
+     * 过车数据相机编码
+     */
+    channelCode?: string;
+    /**
+     * 过车数据卡口名称
+     */
+    orgName?: string;
+    /**
+     * 过车数据时间戳
+     */
+    capTime: number;
+    /**
+     * 过车数据过车图片
+     */
+    carImgUrls?: string[];
+    /**
+     * 过车数据车牌图片
+     */
+    plateNumUrls?: string[];
+    /**
+     * 过车数据车辆品牌
+     */
+    carBrand?: string;
+    /**
+     * 过车数据车辆品牌代码
+     */
+    carBrandCode?: string;
+    /**
+     * 过车经度
+     */
+    lng?: string;
+    /**
+     * 过车纬度
+     */
+    lat?: string;
+  };
+}
+export interface CreateTrackRecordResponse {
+  /**
+   * 过车数据
+   */
+  body: {
+    /**
+     * 第三方Id
+     */
+    thirdId?: string;
+    /**
+     * 过车数据来源
+     */
+    source?: "DAHUA" | "DIRECT";
+    /**
+     * 过车车牌
+     */
+    plate?: string;
+    /**
+     * 过车类型
+     */
+    carType?: string;
+    /**
+     * 过车类型代码
+     */
+    carTypeCode?: string;
+    /**
+     * 过车车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 过车车速
+     */
+    carSpeed?: number;
+    /**
+     * 过车车身颜色
+     */
+    carColor?: string;
+    /**
+     * 过车车身颜色代码
+     */
+    carColorCode?: string;
+    /**
+     * 过车车辆行进方向
+     */
+    carDirect?: 0 | 1 | 2 | 3;
+    /**
+     * 过车数据相机名称
+     */
+    channelName?: string;
+    /**
+     * 过车数据相机编码
+     */
+    channelCode?: string;
+    /**
+     * 过车数据卡口名称
+     */
+    orgName?: string;
+    /**
+     * 过车数据时间戳
+     */
+    capTime?: number;
+    /**
+     * 过车数据过车图片
+     */
+    carImgUrls?: string[];
+    /**
+     * 过车数据车牌图片
+     */
+    plateNumUrls?: string[];
+    /**
+     * 过车数据车辆品牌
+     */
+    carBrand?: string;
+    /**
+     * 过车数据车辆品牌代码
+     */
+    carBrandCode?: string;
+    /**
+     * 过车经度
+     */
+    lng?: string;
+    /**
+     * 过车纬度
+     */
+    lat?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface GetTrackRecordRequest {
+  trackRecordId: string;
+}
+export interface GetTrackRecordResponse {
+  /**
+   * 过车数据
+   */
+  body: {
+    /**
+     * 第三方Id
+     */
+    thirdId?: string;
+    /**
+     * 过车数据来源
+     */
+    source?: "DAHUA" | "DIRECT";
+    /**
+     * 过车车牌
+     */
+    plate?: string;
+    /**
+     * 过车类型
+     */
+    carType?: string;
+    /**
+     * 过车类型代码
+     */
+    carTypeCode?: string;
+    /**
+     * 过车车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 过车车速
+     */
+    carSpeed?: number;
+    /**
+     * 过车车身颜色
+     */
+    carColor?: string;
+    /**
+     * 过车车身颜色代码
+     */
+    carColorCode?: string;
+    /**
+     * 过车车辆行进方向
+     */
+    carDirect?: 0 | 1 | 2 | 3;
+    /**
+     * 过车数据相机名称
+     */
+    channelName?: string;
+    /**
+     * 过车数据相机编码
+     */
+    channelCode?: string;
+    /**
+     * 过车数据卡口名称
+     */
+    orgName?: string;
+    /**
+     * 过车数据时间戳
+     */
+    capTime?: number;
+    /**
+     * 过车数据过车图片
+     */
+    carImgUrls?: string[];
+    /**
+     * 过车数据车牌图片
+     */
+    plateNumUrls?: string[];
+    /**
+     * 过车数据车辆品牌
+     */
+    carBrand?: string;
+    /**
+     * 过车数据车辆品牌代码
+     */
+    carBrandCode?: string;
+    /**
+     * 过车经度
+     */
+    lng?: string;
+    /**
+     * 过车纬度
+     */
+    lat?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpdateTrackRecordRequest {
+  trackRecordId: string;
+  /**
+   * 过车数据详情
+   */
+  body: {
+    /**
+     * 第三方Id
+     */
+    thirdId?: string;
+    /**
+     * 过车数据来源
+     */
+    source?: "DAHUA" | "DIRECT";
+    /**
+     * 过车车牌
+     */
+    plate?: string;
+    /**
+     * 过车类型
+     */
+    carType?: string;
+    /**
+     * 过车类型代码
+     */
+    carTypeCode?: string;
+    /**
+     * 过车车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 过车车速
+     */
+    carSpeed?: number;
+    /**
+     * 过车车身颜色
+     */
+    carColor?: string;
+    /**
+     * 过车车身颜色代码
+     */
+    carColorCode?: string;
+    /**
+     * 过车车辆行进方向
+     */
+    carDirect?: 0 | 1 | 2 | 3;
+    /**
+     * 过车数据相机名称
+     */
+    channelName?: string;
+    /**
+     * 过车数据相机编码
+     */
+    channelCode?: string;
+    /**
+     * 过车数据卡口名称
+     */
+    orgName?: string;
+    /**
+     * 过车数据时间戳
+     */
+    capTime?: number;
+    /**
+     * 过车数据过车图片
+     */
+    carImgUrls?: string[];
+    /**
+     * 过车数据车牌图片
+     */
+    plateNumUrls?: string[];
+    /**
+     * 过车数据车辆品牌
+     */
+    carBrand?: string;
+    /**
+     * 过车数据车辆品牌代码
+     */
+    carBrandCode?: string;
+    /**
+     * 过车经度
+     */
+    lng?: string;
+    /**
+     * 过车纬度
+     */
+    lat?: string;
+  };
+}
+export interface UpdateTrackRecordResponse {
+  /**
+   * 过车数据
+   */
+  body: {
+    /**
+     * 第三方Id
+     */
+    thirdId?: string;
+    /**
+     * 过车数据来源
+     */
+    source?: "DAHUA" | "DIRECT";
+    /**
+     * 过车车牌
+     */
+    plate?: string;
+    /**
+     * 过车类型
+     */
+    carType?: string;
+    /**
+     * 过车类型代码
+     */
+    carTypeCode?: string;
+    /**
+     * 过车车道编号
+     */
+    carWayCode?: number;
+    /**
+     * 过车车速
+     */
+    carSpeed?: number;
+    /**
+     * 过车车身颜色
+     */
+    carColor?: string;
+    /**
+     * 过车车身颜色代码
+     */
+    carColorCode?: string;
+    /**
+     * 过车车辆行进方向
+     */
+    carDirect?: 0 | 1 | 2 | 3;
+    /**
+     * 过车数据相机名称
+     */
+    channelName?: string;
+    /**
+     * 过车数据相机编码
+     */
+    channelCode?: string;
+    /**
+     * 过车数据卡口名称
+     */
+    orgName?: string;
+    /**
+     * 过车数据时间戳
+     */
+    capTime?: number;
+    /**
+     * 过车数据过车图片
+     */
+    carImgUrls?: string[];
+    /**
+     * 过车数据车牌图片
+     */
+    plateNumUrls?: string[];
+    /**
+     * 过车数据车辆品牌
+     */
+    carBrand?: string;
+    /**
+     * 过车数据车辆品牌代码
+     */
+    carBrandCode?: string;
+    /**
+     * 过车经度
+     */
+    lng?: string;
+    /**
+     * 过车纬度
+     */
+    lat?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface DeleteTrackRecordRequest {
+  trackRecordId: string;
+}
+export interface ListWarningsRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    _select?: string[];
+    plate_like?: string;
+    gantryName_like?: string;
+    illegalTypeName?: string[];
+    illegalTypeLevel?: ("1" | "2" | "3")[];
+  };
+}
+export interface ListWarningsResponse {
+  body: ({
+    /**
+     * 预警车牌
+     */
+    plate?: string;
+    /**
+     * 违法类型Id
+     */
+    illegalTypeId?: string;
+    /**
+     * 违法类型名称
+     */
+    illegalTypeName?: string;
+    /**
+     * 违法类型代码
+     */
+    illegalTypeCode?: string;
+    /**
+     * 违法类型等级
+     */
+    illegalTypeLevel?: "1" | "2" | "3";
+    /**
+     * 最近一次经过卡口Id
+     */
+    gantryId?: string;
+    /**
+     * 最近一次经过卡口名称
+     */
+    gantryName?: string;
+    /**
+     * 最近一次经过卡口时间
+     */
+    capAt?: Date;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  })[];
+  headers: {
+    "x-total-count"?: number;
+  };
+}
+export interface CreateWarningRequest {
+  /**
+   * 创建过车数据详情
+   */
+  body: {
+    /**
+     * 预警车牌
+     */
+    plate: string;
+    /**
+     * 违法类型Id
+     */
+    illegalTypeId?: string;
+    /**
+     * 违法类型名称
+     */
+    illegalTypeName?: string;
+    /**
+     * 违法类型代码
+     */
+    illegalTypeCode?: string;
+    /**
+     * 违法类型等级
+     */
+    illegalTypeLevel?: "1" | "2" | "3";
+    /**
+     * 最近一次经过卡口Id
+     */
+    gantryId?: string;
+    /**
+     * 最近一次经过卡口名称
+     */
+    gantryName?: string;
+    /**
+     * 最近一次经过卡口时间
+     */
+    capAt: Date;
+  };
+}
+export interface CreateWarningResponse {
+  /**
+   * 预警数据详情
+   */
+  body: {
+    /**
+     * 预警车牌
+     */
+    plate?: string;
+    /**
+     * 违法类型Id
+     */
+    illegalTypeId?: string;
+    /**
+     * 违法类型名称
+     */
+    illegalTypeName?: string;
+    /**
+     * 违法类型代码
+     */
+    illegalTypeCode?: string;
+    /**
+     * 违法类型等级
+     */
+    illegalTypeLevel?: "1" | "2" | "3";
+    /**
+     * 最近一次经过卡口Id
+     */
+    gantryId?: string;
+    /**
+     * 最近一次经过卡口名称
+     */
+    gantryName?: string;
+    /**
+     * 最近一次经过卡口时间
+     */
+    capAt?: Date;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface GetWarningRequest {
+  warningId: string;
+}
+export interface GetWarningResponse {
+  /**
+   * 预警数据详情
+   */
+  body: {
+    /**
+     * 预警车牌
+     */
+    plate?: string;
+    /**
+     * 违法类型Id
+     */
+    illegalTypeId?: string;
+    /**
+     * 违法类型名称
+     */
+    illegalTypeName?: string;
+    /**
+     * 违法类型代码
+     */
+    illegalTypeCode?: string;
+    /**
+     * 违法类型等级
+     */
+    illegalTypeLevel?: "1" | "2" | "3";
+    /**
+     * 最近一次经过卡口Id
+     */
+    gantryId?: string;
+    /**
+     * 最近一次经过卡口名称
+     */
+    gantryName?: string;
+    /**
+     * 最近一次经过卡口时间
+     */
+    capAt?: Date;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpdateWarningRequest {
+  warningId: string;
+  /**
+   * 预警数据详情
+   */
+  body: {
+    /**
+     * 预警车牌
+     */
+    plate?: string;
+    /**
+     * 违法类型Id
+     */
+    illegalTypeId?: string;
+    /**
+     * 违法类型名称
+     */
+    illegalTypeName?: string;
+    /**
+     * 违法类型代码
+     */
+    illegalTypeCode?: string;
+    /**
+     * 违法类型等级
+     */
+    illegalTypeLevel?: "1" | "2" | "3";
+    /**
+     * 最近一次经过卡口Id
+     */
+    gantryId?: string;
+    /**
+     * 最近一次经过卡口名称
+     */
+    gantryName?: string;
+    /**
+     * 最近一次经过卡口时间
+     */
+    capAt?: Date;
+  };
+}
+export interface UpdateWarningResponse {
+  /**
+   * 预警数据详情
+   */
+  body: {
+    /**
+     * 预警车牌
+     */
+    plate?: string;
+    /**
+     * 违法类型Id
+     */
+    illegalTypeId?: string;
+    /**
+     * 违法类型名称
+     */
+    illegalTypeName?: string;
+    /**
+     * 违法类型代码
+     */
+    illegalTypeCode?: string;
+    /**
+     * 违法类型等级
+     */
+    illegalTypeLevel?: "1" | "2" | "3";
+    /**
+     * 最近一次经过卡口Id
+     */
+    gantryId?: string;
+    /**
+     * 最近一次经过卡口名称
+     */
+    gantryName?: string;
+    /**
+     * 最近一次经过卡口时间
+     */
+    capAt?: Date;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface DeleteWarningRequest {
+  warningId: string;
+}
+export interface GetSettingsResponse {
+  /**
+   * 违法类型
+   */
+  body: {
+    /**
+     * 违法有效天数
+     */
+    illegalValidDay?: number;
+    /**
+     * 匝道超速
+     */
+    illegalRampOverSpeed?: boolean;
+    /**
+     * 仅推送各大队辖区内违法
+     */
+    areaPush?: boolean;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpdateSettingRequest {
+  /**
+   * 白名单详情
+   */
+  body: {
+    /**
+     * 违法有效天数
+     */
+    illegalValidDay?: number;
+    /**
+     * 匝道超速
+     */
+    illegalRampOverSpeed?: boolean;
+    /**
+     * 仅推送各大队辖区内违法
+     */
+    areaPush?: boolean;
+  };
+}
+export interface UpdateSettingResponse {
+  /**
+   * 违法类型
+   */
+  body: {
+    /**
+     * 违法有效天数
+     */
+    illegalValidDay?: number;
+    /**
+     * 匝道超速
+     */
+    illegalRampOverSpeed?: boolean;
+    /**
+     * 仅推送各大队辖区内违法
+     */
+    areaPush?: boolean;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
 }
 export type DateTime = Date;
 
@@ -2488,6 +3545,51 @@ export type IllegalType = {
 /**
  * 白名单详情
  */
+export interface SettingDoc {
+  /**
+   * 违法有效天数
+   */
+  illegalValidDay?: number;
+  /**
+   * 匝道超速
+   */
+  illegalRampOverSpeed?: boolean;
+  /**
+   * 仅推送各大队辖区内违法
+   */
+  areaPush?: boolean;
+}
+
+/**
+ * 违法类型
+ */
+export type Setting = {
+  /**
+   * 违法有效天数
+   */
+  illegalValidDay?: number;
+  /**
+   * 匝道超速
+   */
+  illegalRampOverSpeed?: boolean;
+  /**
+   * 仅推送各大队辖区内违法
+   */
+  areaPush?: boolean;
+} & {
+  /**
+   * mongodb id
+   */
+  id: string;
+  updateAt?: Date;
+  updateBy?: string;
+  createAt?: Date;
+  createBy?: string;
+};
+
+/**
+ * 白名单详情
+ */
 export interface WhitelistDoc {
   /**
    * 车牌
@@ -2567,6 +3669,56 @@ export type GantryAddType = "IP" | "CODE";
 export type GantryType = "CAMERA";
 
 /**
+ * 卡口设备
+ */
+export interface GantryDeviceDoc {
+  /**
+   * id
+   */
+  id?: string;
+  /**
+   * id
+   */
+  name?: string;
+  /**
+   * 设备编码
+   */
+  code?: string;
+  /**
+   * 协议类型
+   */
+  protocolType?: "DAHUA" | "HAIKANG";
+  /**
+   * 厂商
+   */
+  product?: "DAHUA" | "HAIKANG";
+  /**
+   * 卡口设备类型
+   */
+  type?: "CAMERA";
+  /**
+   * IP地址
+   */
+  ip?: string;
+  /**
+   * 设备端口
+   */
+  port?: number;
+  /**
+   * 用户
+   */
+  username?: string;
+  /**
+   * 密码
+   */
+  password?: string;
+  /**
+   * 车道属性
+   */
+  carWayCode?: string;
+}
+
+/**
  * 卡口信息详情
  */
 export interface GantryDoc {
@@ -2591,6 +3743,14 @@ export interface GantryDoc {
    */
   parent?: string;
   /**
+   * 是否开启
+   */
+  open?: boolean;
+  /**
+   * 所属路段
+   */
+  section?: string;
+  /**
    * 卡口属性
    */
   attr?: "RAMP" | "MAINLINE";
@@ -2598,50 +3758,52 @@ export interface GantryDoc {
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
-  /**
-   * 协议类型
-   */
-  protocolType?: "DAHUA" | "HAIKANG";
-  /**
-   * 厂商
-   */
-  product?: "DAHUA" | "HAIKANG";
-  /**
-   * 添加方式
-   */
-  addType?: "IP" | "CODE";
-  /**
-   * 卡口设备类型
-   */
-  type?: "CAMERA";
-  /**
-   * IP地址
-   */
-  ip?: string;
-  /**
-   * 设备端口
-   */
-  port?: number;
-  /**
-   * 用户
-   */
-  username?: string;
-  /**
-   * 密码
-   */
-  password?: string;
-  /**
-   * 域名称
-   */
-  area?: string;
-  /**
-   * 设备编码
-   */
-  code?: string;
-  /**
-   * 设备秘钥
-   */
-  key?: string;
+  devices?: {
+    /**
+     * id
+     */
+    id?: string;
+    /**
+     * id
+     */
+    name?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 车道属性
+     */
+    carWayCode?: string;
+  }[];
 }
 
 /**
@@ -2669,6 +3831,14 @@ export interface GantryCreateBody {
    */
   parent?: string;
   /**
+   * 是否开启
+   */
+  open?: boolean;
+  /**
+   * 所属路段
+   */
+  section?: string;
+  /**
    * 卡口属性
    */
   attr: "RAMP" | "MAINLINE";
@@ -2676,50 +3846,52 @@ export interface GantryCreateBody {
    * 卡口状态
    */
   state: "ONLINE" | "OFFLINE";
-  /**
-   * 协议类型
-   */
-  protocolType?: "DAHUA" | "HAIKANG";
-  /**
-   * 厂商
-   */
-  product?: "DAHUA" | "HAIKANG";
-  /**
-   * 添加方式
-   */
-  addType?: "IP" | "CODE";
-  /**
-   * 卡口设备类型
-   */
-  type?: "CAMERA";
-  /**
-   * IP地址
-   */
-  ip?: string;
-  /**
-   * 设备端口
-   */
-  port?: number;
-  /**
-   * 用户
-   */
-  username?: string;
-  /**
-   * 密码
-   */
-  password?: string;
-  /**
-   * 域名称
-   */
-  area?: string;
-  /**
-   * 设备编码
-   */
-  code?: string;
-  /**
-   * 设备秘钥
-   */
-  key?: string;
+  devices?: {
+    /**
+     * id
+     */
+    id?: string;
+    /**
+     * id
+     */
+    name?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 车道属性
+     */
+    carWayCode?: string;
+  }[];
 }
 
 /**
@@ -2747,6 +3919,14 @@ export type Gantry = {
    */
   parent?: string;
   /**
+   * 是否开启
+   */
+  open?: boolean;
+  /**
+   * 所属路段
+   */
+  section?: string;
+  /**
    * 卡口属性
    */
   attr?: "RAMP" | "MAINLINE";
@@ -2754,50 +3934,452 @@ export type Gantry = {
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
+  devices?: {
+    /**
+     * id
+     */
+    id?: string;
+    /**
+     * id
+     */
+    name?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 车道属性
+     */
+    carWayCode?: string;
+  }[];
+} & {
   /**
-   * 协议类型
+   * mongodb id
    */
-  protocolType?: "DAHUA" | "HAIKANG";
+  id: string;
+  updateAt?: Date;
+  updateBy?: string;
+  createAt?: Date;
+  createBy?: string;
+};
+
+/**
+ * 过车数据来源分类
+ */
+export type TrackRecordSource = "DAHUA" | "DIRECT";
+
+/**
+ * 过车数据车辆行进方向分类
+ */
+export type TrackRecordDirect = 0 | 1 | 2 | 3;
+
+/**
+ * 过车数据详情
+ */
+export interface TrackRecordDoc {
   /**
-   * 厂商
+   * 第三方Id
    */
-  product?: "DAHUA" | "HAIKANG";
+  thirdId?: string;
   /**
-   * 添加方式
+   * 过车数据来源
    */
-  addType?: "IP" | "CODE";
+  source?: "DAHUA" | "DIRECT";
   /**
-   * 卡口设备类型
+   * 过车车牌
    */
-  type?: "CAMERA";
+  plate?: string;
   /**
-   * IP地址
+   * 过车类型
    */
-  ip?: string;
+  carType?: string;
   /**
-   * 设备端口
+   * 过车类型代码
    */
-  port?: number;
+  carTypeCode?: string;
   /**
-   * 用户
+   * 过车车道编号
    */
-  username?: string;
+  carWayCode?: number;
   /**
-   * 密码
+   * 过车车速
    */
-  password?: string;
+  carSpeed?: number;
   /**
-   * 域名称
+   * 过车车身颜色
    */
-  area?: string;
+  carColor?: string;
   /**
-   * 设备编码
+   * 过车车身颜色代码
    */
-  code?: string;
+  carColorCode?: string;
   /**
-   * 设备秘钥
+   * 过车车辆行进方向
    */
-  key?: string;
+  carDirect?: 0 | 1 | 2 | 3;
+  /**
+   * 过车数据相机名称
+   */
+  channelName?: string;
+  /**
+   * 过车数据相机编码
+   */
+  channelCode?: string;
+  /**
+   * 过车数据卡口名称
+   */
+  orgName?: string;
+  /**
+   * 过车数据时间戳
+   */
+  capTime?: number;
+  /**
+   * 过车数据过车图片
+   */
+  carImgUrls?: string[];
+  /**
+   * 过车数据车牌图片
+   */
+  plateNumUrls?: string[];
+  /**
+   * 过车数据车辆品牌
+   */
+  carBrand?: string;
+  /**
+   * 过车数据车辆品牌代码
+   */
+  carBrandCode?: string;
+  /**
+   * 过车经度
+   */
+  lng?: string;
+  /**
+   * 过车纬度
+   */
+  lat?: string;
+}
+
+/**
+ * 创建过车数据详情
+ */
+export interface TrackRecordCreateBody {
+  /**
+   * 第三方Id
+   */
+  thirdId?: string;
+  /**
+   * 过车数据来源
+   */
+  source?: "DAHUA" | "DIRECT";
+  /**
+   * 过车车牌
+   */
+  plate: string;
+  /**
+   * 过车类型
+   */
+  carType?: string;
+  /**
+   * 过车类型代码
+   */
+  carTypeCode?: string;
+  /**
+   * 过车车道编号
+   */
+  carWayCode?: number;
+  /**
+   * 过车车速
+   */
+  carSpeed?: number;
+  /**
+   * 过车车身颜色
+   */
+  carColor?: string;
+  /**
+   * 过车车身颜色代码
+   */
+  carColorCode?: string;
+  /**
+   * 过车车辆行进方向
+   */
+  carDirect?: 0 | 1 | 2 | 3;
+  /**
+   * 过车数据相机名称
+   */
+  channelName?: string;
+  /**
+   * 过车数据相机编码
+   */
+  channelCode?: string;
+  /**
+   * 过车数据卡口名称
+   */
+  orgName?: string;
+  /**
+   * 过车数据时间戳
+   */
+  capTime: number;
+  /**
+   * 过车数据过车图片
+   */
+  carImgUrls?: string[];
+  /**
+   * 过车数据车牌图片
+   */
+  plateNumUrls?: string[];
+  /**
+   * 过车数据车辆品牌
+   */
+  carBrand?: string;
+  /**
+   * 过车数据车辆品牌代码
+   */
+  carBrandCode?: string;
+  /**
+   * 过车经度
+   */
+  lng?: string;
+  /**
+   * 过车纬度
+   */
+  lat?: string;
+}
+
+/**
+ * 过车数据
+ */
+export type TrackRecord = {
+  /**
+   * 第三方Id
+   */
+  thirdId?: string;
+  /**
+   * 过车数据来源
+   */
+  source?: "DAHUA" | "DIRECT";
+  /**
+   * 过车车牌
+   */
+  plate?: string;
+  /**
+   * 过车类型
+   */
+  carType?: string;
+  /**
+   * 过车类型代码
+   */
+  carTypeCode?: string;
+  /**
+   * 过车车道编号
+   */
+  carWayCode?: number;
+  /**
+   * 过车车速
+   */
+  carSpeed?: number;
+  /**
+   * 过车车身颜色
+   */
+  carColor?: string;
+  /**
+   * 过车车身颜色代码
+   */
+  carColorCode?: string;
+  /**
+   * 过车车辆行进方向
+   */
+  carDirect?: 0 | 1 | 2 | 3;
+  /**
+   * 过车数据相机名称
+   */
+  channelName?: string;
+  /**
+   * 过车数据相机编码
+   */
+  channelCode?: string;
+  /**
+   * 过车数据卡口名称
+   */
+  orgName?: string;
+  /**
+   * 过车数据时间戳
+   */
+  capTime?: number;
+  /**
+   * 过车数据过车图片
+   */
+  carImgUrls?: string[];
+  /**
+   * 过车数据车牌图片
+   */
+  plateNumUrls?: string[];
+  /**
+   * 过车数据车辆品牌
+   */
+  carBrand?: string;
+  /**
+   * 过车数据车辆品牌代码
+   */
+  carBrandCode?: string;
+  /**
+   * 过车经度
+   */
+  lng?: string;
+  /**
+   * 过车纬度
+   */
+  lat?: string;
+} & {
+  /**
+   * mongodb id
+   */
+  id: string;
+  updateAt?: Date;
+  updateBy?: string;
+  createAt?: Date;
+  createBy?: string;
+};
+
+/**
+ * 预警数据详情
+ */
+export interface WarningDoc {
+  /**
+   * 预警车牌
+   */
+  plate?: string;
+  /**
+   * 违法类型Id
+   */
+  illegalTypeId?: string;
+  /**
+   * 违法类型名称
+   */
+  illegalTypeName?: string;
+  /**
+   * 违法类型代码
+   */
+  illegalTypeCode?: string;
+  /**
+   * 违法类型等级
+   */
+  illegalTypeLevel?: "1" | "2" | "3";
+  /**
+   * 最近一次经过卡口Id
+   */
+  gantryId?: string;
+  /**
+   * 最近一次经过卡口名称
+   */
+  gantryName?: string;
+  /**
+   * 最近一次经过卡口时间
+   */
+  capAt?: Date;
+}
+
+/**
+ * 创建过车数据详情
+ */
+export interface WarningCreateBody {
+  /**
+   * 预警车牌
+   */
+  plate: string;
+  /**
+   * 违法类型Id
+   */
+  illegalTypeId?: string;
+  /**
+   * 违法类型名称
+   */
+  illegalTypeName?: string;
+  /**
+   * 违法类型代码
+   */
+  illegalTypeCode?: string;
+  /**
+   * 违法类型等级
+   */
+  illegalTypeLevel?: "1" | "2" | "3";
+  /**
+   * 最近一次经过卡口Id
+   */
+  gantryId?: string;
+  /**
+   * 最近一次经过卡口名称
+   */
+  gantryName?: string;
+  /**
+   * 最近一次经过卡口时间
+   */
+  capAt: Date;
+}
+
+/**
+ * 预警数据详情
+ */
+export type Warning = {
+  /**
+   * 预警车牌
+   */
+  plate?: string;
+  /**
+   * 违法类型Id
+   */
+  illegalTypeId?: string;
+  /**
+   * 违法类型名称
+   */
+  illegalTypeName?: string;
+  /**
+   * 违法类型代码
+   */
+  illegalTypeCode?: string;
+  /**
+   * 违法类型等级
+   */
+  illegalTypeLevel?: "1" | "2" | "3";
+  /**
+   * 最近一次经过卡口Id
+   */
+  gantryId?: string;
+  /**
+   * 最近一次经过卡口名称
+   */
+  gantryName?: string;
+  /**
+   * 最近一次经过卡口时间
+   */
+  capAt?: Date;
 } & {
   /**
    * mongodb id
