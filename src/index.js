@@ -34,88 +34,91 @@ export default class SDK {
   }
 
   /**
-   * illegal's methods
+   * illegalRecord's methods
    */
-  illegal = {
+  illegalRecord = {
     /**
-     * List illegals
+     * List illegalRecords
      *
-     * @param {ListIllegalsRequest} req listIllegals request
-     * @returns {Promise<ListIllegalsResponse>} A paged array of illegals
+     * @param {ListIllegalRecordsRequest} req listIllegalRecords request
+     * @returns {Promise<ListIllegalRecordsResponse>} A paged array of illegal records
      */
-    listIllegals: req => {
+    listIllegalRecords: req => {
       const { query } = req || {};
 
-      return fetch(`${this.base}/illegals`, {
+      return fetch(`${this.base}/illegalRecords`, {
         method: "GET",
         query,
         headers: { Authorization: this.auth },
       });
     },
     /**
-     * Create a illegal
+     * Create an illegal record
      *
-     * @param {CreateIllegalRequest} req createIllegal request
-     * @returns {Promise<CreateIllegalResponse>} The illegal created
+     * @param {CreateIllegalRecordRequest} req createIllegalRecord request
+     * @returns {Promise<CreateIllegalRecordResponse>} The illegal created
      */
-    createIllegal: req => {
+    createIllegalRecord: req => {
       const { body } = req || {};
 
-      if (!body) throw new Error("requetBody is required for createIllegal");
+      if (!body)
+        throw new Error("requetBody is required for createIllegalRecord");
 
-      return fetch(`${this.base}/illegals`, {
+      return fetch(`${this.base}/illegalRecords`, {
         method: "POST",
         body,
         headers: { Authorization: this.auth },
       });
     },
     /**
-     * confirm an open illegal
+     * confirm an open illegal record
      *
-     * @param {ConfirmIllegalRequest} req confirmIllegal request
-     * @returns {Promise<ConfirmIllegalResponse>} The illegal
+     * @param {ConfirmIllegalRecordRequest} req confirmIllegalRecord request
+     * @returns {Promise<ConfirmIllegalRecordResponse>} The illegal record
      */
-    confirmIllegal: req => {
-      const { illegalId } = req || {};
+    confirmIllegalRecord: req => {
+      const { illegalRecordId } = req || {};
 
-      if (!illegalId)
-        throw new Error("illegalId is required for confirmIllegal");
+      if (!illegalRecordId)
+        throw new Error("illegalRecordId is required for confirmIllegalRecord");
 
-      return fetch(`${this.base}/illegal/${illegalId}/!confirm`, {
+      return fetch(`${this.base}/illegalRecords/${illegalRecordId}/!confirm`, {
         method: "PUT",
         headers: { Authorization: this.auth },
       });
     },
     /**
-     * Find illegal device by id
+     * Find an illegal record by id
      *
-     * @param {GetIllegalRequest} req getIllegal request
-     * @returns {Promise<GetIllegalResponse>} Expected response to a valid request
+     * @param {GetIllegalRecordRequest} req getIllegalRecord request
+     * @returns {Promise<GetIllegalRecordResponse>} Expected response to a valid request
      */
-    getIllegal: req => {
-      const { illegalId } = req || {};
+    getIllegalRecord: req => {
+      const { illegalRecordId } = req || {};
 
-      if (!illegalId) throw new Error("illegalId is required for getIllegal");
+      if (!illegalRecordId)
+        throw new Error("illegalRecordId is required for getIllegalRecord");
 
-      return fetch(`${this.base}/illegal/${illegalId}`, {
+      return fetch(`${this.base}/illegalRecords/${illegalRecordId}`, {
         method: "GET",
         headers: { Authorization: this.auth },
       });
     },
     /**
-     * Update illegal device
+     * Update illegal record
      *
-     * @param {UpdateIllegalRequest} req updateIllegal request
-     * @returns {Promise<UpdateIllegalResponse>} The illegal
+     * @param {UpdateIllegalRecordRequest} req updateIllegalRecord request
+     * @returns {Promise<UpdateIllegalRecordResponse>} The illegal
      */
-    updateIllegal: req => {
-      const { illegalId, body } = req || {};
+    updateIllegalRecord: req => {
+      const { illegalRecordId, body } = req || {};
 
-      if (!illegalId)
-        throw new Error("illegalId is required for updateIllegal");
-      if (!body) throw new Error("requetBody is required for updateIllegal");
+      if (!illegalRecordId)
+        throw new Error("illegalRecordId is required for updateIllegalRecord");
+      if (!body)
+        throw new Error("requetBody is required for updateIllegalRecord");
 
-      return fetch(`${this.base}/illegal/${illegalId}`, {
+      return fetch(`${this.base}/illegalRecords/${illegalRecordId}`, {
         method: "PUT",
         body,
         headers: { Authorization: this.auth },
@@ -124,15 +127,15 @@ export default class SDK {
     /**
      * Delete illegal device
      *
-     * @param {DeleteIllegalRequest} req deleteIllegal request
+     * @param {DeleteIllegalRecordRequest} req deleteIllegalRecord request
      */
-    deleteIllegal: req => {
-      const { illegalId } = req || {};
+    deleteIllegalRecord: req => {
+      const { illegalRecordId } = req || {};
 
-      if (!illegalId)
-        throw new Error("illegalId is required for deleteIllegal");
+      if (!illegalRecordId)
+        throw new Error("illegalRecordId is required for deleteIllegalRecord");
 
-      return fetch(`${this.base}/illegal/${illegalId}`, {
+      return fetch(`${this.base}/illegalRecords/${illegalRecordId}`, {
         method: "DELETE",
         headers: { Authorization: this.auth },
       });
