@@ -7,6 +7,7 @@ declare class SDK {
 
   illegalRecord: IllegalRecordAPI;
   illegalType: IllegalTypeAPI;
+  gantryDevice: GantryDeviceAPI;
   gantry: GantryAPI;
   whitelist: WhitelistAPI;
   trackRecord: TrackRecordAPI;
@@ -66,6 +67,28 @@ export interface IllegalTypeAPI {
    * Delete illegalType device
    */
   deleteIllegalType(req: DeleteIllegalTypeRequest): Promise<void>;
+}
+export interface GantryDeviceAPI {
+  /**
+   * List gantryDevices
+   */
+  listGantryDevices(req: ListGantryDevicesRequest): Promise<ListGantryDevicesResponse>;
+  /**
+   * Create a gantryDevice
+   */
+  createGantryDevice(req: CreateGantryDeviceRequest): Promise<CreateGantryDeviceResponse>;
+  /**
+   * Find gantryDevice by id
+   */
+  getGantryDevice(req: GetGantryDeviceRequest): Promise<GetGantryDeviceResponse>;
+  /**
+   * Update gantryDevice
+   */
+  updateGantryDevice(req: UpdateGantryDeviceRequest): Promise<UpdateGantryDeviceResponse>;
+  /**
+   * Delete gantryDevice
+   */
+  deleteGantryDevice(req: DeleteGantryDeviceRequest): Promise<void>;
 }
 export interface GantryAPI {
   /**
@@ -1365,6 +1388,365 @@ export interface UpdateIllegalTypeResponse {
 export interface DeleteIllegalTypeRequest {
   illegalTypeId: string;
 }
+export interface ListGantryDevicesRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    _select?: string[];
+    name_like?: string;
+    gantry?: string[];
+  };
+}
+export interface ListGantryDevicesResponse {
+  body: ({
+    /**
+     * 所属卡口 id
+     */
+    gantry?: string;
+    /**
+     * 设备名称
+     */
+    name?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 车道属性
+     */
+    carWayCode?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  })[];
+  headers: {
+    "x-total-count"?: number;
+  };
+}
+export interface CreateGantryDeviceRequest {
+  /**
+   * 创建卡口设备详情
+   */
+  body: {
+    /**
+     * 所属卡口 id
+     */
+    gantry: string;
+    /**
+     * 设备名称
+     */
+    name?: string;
+    /**
+     * 设备编码
+     */
+    code: string;
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 车道属性
+     */
+    carWayCode?: string;
+  };
+}
+export interface CreateGantryDeviceResponse {
+  /**
+   * 卡口设备
+   */
+  body: {
+    /**
+     * 所属卡口 id
+     */
+    gantry?: string;
+    /**
+     * 设备名称
+     */
+    name?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 车道属性
+     */
+    carWayCode?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface GetGantryDeviceRequest {
+  gantryDeviceId: string;
+}
+export interface GetGantryDeviceResponse {
+  /**
+   * 卡口设备
+   */
+  body: {
+    /**
+     * 所属卡口 id
+     */
+    gantry?: string;
+    /**
+     * 设备名称
+     */
+    name?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 车道属性
+     */
+    carWayCode?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpdateGantryDeviceRequest {
+  gantryDeviceId: string;
+  /**
+   * 卡口设备
+   */
+  body: {
+    /**
+     * 所属卡口 id
+     */
+    gantry?: string;
+    /**
+     * 设备名称
+     */
+    name?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 车道属性
+     */
+    carWayCode?: string;
+  };
+}
+export interface UpdateGantryDeviceResponse {
+  /**
+   * 卡口设备
+   */
+  body: {
+    /**
+     * 所属卡口 id
+     */
+    gantry?: string;
+    /**
+     * 设备名称
+     */
+    name?: string;
+    /**
+     * 设备编码
+     */
+    code?: string;
+    /**
+     * 协议类型
+     */
+    protocolType?: "DAHUA" | "HAIKANG";
+    /**
+     * 厂商
+     */
+    product?: "DAHUA" | "HAIKANG";
+    /**
+     * 卡口设备类型
+     */
+    type?: "CAMERA";
+    /**
+     * IP地址
+     */
+    ip?: string;
+    /**
+     * 设备端口
+     */
+    port?: number;
+    /**
+     * 用户
+     */
+    username?: string;
+    /**
+     * 密码
+     */
+    password?: string;
+    /**
+     * 车道属性
+     */
+    carWayCode?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface DeleteGantryDeviceRequest {
+  gantryDeviceId: string;
+}
 export interface ListGantriesRequest {
   query?: {
     _limit?: number;
@@ -1415,52 +1797,6 @@ export interface ListGantriesResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    devices?: {
-      /**
-       * id
-       */
-      id?: string;
-      /**
-       * id
-       */
-      name?: string;
-      /**
-       * 设备编码
-       */
-      code?: string;
-      /**
-       * 协议类型
-       */
-      protocolType?: "DAHUA" | "HAIKANG";
-      /**
-       * 厂商
-       */
-      product?: "DAHUA" | "HAIKANG";
-      /**
-       * 卡口设备类型
-       */
-      type?: "CAMERA";
-      /**
-       * IP地址
-       */
-      ip?: string;
-      /**
-       * 设备端口
-       */
-      port?: number;
-      /**
-       * 用户
-       */
-      username?: string;
-      /**
-       * 密码
-       */
-      password?: string;
-      /**
-       * 车道属性
-       */
-      carWayCode?: string;
-    }[];
   } & {
     /**
      * mongodb id
@@ -1516,52 +1852,6 @@ export interface CreateGantryRequest {
      * 卡口状态
      */
     state: "ONLINE" | "OFFLINE";
-    devices?: {
-      /**
-       * id
-       */
-      id?: string;
-      /**
-       * id
-       */
-      name?: string;
-      /**
-       * 设备编码
-       */
-      code?: string;
-      /**
-       * 协议类型
-       */
-      protocolType?: "DAHUA" | "HAIKANG";
-      /**
-       * 厂商
-       */
-      product?: "DAHUA" | "HAIKANG";
-      /**
-       * 卡口设备类型
-       */
-      type?: "CAMERA";
-      /**
-       * IP地址
-       */
-      ip?: string;
-      /**
-       * 设备端口
-       */
-      port?: number;
-      /**
-       * 用户
-       */
-      username?: string;
-      /**
-       * 密码
-       */
-      password?: string;
-      /**
-       * 车道属性
-       */
-      carWayCode?: string;
-    }[];
   };
 }
 export interface CreateGantryResponse {
@@ -1605,52 +1895,6 @@ export interface CreateGantryResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    devices?: {
-      /**
-       * id
-       */
-      id?: string;
-      /**
-       * id
-       */
-      name?: string;
-      /**
-       * 设备编码
-       */
-      code?: string;
-      /**
-       * 协议类型
-       */
-      protocolType?: "DAHUA" | "HAIKANG";
-      /**
-       * 厂商
-       */
-      product?: "DAHUA" | "HAIKANG";
-      /**
-       * 卡口设备类型
-       */
-      type?: "CAMERA";
-      /**
-       * IP地址
-       */
-      ip?: string;
-      /**
-       * 设备端口
-       */
-      port?: number;
-      /**
-       * 用户
-       */
-      username?: string;
-      /**
-       * 密码
-       */
-      password?: string;
-      /**
-       * 车道属性
-       */
-      carWayCode?: string;
-    }[];
   } & {
     /**
      * mongodb id
@@ -1706,52 +1950,6 @@ export interface GetGantryResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    devices?: {
-      /**
-       * id
-       */
-      id?: string;
-      /**
-       * id
-       */
-      name?: string;
-      /**
-       * 设备编码
-       */
-      code?: string;
-      /**
-       * 协议类型
-       */
-      protocolType?: "DAHUA" | "HAIKANG";
-      /**
-       * 厂商
-       */
-      product?: "DAHUA" | "HAIKANG";
-      /**
-       * 卡口设备类型
-       */
-      type?: "CAMERA";
-      /**
-       * IP地址
-       */
-      ip?: string;
-      /**
-       * 设备端口
-       */
-      port?: number;
-      /**
-       * 用户
-       */
-      username?: string;
-      /**
-       * 密码
-       */
-      password?: string;
-      /**
-       * 车道属性
-       */
-      carWayCode?: string;
-    }[];
   } & {
     /**
      * mongodb id
@@ -1805,52 +2003,6 @@ export interface UpdateGantryRequest {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    devices?: {
-      /**
-       * id
-       */
-      id?: string;
-      /**
-       * id
-       */
-      name?: string;
-      /**
-       * 设备编码
-       */
-      code?: string;
-      /**
-       * 协议类型
-       */
-      protocolType?: "DAHUA" | "HAIKANG";
-      /**
-       * 厂商
-       */
-      product?: "DAHUA" | "HAIKANG";
-      /**
-       * 卡口设备类型
-       */
-      type?: "CAMERA";
-      /**
-       * IP地址
-       */
-      ip?: string;
-      /**
-       * 设备端口
-       */
-      port?: number;
-      /**
-       * 用户
-       */
-      username?: string;
-      /**
-       * 密码
-       */
-      password?: string;
-      /**
-       * 车道属性
-       */
-      carWayCode?: string;
-    }[];
   };
 }
 export interface UpdateGantryResponse {
@@ -1894,52 +2046,6 @@ export interface UpdateGantryResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
-    devices?: {
-      /**
-       * id
-       */
-      id?: string;
-      /**
-       * id
-       */
-      name?: string;
-      /**
-       * 设备编码
-       */
-      code?: string;
-      /**
-       * 协议类型
-       */
-      protocolType?: "DAHUA" | "HAIKANG";
-      /**
-       * 厂商
-       */
-      product?: "DAHUA" | "HAIKANG";
-      /**
-       * 卡口设备类型
-       */
-      type?: "CAMERA";
-      /**
-       * IP地址
-       */
-      ip?: string;
-      /**
-       * 设备端口
-       */
-      port?: number;
-      /**
-       * 用户
-       */
-      username?: string;
-      /**
-       * 密码
-       */
-      password?: string;
-      /**
-       * 车道属性
-       */
-      carWayCode?: string;
-    }[];
   } & {
     /**
      * mongodb id
@@ -2805,7 +2911,7 @@ export interface ListWarningsRequest {
     place_like?: string;
     type?: string;
     level?: number;
-    gantry?: string;
+    gantry?: string[];
   };
 }
 export interface ListWarningsResponse {
@@ -3876,45 +3982,15 @@ export type Whitelist = {
 };
 
 /**
- * 卡口属性分类
- */
-export type GantryAttr = "RAMP" | "MAINLINE";
-
-/**
- * 卡口状态分类
- */
-export type GantryState = "ONLINE" | "OFFLINE";
-
-/**
- * 卡口协议类型分类
- */
-export type GantryProtocolType = "DAHUA" | "HAIKANG";
-
-/**
- * 卡口厂商分类
- */
-export type GantryProduct = "DAHUA" | "HAIKANG";
-
-/**
- * 卡口添加方式分类
- */
-export type GantryAddType = "IP" | "CODE";
-
-/**
- * 卡口设备类型分类
- */
-export type GantryType = "CAMERA";
-
-/**
  * 卡口设备
  */
 export interface GantryDeviceDoc {
   /**
-   * id
+   * 所属卡口 id
    */
-  id?: string;
+  gantry?: string;
   /**
-   * id
+   * 设备名称
    */
   name?: string;
   /**
@@ -3956,6 +4032,140 @@ export interface GantryDeviceDoc {
 }
 
 /**
+ * 创建卡口设备详情
+ */
+export interface GantryDeviceCreateBody {
+  /**
+   * 所属卡口 id
+   */
+  gantry: string;
+  /**
+   * 设备名称
+   */
+  name?: string;
+  /**
+   * 设备编码
+   */
+  code: string;
+  /**
+   * 协议类型
+   */
+  protocolType?: "DAHUA" | "HAIKANG";
+  /**
+   * 厂商
+   */
+  product?: "DAHUA" | "HAIKANG";
+  /**
+   * 卡口设备类型
+   */
+  type?: "CAMERA";
+  /**
+   * IP地址
+   */
+  ip?: string;
+  /**
+   * 设备端口
+   */
+  port?: number;
+  /**
+   * 用户
+   */
+  username?: string;
+  /**
+   * 密码
+   */
+  password?: string;
+  /**
+   * 车道属性
+   */
+  carWayCode?: string;
+}
+
+/**
+ * 卡口设备
+ */
+export type GantryDevice = {
+  /**
+   * 所属卡口 id
+   */
+  gantry?: string;
+  /**
+   * 设备名称
+   */
+  name?: string;
+  /**
+   * 设备编码
+   */
+  code?: string;
+  /**
+   * 协议类型
+   */
+  protocolType?: "DAHUA" | "HAIKANG";
+  /**
+   * 厂商
+   */
+  product?: "DAHUA" | "HAIKANG";
+  /**
+   * 卡口设备类型
+   */
+  type?: "CAMERA";
+  /**
+   * IP地址
+   */
+  ip?: string;
+  /**
+   * 设备端口
+   */
+  port?: number;
+  /**
+   * 用户
+   */
+  username?: string;
+  /**
+   * 密码
+   */
+  password?: string;
+  /**
+   * 车道属性
+   */
+  carWayCode?: string;
+} & {
+  /**
+   * mongodb id
+   */
+  id: string;
+  updateAt?: Date;
+  updateBy?: string;
+  createAt?: Date;
+  createBy?: string;
+};
+
+/**
+ * 卡口属性分类
+ */
+export type GantryAttr = "RAMP" | "MAINLINE";
+
+/**
+ * 卡口状态分类
+ */
+export type GantryState = "ONLINE" | "OFFLINE";
+
+/**
+ * 卡口协议类型分类
+ */
+export type GantryProtocolType = "DAHUA" | "HAIKANG";
+
+/**
+ * 卡口厂商分类
+ */
+export type GantryProduct = "DAHUA" | "HAIKANG";
+
+/**
+ * 卡口设备类型分类
+ */
+export type GantryType = "CAMERA";
+
+/**
  * 卡口信息详情
  */
 export interface GantryDoc {
@@ -3995,52 +4205,6 @@ export interface GantryDoc {
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
-  devices?: {
-    /**
-     * id
-     */
-    id?: string;
-    /**
-     * id
-     */
-    name?: string;
-    /**
-     * 设备编码
-     */
-    code?: string;
-    /**
-     * 协议类型
-     */
-    protocolType?: "DAHUA" | "HAIKANG";
-    /**
-     * 厂商
-     */
-    product?: "DAHUA" | "HAIKANG";
-    /**
-     * 卡口设备类型
-     */
-    type?: "CAMERA";
-    /**
-     * IP地址
-     */
-    ip?: string;
-    /**
-     * 设备端口
-     */
-    port?: number;
-    /**
-     * 用户
-     */
-    username?: string;
-    /**
-     * 密码
-     */
-    password?: string;
-    /**
-     * 车道属性
-     */
-    carWayCode?: string;
-  }[];
 }
 
 /**
@@ -4083,52 +4247,6 @@ export interface GantryCreateBody {
    * 卡口状态
    */
   state: "ONLINE" | "OFFLINE";
-  devices?: {
-    /**
-     * id
-     */
-    id?: string;
-    /**
-     * id
-     */
-    name?: string;
-    /**
-     * 设备编码
-     */
-    code?: string;
-    /**
-     * 协议类型
-     */
-    protocolType?: "DAHUA" | "HAIKANG";
-    /**
-     * 厂商
-     */
-    product?: "DAHUA" | "HAIKANG";
-    /**
-     * 卡口设备类型
-     */
-    type?: "CAMERA";
-    /**
-     * IP地址
-     */
-    ip?: string;
-    /**
-     * 设备端口
-     */
-    port?: number;
-    /**
-     * 用户
-     */
-    username?: string;
-    /**
-     * 密码
-     */
-    password?: string;
-    /**
-     * 车道属性
-     */
-    carWayCode?: string;
-  }[];
 }
 
 /**
@@ -4171,52 +4289,6 @@ export type Gantry = {
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
-  devices?: {
-    /**
-     * id
-     */
-    id?: string;
-    /**
-     * id
-     */
-    name?: string;
-    /**
-     * 设备编码
-     */
-    code?: string;
-    /**
-     * 协议类型
-     */
-    protocolType?: "DAHUA" | "HAIKANG";
-    /**
-     * 厂商
-     */
-    product?: "DAHUA" | "HAIKANG";
-    /**
-     * 卡口设备类型
-     */
-    type?: "CAMERA";
-    /**
-     * IP地址
-     */
-    ip?: string;
-    /**
-     * 设备端口
-     */
-    port?: number;
-    /**
-     * 用户
-     */
-    username?: string;
-    /**
-     * 密码
-     */
-    password?: string;
-    /**
-     * 车道属性
-     */
-    carWayCode?: string;
-  }[];
 } & {
   /**
    * mongodb id

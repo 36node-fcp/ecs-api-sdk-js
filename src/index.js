@@ -233,6 +233,97 @@ export default class SDK {
     },
   };
   /**
+   * gantryDevice's methods
+   */
+  gantryDevice = {
+    /**
+     * List gantryDevices
+     *
+     * @param {ListGantryDevicesRequest} req listGantryDevices request
+     * @returns {Promise<ListGantryDevicesResponse>} A paged array of gantryDevices
+     */
+    listGantryDevices: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/gantryDevices`, {
+        method: "GET",
+        query,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Create a gantryDevice
+     *
+     * @param {CreateGantryDeviceRequest} req createGantryDevice request
+     * @returns {Promise<CreateGantryDeviceResponse>} The gantryDevice created
+     */
+    createGantryDevice: req => {
+      const { body } = req || {};
+
+      if (!body)
+        throw new Error("requetBody is required for createGantryDevice");
+
+      return fetch(`${this.base}/gantryDevices`, {
+        method: "POST",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Find gantryDevice by id
+     *
+     * @param {GetGantryDeviceRequest} req getGantryDevice request
+     * @returns {Promise<GetGantryDeviceResponse>} Expected response to a valid request
+     */
+    getGantryDevice: req => {
+      const { gantryDeviceId } = req || {};
+
+      if (!gantryDeviceId)
+        throw new Error("gantryDeviceId is required for getGantryDevice");
+
+      return fetch(`${this.base}/gantryDevices/${gantryDeviceId}`, {
+        method: "GET",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Update gantryDevice
+     *
+     * @param {UpdateGantryDeviceRequest} req updateGantryDevice request
+     * @returns {Promise<UpdateGantryDeviceResponse>} The gantryDevice
+     */
+    updateGantryDevice: req => {
+      const { gantryDeviceId, body } = req || {};
+
+      if (!gantryDeviceId)
+        throw new Error("gantryDeviceId is required for updateGantryDevice");
+      if (!body)
+        throw new Error("requetBody is required for updateGantryDevice");
+
+      return fetch(`${this.base}/gantryDevices/${gantryDeviceId}`, {
+        method: "PUT",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Delete gantryDevice
+     *
+     * @param {DeleteGantryDeviceRequest} req deleteGantryDevice request
+     */
+    deleteGantryDevice: req => {
+      const { gantryDeviceId } = req || {};
+
+      if (!gantryDeviceId)
+        throw new Error("gantryDeviceId is required for deleteGantryDevice");
+
+      return fetch(`${this.base}/gantryDevices/${gantryDeviceId}`, {
+        method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+  };
+  /**
    * gantry's methods
    */
   gantry = {
