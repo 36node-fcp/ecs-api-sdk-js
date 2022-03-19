@@ -207,9 +207,9 @@ export interface ListIllegalRecordsResponse {
      */
     thirdId?: string;
     /**
-     * 来源
+     * 违法来源
      */
-    source?: "GUANGXIN" | "HENGTONG";
+    source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
      * 车牌
      */
@@ -279,6 +279,10 @@ export interface ListIllegalRecordsResponse {
      */
     plateImages?: string[];
     /**
+     * 车辆视频
+     */
+    videos?: string[];
+    /**
      * 车辆品牌代码
      */
     carBrand?: string;
@@ -287,15 +291,15 @@ export interface ListIllegalRecordsResponse {
      */
     carBrandStr?: string;
     /**
-     * 违法代码
+     * 违法名称
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
-     * 违法名称
+     * 违法代码
      */
     code?: string;
     /**
@@ -350,9 +354,9 @@ export interface CreateIllegalRecordRequest {
      */
     thirdId?: string;
     /**
-     * 来源
+     * 违法来源
      */
-    source?: "GUANGXIN" | "HENGTONG";
+    source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
      * 车牌
      */
@@ -422,6 +426,10 @@ export interface CreateIllegalRecordRequest {
      */
     plateImages?: string[];
     /**
+     * 车辆视频
+     */
+    videos?: string[];
+    /**
      * 车辆品牌代码
      */
     carBrand?: string;
@@ -430,21 +438,21 @@ export interface CreateIllegalRecordRequest {
      */
     carBrandStr?: string;
     /**
-     * 违法代码
+     * 违法名称
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
-     * 违法名称
+     * 违法代码
      */
-    code: string;
+    code?: string;
     /**
      * 违法类型
      */
-    type: string;
+    type?: string;
     /**
      * 违法地点
      */
@@ -481,9 +489,9 @@ export interface CreateIllegalRecordResponse {
      */
     thirdId?: string;
     /**
-     * 来源
+     * 违法来源
      */
-    source?: "GUANGXIN" | "HENGTONG";
+    source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
      * 车牌
      */
@@ -553,6 +561,10 @@ export interface CreateIllegalRecordResponse {
      */
     plateImages?: string[];
     /**
+     * 车辆视频
+     */
+    videos?: string[];
+    /**
      * 车辆品牌代码
      */
     carBrand?: string;
@@ -561,15 +573,15 @@ export interface CreateIllegalRecordResponse {
      */
     carBrandStr?: string;
     /**
-     * 违法代码
+     * 违法名称
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
-     * 违法名称
+     * 违法代码
      */
     code?: string;
     /**
@@ -624,9 +636,9 @@ export interface ConfirmIllegalRecordResponse {
      */
     thirdId?: string;
     /**
-     * 来源
+     * 违法来源
      */
-    source?: "GUANGXIN" | "HENGTONG";
+    source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
      * 车牌
      */
@@ -696,6 +708,10 @@ export interface ConfirmIllegalRecordResponse {
      */
     plateImages?: string[];
     /**
+     * 车辆视频
+     */
+    videos?: string[];
+    /**
      * 车辆品牌代码
      */
     carBrand?: string;
@@ -704,15 +720,15 @@ export interface ConfirmIllegalRecordResponse {
      */
     carBrandStr?: string;
     /**
-     * 违法代码
+     * 违法名称
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
-     * 违法名称
+     * 违法代码
      */
     code?: string;
     /**
@@ -767,9 +783,9 @@ export interface GetIllegalRecordResponse {
      */
     thirdId?: string;
     /**
-     * 来源
+     * 违法来源
      */
-    source?: "GUANGXIN" | "HENGTONG";
+    source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
      * 车牌
      */
@@ -839,6 +855,10 @@ export interface GetIllegalRecordResponse {
      */
     plateImages?: string[];
     /**
+     * 车辆视频
+     */
+    videos?: string[];
+    /**
      * 车辆品牌代码
      */
     carBrand?: string;
@@ -847,15 +867,15 @@ export interface GetIllegalRecordResponse {
      */
     carBrandStr?: string;
     /**
-     * 违法代码
+     * 违法名称
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
-     * 违法名称
+     * 违法代码
      */
     code?: string;
     /**
@@ -908,9 +928,9 @@ export interface UpdateIllegalRecordRequest {
      */
     thirdId?: string;
     /**
-     * 来源
+     * 违法来源
      */
-    source?: "GUANGXIN" | "HENGTONG";
+    source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
      * 车牌
      */
@@ -980,6 +1000,10 @@ export interface UpdateIllegalRecordRequest {
      */
     plateImages?: string[];
     /**
+     * 车辆视频
+     */
+    videos?: string[];
+    /**
      * 车辆品牌代码
      */
     carBrand?: string;
@@ -988,15 +1012,15 @@ export interface UpdateIllegalRecordRequest {
      */
     carBrandStr?: string;
     /**
-     * 违法代码
+     * 违法名称
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
-     * 违法名称
+     * 违法代码
      */
     code?: string;
     /**
@@ -1039,9 +1063,9 @@ export interface UpdateIllegalRecordResponse {
      */
     thirdId?: string;
     /**
-     * 来源
+     * 违法来源
      */
-    source?: "GUANGXIN" | "HENGTONG";
+    source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
      * 车牌
      */
@@ -1111,6 +1135,10 @@ export interface UpdateIllegalRecordResponse {
      */
     plateImages?: string[];
     /**
+     * 车辆视频
+     */
+    videos?: string[];
+    /**
      * 车辆品牌代码
      */
     carBrand?: string;
@@ -1119,15 +1147,15 @@ export interface UpdateIllegalRecordResponse {
      */
     carBrandStr?: string;
     /**
-     * 违法代码
+     * 违法名称
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
-     * 违法名称
+     * 违法代码
      */
     code?: string;
     /**
@@ -1190,9 +1218,9 @@ export interface ListIllegalTypesResponse {
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
      * 违法类型
      */
@@ -1229,9 +1257,9 @@ export interface CreateIllegalTypeRequest {
      */
     name: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
      * 违法类型
      */
@@ -1256,9 +1284,9 @@ export interface CreateIllegalTypeResponse {
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
      * 违法类型
      */
@@ -1295,9 +1323,9 @@ export interface GetIllegalTypeResponse {
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
      * 违法类型
      */
@@ -1332,9 +1360,9 @@ export interface UpdateIllegalTypeRequest {
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
      * 违法类型
      */
@@ -1359,9 +1387,9 @@ export interface UpdateIllegalTypeResponse {
      */
     name?: string;
     /**
-     * 违法简称
+     * 违法内容
      */
-    shortName?: string;
+    content?: string;
     /**
      * 违法类型
      */
@@ -3408,9 +3436,9 @@ export interface IllegalRecordDoc {
    */
   thirdId?: string;
   /**
-   * 来源
+   * 违法来源
    */
-  source?: "GUANGXIN" | "HENGTONG";
+  source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
   /**
    * 车牌
    */
@@ -3480,6 +3508,10 @@ export interface IllegalRecordDoc {
    */
   plateImages?: string[];
   /**
+   * 车辆视频
+   */
+  videos?: string[];
+  /**
    * 车辆品牌代码
    */
   carBrand?: string;
@@ -3488,15 +3520,15 @@ export interface IllegalRecordDoc {
    */
   carBrandStr?: string;
   /**
-   * 违法代码
+   * 违法名称
    */
   name?: string;
   /**
-   * 违法简称
+   * 违法内容
    */
-  shortName?: string;
+  content?: string;
   /**
-   * 违法名称
+   * 违法代码
    */
   code?: string;
   /**
@@ -3538,9 +3570,9 @@ export interface IllegalRecordCreateBody {
    */
   thirdId?: string;
   /**
-   * 来源
+   * 违法来源
    */
-  source?: "GUANGXIN" | "HENGTONG";
+  source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
   /**
    * 车牌
    */
@@ -3610,6 +3642,10 @@ export interface IllegalRecordCreateBody {
    */
   plateImages?: string[];
   /**
+   * 车辆视频
+   */
+  videos?: string[];
+  /**
    * 车辆品牌代码
    */
   carBrand?: string;
@@ -3618,21 +3654,21 @@ export interface IllegalRecordCreateBody {
    */
   carBrandStr?: string;
   /**
-   * 违法代码
+   * 违法名称
    */
   name?: string;
   /**
-   * 违法简称
+   * 违法内容
    */
-  shortName?: string;
+  content?: string;
   /**
-   * 违法名称
+   * 违法代码
    */
-  code: string;
+  code?: string;
   /**
    * 违法类型
    */
-  type: string;
+  type?: string;
   /**
    * 违法地点
    */
@@ -3668,9 +3704,9 @@ export type IllegalRecord = {
    */
   thirdId?: string;
   /**
-   * 来源
+   * 违法来源
    */
-  source?: "GUANGXIN" | "HENGTONG";
+  source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
   /**
    * 车牌
    */
@@ -3740,6 +3776,10 @@ export type IllegalRecord = {
    */
   plateImages?: string[];
   /**
+   * 车辆视频
+   */
+  videos?: string[];
+  /**
    * 车辆品牌代码
    */
   carBrand?: string;
@@ -3748,15 +3788,15 @@ export type IllegalRecord = {
    */
   carBrandStr?: string;
   /**
-   * 违法代码
+   * 违法名称
    */
   name?: string;
   /**
-   * 违法简称
+   * 违法内容
    */
-  shortName?: string;
+  content?: string;
   /**
-   * 违法名称
+   * 违法代码
    */
   code?: string;
   /**
@@ -3807,9 +3847,9 @@ export interface IllegalTypeDoc {
    */
   name?: string;
   /**
-   * 违法简称
+   * 违法内容
    */
-  shortName?: string;
+  content?: string;
   /**
    * 违法类型
    */
@@ -3833,9 +3873,9 @@ export interface IllegalTypeCreateBody {
    */
   name: string;
   /**
-   * 违法简称
+   * 违法内容
    */
-  shortName?: string;
+  content?: string;
   /**
    * 违法类型
    */
@@ -3859,9 +3899,9 @@ export type IllegalType = {
    */
   name?: string;
   /**
-   * 违法简称
+   * 违法内容
    */
-  shortName?: string;
+  content?: string;
   /**
    * 违法类型
    */
