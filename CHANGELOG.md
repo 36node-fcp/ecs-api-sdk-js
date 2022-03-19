@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.15](https://github.com/36node-fcp/ecs-api-sdk-js/compare/v0.1.14...v0.1.15) (2022-03-19)
+
+
+### Bug Fixes
+
+* remove illegal record requried captime ([0538f0c](https://github.com/36node-fcp/ecs-api-sdk-js/commit/0538f0cdb33d68242ba5a8a8f07ffae689e584d7))
+
 ### [0.1.14](https://github.com/36node-fcp/ecs-api-sdk-js/compare/v0.1.13...v0.1.14) (2022-03-19)
 
 ### [0.1.13](https://github.com/36node-fcp/ecs-api-sdk-js/compare/v0.1.12...v0.1.13) (2022-03-17)
