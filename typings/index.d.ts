@@ -416,7 +416,7 @@ export interface CreateIllegalRecordRequest {
     /**
      * 违法时间
      */
-    capTime: Date;
+    capTime?: Date;
     /**
      * 过车图片
      */
@@ -456,7 +456,7 @@ export interface CreateIllegalRecordRequest {
     /**
      * 违法地点
      */
-    place: string;
+    place?: string;
     /**
      * 经度
      */
@@ -3632,7 +3632,7 @@ export interface IllegalRecordCreateBody {
   /**
    * 违法时间
    */
-  capTime: Date;
+  capTime?: Date;
   /**
    * 过车图片
    */
@@ -3672,7 +3672,7 @@ export interface IllegalRecordCreateBody {
   /**
    * 违法地点
    */
-  place: string;
+  place?: string;
   /**
    * 经度
    */
