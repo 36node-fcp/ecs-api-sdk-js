@@ -195,6 +195,7 @@ export interface ListIllegalRecordsRequest {
     _offset?: number;
     _sort?: string;
     _select?: string[];
+    ns_like?: string;
     plate?: string[];
     plate_like?: string;
     state?: ("DRAFT" | "OPEN" | "CLOSED")[];
@@ -210,6 +211,10 @@ export interface ListIllegalRecordsResponse {
      * 违法来源
      */
     source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
+    /**
+     * 所属的部门
+     */
+    ns?: string;
     /**
      * 车牌
      */
@@ -358,6 +363,10 @@ export interface CreateIllegalRecordRequest {
      */
     source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 车牌
      */
     plate: string;
@@ -492,6 +501,10 @@ export interface CreateIllegalRecordResponse {
      * 违法来源
      */
     source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
+    /**
+     * 所属的部门
+     */
+    ns?: string;
     /**
      * 车牌
      */
@@ -640,6 +653,10 @@ export interface ConfirmIllegalRecordResponse {
      */
     source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 车牌
      */
     plate?: string;
@@ -787,6 +804,10 @@ export interface GetIllegalRecordResponse {
      */
     source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 车牌
      */
     plate?: string;
@@ -932,6 +953,10 @@ export interface UpdateIllegalRecordRequest {
      */
     source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 车牌
      */
     plate?: string;
@@ -1066,6 +1091,10 @@ export interface UpdateIllegalRecordResponse {
      * 违法来源
      */
     source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
+    /**
+     * 所属的部门
+     */
+    ns?: string;
     /**
      * 车牌
      */
@@ -1424,6 +1453,7 @@ export interface ListGantryDevicesRequest {
     _select?: string[];
     name_like?: string;
     gantry?: string[];
+    state?: string;
   };
 }
 export interface ListGantryDevicesResponse {
@@ -1472,6 +1502,10 @@ export interface ListGantryDevicesResponse {
      * 车道属性
      */
     carWayCode?: string;
+    /**
+     * 设备状态
+     */
+    state?: "ONLINE" | "OFFLINE";
   } & {
     /**
      * mongodb id
@@ -1535,6 +1569,10 @@ export interface CreateGantryDeviceRequest {
      * 车道属性
      */
     carWayCode?: string;
+    /**
+     * 设备状态
+     */
+    state?: "ONLINE" | "OFFLINE";
   };
 }
 export interface CreateGantryDeviceResponse {
@@ -1586,6 +1624,10 @@ export interface CreateGantryDeviceResponse {
      * 车道属性
      */
     carWayCode?: string;
+    /**
+     * 设备状态
+     */
+    state?: "ONLINE" | "OFFLINE";
   } & {
     /**
      * mongodb id
@@ -1649,6 +1691,10 @@ export interface GetGantryDeviceResponse {
      * 车道属性
      */
     carWayCode?: string;
+    /**
+     * 设备状态
+     */
+    state?: "ONLINE" | "OFFLINE";
   } & {
     /**
      * mongodb id
@@ -1710,6 +1756,10 @@ export interface UpdateGantryDeviceRequest {
      * 车道属性
      */
     carWayCode?: string;
+    /**
+     * 设备状态
+     */
+    state?: "ONLINE" | "OFFLINE";
   };
 }
 export interface UpdateGantryDeviceResponse {
@@ -1761,6 +1811,10 @@ export interface UpdateGantryDeviceResponse {
      * 车道属性
      */
     carWayCode?: string;
+    /**
+     * 设备状态
+     */
+    state?: "ONLINE" | "OFFLINE";
   } & {
     /**
      * mongodb id
@@ -1782,6 +1836,7 @@ export interface ListGantriesRequest {
     _sort?: string;
     _select?: string[];
     name_like?: string;
+    ns_like?: string;
     state?: ("ONLINE" | "OFFLINE")[];
     attr?: string[];
     ns?: string[];
@@ -2935,6 +2990,7 @@ export interface ListWarningsRequest {
     _select?: string[];
     plate?: string[];
     plate_like?: string;
+    ns_like?: string;
     name_like?: string;
     place_like?: string;
     type?: string;
@@ -2945,13 +3001,21 @@ export interface ListWarningsRequest {
 export interface ListWarningsResponse {
   body: ({
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 预警名称
      */
     name?: string;
     /**
-     * 预警所属的类型，目前直接同违法类型
+     * 预警所属的类型
      */
     type?: string;
+    /**
+     * 预警代码，包含所有违章代码
+     */
+    code?: string;
     /**
      * 预警车牌
      */
@@ -3016,13 +3080,21 @@ export interface CreateWarningRequest {
    */
   body: {
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 预警名称
      */
     name?: string;
     /**
-     * 预警所属的类型，目前直接同违法类型
+     * 预警所属的类型
      */
     type?: string;
+    /**
+     * 预警代码，包含所有违章代码
+     */
+    code?: string;
     /**
      * 预警车牌
      */
@@ -3075,13 +3147,21 @@ export interface CreateWarningResponse {
    */
   body: {
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 预警名称
      */
     name?: string;
     /**
-     * 预警所属的类型，目前直接同违法类型
+     * 预警所属的类型
      */
     type?: string;
+    /**
+     * 预警代码，包含所有违章代码
+     */
+    code?: string;
     /**
      * 预警车牌
      */
@@ -3146,13 +3226,21 @@ export interface GetWarningResponse {
    */
   body: {
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 预警名称
      */
     name?: string;
     /**
-     * 预警所属的类型，目前直接同违法类型
+     * 预警所属的类型
      */
     type?: string;
+    /**
+     * 预警代码，包含所有违章代码
+     */
+    code?: string;
     /**
      * 预警车牌
      */
@@ -3215,13 +3303,21 @@ export interface UpdateWarningRequest {
    */
   body: {
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 预警名称
      */
     name?: string;
     /**
-     * 预警所属的类型，目前直接同违法类型
+     * 预警所属的类型
      */
     type?: string;
+    /**
+     * 预警代码，包含所有违章代码
+     */
+    code?: string;
     /**
      * 预警车牌
      */
@@ -3274,13 +3370,21 @@ export interface UpdateWarningResponse {
    */
   body: {
     /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
      * 预警名称
      */
     name?: string;
     /**
-     * 预警所属的类型，目前直接同违法类型
+     * 预警所属的类型
      */
     type?: string;
+    /**
+     * 预警代码，包含所有违章代码
+     */
+    code?: string;
     /**
      * 预警车牌
      */
@@ -3440,6 +3544,10 @@ export interface IllegalRecordDoc {
    */
   source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
   /**
+   * 所属的部门
+   */
+  ns?: string;
+  /**
    * 车牌
    */
   plate?: string;
@@ -3574,6 +3682,10 @@ export interface IllegalRecordCreateBody {
    */
   source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
   /**
+   * 所属的部门
+   */
+  ns?: string;
+  /**
    * 车牌
    */
   plate: string;
@@ -3707,6 +3819,10 @@ export type IllegalRecord = {
    * 违法来源
    */
   source?: "GUANGXIN" | "HENGTONG" | "MANUAL" | "ETC";
+  /**
+   * 所属的部门
+   */
+  ns?: string;
   /**
    * 车牌
    */
@@ -4069,6 +4185,10 @@ export interface GantryDeviceDoc {
    * 车道属性
    */
   carWayCode?: string;
+  /**
+   * 设备状态
+   */
+  state?: "ONLINE" | "OFFLINE";
 }
 
 /**
@@ -4119,6 +4239,10 @@ export interface GantryDeviceCreateBody {
    * 车道属性
    */
   carWayCode?: string;
+  /**
+   * 设备状态
+   */
+  state?: "ONLINE" | "OFFLINE";
 }
 
 /**
@@ -4169,6 +4293,10 @@ export type GantryDevice = {
    * 车道属性
    */
   carWayCode?: string;
+  /**
+   * 设备状态
+   */
+  state?: "ONLINE" | "OFFLINE";
 } & {
   /**
    * mongodb id
@@ -4682,13 +4810,21 @@ export type TrackRecord = {
  */
 export interface WarningDoc {
   /**
+   * 所属的部门
+   */
+  ns?: string;
+  /**
    * 预警名称
    */
   name?: string;
   /**
-   * 预警所属的类型，目前直接同违法类型
+   * 预警所属的类型
    */
   type?: string;
+  /**
+   * 预警代码，包含所有违章代码
+   */
+  code?: string;
   /**
    * 预警车牌
    */
@@ -4740,13 +4876,21 @@ export interface WarningDoc {
  */
 export interface WarningCreateBody {
   /**
+   * 所属的部门
+   */
+  ns?: string;
+  /**
    * 预警名称
    */
   name?: string;
   /**
-   * 预警所属的类型，目前直接同违法类型
+   * 预警所属的类型
    */
   type?: string;
+  /**
+   * 预警代码，包含所有违章代码
+   */
+  code?: string;
   /**
    * 预警车牌
    */
@@ -4798,13 +4942,21 @@ export interface WarningCreateBody {
  */
 export type Warning = {
   /**
+   * 所属的部门
+   */
+  ns?: string;
+  /**
    * 预警名称
    */
   name?: string;
   /**
-   * 预警所属的类型，目前直接同违法类型
+   * 预警所属的类型
    */
   type?: string;
+  /**
+   * 预警代码，包含所有违章代码
+   */
+  code?: string;
   /**
    * 预警车牌
    */
