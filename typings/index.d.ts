@@ -1453,7 +1453,7 @@ export interface ListGantryDevicesRequest {
     _select?: string[];
     name_like?: string;
     gantry?: string[];
-    state?: string;
+    state?: string[];
   };
 }
 export interface ListGantryDevicesResponse {
@@ -1502,6 +1502,10 @@ export interface ListGantryDevicesResponse {
      * 车道属性
      */
     carWayCode?: string;
+    /**
+     * 限速(千米/小时)
+     */
+    speedLimit?: number;
     /**
      * 设备状态
      */
@@ -1570,6 +1574,10 @@ export interface CreateGantryDeviceRequest {
      */
     carWayCode?: string;
     /**
+     * 限速(千米/小时)
+     */
+    speedLimit?: number;
+    /**
      * 设备状态
      */
     state?: "ONLINE" | "OFFLINE";
@@ -1624,6 +1632,10 @@ export interface CreateGantryDeviceResponse {
      * 车道属性
      */
     carWayCode?: string;
+    /**
+     * 限速(千米/小时)
+     */
+    speedLimit?: number;
     /**
      * 设备状态
      */
@@ -1692,6 +1704,10 @@ export interface GetGantryDeviceResponse {
      */
     carWayCode?: string;
     /**
+     * 限速(千米/小时)
+     */
+    speedLimit?: number;
+    /**
      * 设备状态
      */
     state?: "ONLINE" | "OFFLINE";
@@ -1757,6 +1773,10 @@ export interface UpdateGantryDeviceRequest {
      */
     carWayCode?: string;
     /**
+     * 限速(千米/小时)
+     */
+    speedLimit?: number;
+    /**
      * 设备状态
      */
     state?: "ONLINE" | "OFFLINE";
@@ -1811,6 +1831,10 @@ export interface UpdateGantryDeviceResponse {
      * 车道属性
      */
     carWayCode?: string;
+    /**
+     * 限速(千米/小时)
+     */
+    speedLimit?: number;
     /**
      * 设备状态
      */
@@ -4186,6 +4210,10 @@ export interface GantryDeviceDoc {
    */
   carWayCode?: string;
   /**
+   * 限速(千米/小时)
+   */
+  speedLimit?: number;
+  /**
    * 设备状态
    */
   state?: "ONLINE" | "OFFLINE";
@@ -4240,6 +4268,10 @@ export interface GantryDeviceCreateBody {
    */
   carWayCode?: string;
   /**
+   * 限速(千米/小时)
+   */
+  speedLimit?: number;
+  /**
    * 设备状态
    */
   state?: "ONLINE" | "OFFLINE";
@@ -4293,6 +4325,10 @@ export type GantryDevice = {
    * 车道属性
    */
   carWayCode?: string;
+  /**
+   * 限速(千米/小时)
+   */
+  speedLimit?: number;
   /**
    * 设备状态
    */
