@@ -140,6 +140,21 @@ export default class SDK {
         headers: { Authorization: this.auth },
       });
     },
+    /**
+     * Get illegal record counts
+     *
+     * @param {GetIllegalRecordCountsRequest} req getIllegalRecordCounts request
+     * @returns {Promise<GetIllegalRecordCountsResponse>} Expected response to a valid request
+     */
+    getIllegalRecordCounts: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/illegalRecord/counts`, {
+        method: "GET",
+        query,
+        headers: { Authorization: this.auth },
+      });
+    },
   };
   /**
    * illegalType's methods
@@ -511,7 +526,7 @@ export default class SDK {
     listTrackRecords: req => {
       const { query } = req || {};
 
-      return fetch(`${this.base}/TrackRecords`, {
+      return fetch(`${this.base}/trackRecords`, {
         method: "GET",
         query,
         headers: { Authorization: this.auth },
@@ -529,7 +544,7 @@ export default class SDK {
       if (!body)
         throw new Error("requetBody is required for createTrackRecord");
 
-      return fetch(`${this.base}/TrackRecords`, {
+      return fetch(`${this.base}/trackRecords`, {
         method: "POST",
         body,
         headers: { Authorization: this.auth },
@@ -547,7 +562,7 @@ export default class SDK {
       if (!trackRecordId)
         throw new Error("trackRecordId is required for getTrackRecord");
 
-      return fetch(`${this.base}/TrackRecords/${trackRecordId}`, {
+      return fetch(`${this.base}/trackRecords/${trackRecordId}`, {
         method: "GET",
         headers: { Authorization: this.auth },
       });
@@ -566,7 +581,7 @@ export default class SDK {
       if (!body)
         throw new Error("requetBody is required for updateTrackRecord");
 
-      return fetch(`${this.base}/TrackRecords/${trackRecordId}`, {
+      return fetch(`${this.base}/trackRecords/${trackRecordId}`, {
         method: "PUT",
         body,
         headers: { Authorization: this.auth },
@@ -583,8 +598,23 @@ export default class SDK {
       if (!trackRecordId)
         throw new Error("trackRecordId is required for deleteTrackRecord");
 
-      return fetch(`${this.base}/TrackRecords/${trackRecordId}`, {
+      return fetch(`${this.base}/trackRecords/${trackRecordId}`, {
         method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Get track record counts
+     *
+     * @param {GetTrackRecordCountsRequest} req getTrackRecordCounts request
+     * @returns {Promise<GetTrackRecordCountsResponse>} Expected response to a valid request
+     */
+    getTrackRecordCounts: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/trackRecord/counts`, {
+        method: "GET",
+        query,
         headers: { Authorization: this.auth },
       });
     },
@@ -602,7 +632,7 @@ export default class SDK {
     listWarnings: req => {
       const { query } = req || {};
 
-      return fetch(`${this.base}/Warnings`, {
+      return fetch(`${this.base}/warnings`, {
         method: "GET",
         query,
         headers: { Authorization: this.auth },
@@ -619,7 +649,7 @@ export default class SDK {
 
       if (!body) throw new Error("requetBody is required for createWarning");
 
-      return fetch(`${this.base}/Warnings`, {
+      return fetch(`${this.base}/warnings`, {
         method: "POST",
         body,
         headers: { Authorization: this.auth },
@@ -636,7 +666,7 @@ export default class SDK {
 
       if (!warningId) throw new Error("warningId is required for getWarning");
 
-      return fetch(`${this.base}/Warnings/${warningId}`, {
+      return fetch(`${this.base}/warnings/${warningId}`, {
         method: "GET",
         headers: { Authorization: this.auth },
       });
@@ -654,7 +684,7 @@ export default class SDK {
         throw new Error("warningId is required for updateWarning");
       if (!body) throw new Error("requetBody is required for updateWarning");
 
-      return fetch(`${this.base}/Warnings/${warningId}`, {
+      return fetch(`${this.base}/warnings/${warningId}`, {
         method: "PUT",
         body,
         headers: { Authorization: this.auth },
@@ -671,8 +701,23 @@ export default class SDK {
       if (!warningId)
         throw new Error("warningId is required for deleteWarning");
 
-      return fetch(`${this.base}/Warnings/${warningId}`, {
+      return fetch(`${this.base}/warnings/${warningId}`, {
         method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Get warning counts
+     *
+     * @param {GetWarningCountsRequest} req getWarningCounts request
+     * @returns {Promise<GetWarningCountsResponse>} Expected response to a valid request
+     */
+    getWarningCounts: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/warning/counts`, {
+        method: "GET",
+        query,
         headers: { Authorization: this.auth },
       });
     },

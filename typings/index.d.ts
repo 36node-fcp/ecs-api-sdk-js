@@ -45,6 +45,12 @@ export interface IllegalRecordAPI {
    * Delete illegal device
    */
   deleteIllegalRecord(req: DeleteIllegalRecordRequest): Promise<void>;
+  /**
+   * Get illegal record counts
+   */
+  getIllegalRecordCounts(
+    req: GetIllegalRecordCountsRequest
+  ): Promise<GetIllegalRecordCountsResponse>;
 }
 export interface IllegalTypeAPI {
   /**
@@ -155,6 +161,10 @@ export interface TrackRecordAPI {
    * Delete trackRecord
    */
   deleteTrackRecord(req: DeleteTrackRecordRequest): Promise<void>;
+  /**
+   * Get track record counts
+   */
+  getTrackRecordCounts(req: GetTrackRecordCountsRequest): Promise<GetTrackRecordCountsResponse>;
 }
 export interface WarningAPI {
   /**
@@ -177,6 +187,10 @@ export interface WarningAPI {
    * Delete warning
    */
   deleteWarning(req: DeleteWarningRequest): Promise<void>;
+  /**
+   * Get warning counts
+   */
+  getWarningCounts(req: GetWarningCountsRequest): Promise<GetWarningCountsResponse>;
 }
 export interface SettingsAPI {
   /**
@@ -1233,6 +1247,62 @@ export interface UpdateIllegalRecordResponse {
 }
 export interface DeleteIllegalRecordRequest {
   illegalRecordId: string;
+}
+export interface GetIllegalRecordCountsRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    createAt_lt?: string;
+    createAt_gt?: string;
+    ns_like?: string;
+    _group?: ("createAt" | "gantryCode" | "code" | "ns")[];
+  };
+}
+export interface GetIllegalRecordCountsResponse {
+  body: {
+    /**
+     * id of count group
+     */
+    id?: string;
+    /**
+     * Group of date
+     */
+    createAt?: {
+      /**
+       * day of date
+       */
+      day?: string;
+      /**
+       * week of date
+       */
+      week?: string;
+      /**
+       * month of date
+       */
+      month?: string;
+      /**
+       * year of date
+       */
+      year?: string;
+    };
+    /**
+     * 卡口 id
+     */
+    gantryCode?: string;
+    /**
+     * 违法代码
+     */
+    code?: string;
+    /**
+     * 所属命名空间
+     */
+    ns?: string;
+    /**
+     * 计数
+     */
+    count?: number;
+  }[];
 }
 export interface ListIllegalTypesRequest {
   query?: {
@@ -3116,6 +3186,53 @@ export interface UpdateTrackRecordResponse {
 export interface DeleteTrackRecordRequest {
   trackRecordId: string;
 }
+export interface GetTrackRecordCountsRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    createAt_lt?: string;
+    createAt_gt?: string;
+    _group?: ("createAt" | "gantryCode")[];
+  };
+}
+export interface GetTrackRecordCountsResponse {
+  body: {
+    /**
+     * id of count group
+     */
+    id?: string;
+    /**
+     * Group of date
+     */
+    createAt?: {
+      /**
+       * day of date
+       */
+      day?: string;
+      /**
+       * week of date
+       */
+      week?: string;
+      /**
+       * month of date
+       */
+      month?: string;
+      /**
+       * year of date
+       */
+      year?: string;
+    };
+    /**
+     * 卡口 id
+     */
+    gantryCode?: string;
+    /**
+     * 计数
+     */
+    count?: number;
+  }[];
+}
 export interface ListWarningsRequest {
   query?: {
     _limit?: number;
@@ -3579,6 +3696,73 @@ export interface UpdateWarningResponse {
 export interface DeleteWarningRequest {
   warningId: string;
 }
+export interface GetWarningCountsRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    createAt_lt?: string;
+    createAt_gt?: string;
+    ns_like?: string;
+    name_like?: string;
+    place_like?: string;
+    type?: string;
+    level?: number;
+    gantry?: string[];
+    capTime_gte?: string;
+    capTime_lte?: string;
+    _group?: ("createAt" | "gantry" | "code" | "level" | "ns")[];
+  };
+}
+export interface GetWarningCountsResponse {
+  body: {
+    /**
+     * id of count group
+     */
+    id?: string;
+    /**
+     * Group of date
+     */
+    createAt?: {
+      /**
+       * day of date
+       */
+      day?: string;
+      /**
+       * week of date
+       */
+      week?: string;
+      /**
+       * month of date
+       */
+      month?: string;
+      /**
+       * year of date
+       */
+      year?: string;
+    };
+    /**
+     * 卡口 id
+     */
+    gantry?: string;
+    /**
+     * 违法代码
+     */
+    code?: string;
+    /**
+     * 违法等级
+     */
+    level?: string;
+    /**
+     * 所属命名空间
+     */
+    ns?: string;
+    /**
+     * 计数
+     */
+    count?: number;
+  }[];
+}
 export interface GetSettingsResponse {
   /**
    * 系统设置
@@ -3654,6 +3838,171 @@ export interface UpdateSettingResponse {
     createBy?: string;
   };
 }
+/**
+ * Group of date
+ */
+export interface GroupDate {
+  /**
+   * day of date
+   */
+  day?: string;
+  /**
+   * week of date
+   */
+  week?: string;
+  /**
+   * month of date
+   */
+  month?: string;
+  /**
+   * year of date
+   */
+  year?: string;
+}
+
+export type IllegalRecordCountGroup = "createAt" | "gantryCode" | "code" | "ns";
+
+/**
+ * Count of illegal record aggregation
+ */
+export interface IllegalRecordCount {
+  /**
+   * id of count group
+   */
+  id?: string;
+  /**
+   * Group of date
+   */
+  createAt?: {
+    /**
+     * day of date
+     */
+    day?: string;
+    /**
+     * week of date
+     */
+    week?: string;
+    /**
+     * month of date
+     */
+    month?: string;
+    /**
+     * year of date
+     */
+    year?: string;
+  };
+  /**
+   * 卡口 id
+   */
+  gantryCode?: string;
+  /**
+   * 违法代码
+   */
+  code?: string;
+  /**
+   * 所属命名空间
+   */
+  ns?: string;
+  /**
+   * 计数
+   */
+  count?: number;
+}
+
+export type WarningCountGroup = "createAt" | "gantry" | "code" | "level" | "ns";
+
+/**
+ * Count of illegal record aggregation
+ */
+export interface WarningCount {
+  /**
+   * id of count group
+   */
+  id?: string;
+  /**
+   * Group of date
+   */
+  createAt?: {
+    /**
+     * day of date
+     */
+    day?: string;
+    /**
+     * week of date
+     */
+    week?: string;
+    /**
+     * month of date
+     */
+    month?: string;
+    /**
+     * year of date
+     */
+    year?: string;
+  };
+  /**
+   * 卡口 id
+   */
+  gantry?: string;
+  /**
+   * 违法代码
+   */
+  code?: string;
+  /**
+   * 违法等级
+   */
+  level?: string;
+  /**
+   * 所属命名空间
+   */
+  ns?: string;
+  /**
+   * 计数
+   */
+  count?: number;
+}
+
+export type TrackRecordCountGroup = "createAt" | "gantryCode";
+
+/**
+ * Count of track record aggregation
+ */
+export interface TrackRecordCount {
+  /**
+   * id of count group
+   */
+  id?: string;
+  /**
+   * Group of date
+   */
+  createAt?: {
+    /**
+     * day of date
+     */
+    day?: string;
+    /**
+     * week of date
+     */
+    week?: string;
+    /**
+     * month of date
+     */
+    month?: string;
+    /**
+     * year of date
+     */
+    year?: string;
+  };
+  /**
+   * 卡口 id
+   */
+  gantryCode?: string;
+  /**
+   * 计数
+   */
+  count?: number;
+}
+
 export type DateTime = Date;
 
 /**
