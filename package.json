@@ -1,6 +1,6 @@
 {
   "name": "@36node-fcp/ecs-api-sdk",
-  "version": "0.1.18",
+  "version": "0.1.19",
   "description": "JS sdk for ecs api.",
   "repository": {
     "url": "36node-fcp/ecs-api-sdk-js",
