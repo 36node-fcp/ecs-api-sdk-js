@@ -197,8 +197,13 @@ export interface ListIllegalRecordsRequest {
     _select?: string[];
     ns_like?: string;
     plate?: string[];
+    code?: string[];
     plate_like?: string;
     state?: ("DRAFT" | "OPEN" | "CLOSED")[];
+    capTime_gte?: string;
+    capTime_lte?: string;
+    createAt_gt?: string;
+    createAt_lt?: string;
   };
 }
 export interface ListIllegalRecordsResponse {
@@ -1459,6 +1464,19 @@ export interface ListGantryDevicesRequest {
 export interface ListGantryDevicesResponse {
   body: ({
     /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  } & {
+    /**
+     * 卡口设备唯一识别码
+     */
+    id?: string;
+    /**
      * 所属卡口 id
      */
     gantry?: string;
@@ -1505,20 +1523,11 @@ export interface ListGantryDevicesResponse {
     /**
      * 限速(千米/小时)
      */
-    speedLimit?: number;
+    speedLimit?: number | null;
     /**
      * 设备状态
      */
     state?: "ONLINE" | "OFFLINE";
-  } & {
-    /**
-     * mongodb id
-     */
-    id: string;
-    updateAt?: Date;
-    updateBy?: string;
-    createAt?: Date;
-    createBy?: string;
   })[];
   headers: {
     "x-total-count"?: number;
@@ -1530,17 +1539,21 @@ export interface CreateGantryDeviceRequest {
    */
   body: {
     /**
+     * 卡口设备唯一识别码
+     */
+    id: string;
+    /**
      * 所属卡口 id
      */
-    gantry: string;
+    gantry?: string;
     /**
      * 设备名称
      */
-    name?: string;
+    name: string;
     /**
      * 设备编码
      */
-    code: string;
+    code?: string;
     /**
      * 协议类型
      */
@@ -1576,7 +1589,7 @@ export interface CreateGantryDeviceRequest {
     /**
      * 限速(千米/小时)
      */
-    speedLimit?: number;
+    speedLimit?: number | null;
     /**
      * 设备状态
      */
@@ -1589,6 +1602,19 @@ export interface CreateGantryDeviceResponse {
    */
   body: {
     /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  } & {
+    /**
+     * 卡口设备唯一识别码
+     */
+    id?: string;
+    /**
      * 所属卡口 id
      */
     gantry?: string;
@@ -1635,20 +1661,11 @@ export interface CreateGantryDeviceResponse {
     /**
      * 限速(千米/小时)
      */
-    speedLimit?: number;
+    speedLimit?: number | null;
     /**
      * 设备状态
      */
     state?: "ONLINE" | "OFFLINE";
-  } & {
-    /**
-     * mongodb id
-     */
-    id: string;
-    updateAt?: Date;
-    updateBy?: string;
-    createAt?: Date;
-    createBy?: string;
   };
 }
 export interface GetGantryDeviceRequest {
@@ -1660,6 +1677,19 @@ export interface GetGantryDeviceResponse {
    */
   body: {
     /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  } & {
+    /**
+     * 卡口设备唯一识别码
+     */
+    id?: string;
+    /**
      * 所属卡口 id
      */
     gantry?: string;
@@ -1706,20 +1736,11 @@ export interface GetGantryDeviceResponse {
     /**
      * 限速(千米/小时)
      */
-    speedLimit?: number;
+    speedLimit?: number | null;
     /**
      * 设备状态
      */
     state?: "ONLINE" | "OFFLINE";
-  } & {
-    /**
-     * mongodb id
-     */
-    id: string;
-    updateAt?: Date;
-    updateBy?: string;
-    createAt?: Date;
-    createBy?: string;
   };
 }
 export interface UpdateGantryDeviceRequest {
@@ -1729,6 +1750,10 @@ export interface UpdateGantryDeviceRequest {
    */
   body: {
     /**
+     * 卡口设备唯一识别码
+     */
+    id?: string;
+    /**
      * 所属卡口 id
      */
     gantry?: string;
@@ -1775,7 +1800,7 @@ export interface UpdateGantryDeviceRequest {
     /**
      * 限速(千米/小时)
      */
-    speedLimit?: number;
+    speedLimit?: number | null;
     /**
      * 设备状态
      */
@@ -1788,6 +1813,19 @@ export interface UpdateGantryDeviceResponse {
    */
   body: {
     /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  } & {
+    /**
+     * 卡口设备唯一识别码
+     */
+    id?: string;
+    /**
      * 所属卡口 id
      */
     gantry?: string;
@@ -1834,20 +1872,11 @@ export interface UpdateGantryDeviceResponse {
     /**
      * 限速(千米/小时)
      */
-    speedLimit?: number;
+    speedLimit?: number | null;
     /**
      * 设备状态
      */
     state?: "ONLINE" | "OFFLINE";
-  } & {
-    /**
-     * mongodb id
-     */
-    id: string;
-    updateAt?: Date;
-    updateBy?: string;
-    createAt?: Date;
-    createBy?: string;
   };
 }
 export interface DeleteGantryDeviceRequest {
@@ -1885,6 +1914,19 @@ export interface ListGantriesResponse {
      */
     lat?: number;
     /**
+     * 火星坐标系
+     */
+    gcj02?: {
+      /**
+       * 卡口所在经度
+       */
+      lng?: number;
+      /**
+       * 卡口所在纬度
+       */
+      lat?: number;
+    };
+    /**
      * 上级卡口
      */
     parent?: string;
@@ -1899,7 +1941,7 @@ export interface ListGantriesResponse {
     /**
      * 卡口属性
      */
-    attr?: "RAMP" | "MAINLINE";
+    attr?: "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
     /**
      * 卡口状态
      */
@@ -1940,6 +1982,19 @@ export interface CreateGantryRequest {
      */
     lat: number;
     /**
+     * 火星坐标系
+     */
+    gcj02?: {
+      /**
+       * 卡口所在经度
+       */
+      lng?: number;
+      /**
+       * 卡口所在纬度
+       */
+      lat?: number;
+    };
+    /**
      * 上级卡口
      */
     parent?: string;
@@ -1954,11 +2009,11 @@ export interface CreateGantryRequest {
     /**
      * 卡口属性
      */
-    attr: "RAMP" | "MAINLINE";
+    attr: "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
     /**
      * 卡口状态
      */
-    state: "ONLINE" | "OFFLINE";
+    state?: "ONLINE" | "OFFLINE";
   };
 }
 export interface CreateGantryResponse {
@@ -1983,6 +2038,19 @@ export interface CreateGantryResponse {
      */
     lat?: number;
     /**
+     * 火星坐标系
+     */
+    gcj02?: {
+      /**
+       * 卡口所在经度
+       */
+      lng?: number;
+      /**
+       * 卡口所在纬度
+       */
+      lat?: number;
+    };
+    /**
      * 上级卡口
      */
     parent?: string;
@@ -1997,7 +2065,7 @@ export interface CreateGantryResponse {
     /**
      * 卡口属性
      */
-    attr?: "RAMP" | "MAINLINE";
+    attr?: "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
     /**
      * 卡口状态
      */
@@ -2038,6 +2106,19 @@ export interface GetGantryResponse {
      */
     lat?: number;
     /**
+     * 火星坐标系
+     */
+    gcj02?: {
+      /**
+       * 卡口所在经度
+       */
+      lng?: number;
+      /**
+       * 卡口所在纬度
+       */
+      lat?: number;
+    };
+    /**
      * 上级卡口
      */
     parent?: string;
@@ -2052,7 +2133,7 @@ export interface GetGantryResponse {
     /**
      * 卡口属性
      */
-    attr?: "RAMP" | "MAINLINE";
+    attr?: "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
     /**
      * 卡口状态
      */
@@ -2091,6 +2172,19 @@ export interface UpdateGantryRequest {
      */
     lat?: number;
     /**
+     * 火星坐标系
+     */
+    gcj02?: {
+      /**
+       * 卡口所在经度
+       */
+      lng?: number;
+      /**
+       * 卡口所在纬度
+       */
+      lat?: number;
+    };
+    /**
      * 上级卡口
      */
     parent?: string;
@@ -2105,7 +2199,7 @@ export interface UpdateGantryRequest {
     /**
      * 卡口属性
      */
-    attr?: "RAMP" | "MAINLINE";
+    attr?: "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
     /**
      * 卡口状态
      */
@@ -2134,6 +2228,19 @@ export interface UpdateGantryResponse {
      */
     lat?: number;
     /**
+     * 火星坐标系
+     */
+    gcj02?: {
+      /**
+       * 卡口所在经度
+       */
+      lng?: number;
+      /**
+       * 卡口所在纬度
+       */
+      lat?: number;
+    };
+    /**
      * 上级卡口
      */
     parent?: string;
@@ -2148,7 +2255,7 @@ export interface UpdateGantryResponse {
     /**
      * 卡口属性
      */
-    attr?: "RAMP" | "MAINLINE";
+    attr?: "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
     /**
      * 卡口状态
      */
@@ -2319,6 +2426,9 @@ export interface ListTrackRecordsRequest {
     plate_like?: string;
     thirdId?: string[];
     carType?: string[];
+    gantryName_like?: string;
+    capTime_gte?: string;
+    capTime_lte?: string;
   };
 }
 export interface ListTrackRecordsResponse {
@@ -3020,6 +3130,8 @@ export interface ListWarningsRequest {
     type?: string;
     level?: number;
     gantry?: string[];
+    capTime_gte?: string;
+    capTime_lte?: string;
   };
 }
 export interface ListWarningsResponse {
@@ -4166,6 +4278,10 @@ export type Whitelist = {
  */
 export interface GantryDeviceDoc {
   /**
+   * 卡口设备唯一识别码
+   */
+  id?: string;
+  /**
    * 所属卡口 id
    */
   gantry?: string;
@@ -4212,7 +4328,7 @@ export interface GantryDeviceDoc {
   /**
    * 限速(千米/小时)
    */
-  speedLimit?: number;
+  speedLimit?: number | null;
   /**
    * 设备状态
    */
@@ -4224,17 +4340,21 @@ export interface GantryDeviceDoc {
  */
 export interface GantryDeviceCreateBody {
   /**
+   * 卡口设备唯一识别码
+   */
+  id: string;
+  /**
    * 所属卡口 id
    */
-  gantry: string;
+  gantry?: string;
   /**
    * 设备名称
    */
-  name?: string;
+  name: string;
   /**
    * 设备编码
    */
-  code: string;
+  code?: string;
   /**
    * 协议类型
    */
@@ -4270,7 +4390,7 @@ export interface GantryDeviceCreateBody {
   /**
    * 限速(千米/小时)
    */
-  speedLimit?: number;
+  speedLimit?: number | null;
   /**
    * 设备状态
    */
@@ -4281,6 +4401,19 @@ export interface GantryDeviceCreateBody {
  * 卡口设备
  */
 export type GantryDevice = {
+  /**
+   * mongodb id
+   */
+  id: string;
+  updateAt?: Date;
+  updateBy?: string;
+  createAt?: Date;
+  createBy?: string;
+} & {
+  /**
+   * 卡口设备唯一识别码
+   */
+  id?: string;
   /**
    * 所属卡口 id
    */
@@ -4328,26 +4461,17 @@ export type GantryDevice = {
   /**
    * 限速(千米/小时)
    */
-  speedLimit?: number;
+  speedLimit?: number | null;
   /**
    * 设备状态
    */
   state?: "ONLINE" | "OFFLINE";
-} & {
-  /**
-   * mongodb id
-   */
-  id: string;
-  updateAt?: Date;
-  updateBy?: string;
-  createAt?: Date;
-  createBy?: string;
 };
 
 /**
  * 卡口属性分类
  */
-export type GantryAttr = "RAMP" | "MAINLINE";
+export type GantryAttr = "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
 
 /**
  * 卡口状态分类
@@ -4390,6 +4514,19 @@ export interface GantryDoc {
    */
   lat?: number;
   /**
+   * 火星坐标系
+   */
+  gcj02?: {
+    /**
+     * 卡口所在经度
+     */
+    lng?: number;
+    /**
+     * 卡口所在纬度
+     */
+    lat?: number;
+  };
+  /**
    * 上级卡口
    */
   parent?: string;
@@ -4404,7 +4541,7 @@ export interface GantryDoc {
   /**
    * 卡口属性
    */
-  attr?: "RAMP" | "MAINLINE";
+  attr?: "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
   /**
    * 卡口状态
    */
@@ -4432,6 +4569,19 @@ export interface GantryCreateBody {
    */
   lat: number;
   /**
+   * 火星坐标系
+   */
+  gcj02?: {
+    /**
+     * 卡口所在经度
+     */
+    lng?: number;
+    /**
+     * 卡口所在纬度
+     */
+    lat?: number;
+  };
+  /**
    * 上级卡口
    */
   parent?: string;
@@ -4446,11 +4596,11 @@ export interface GantryCreateBody {
   /**
    * 卡口属性
    */
-  attr: "RAMP" | "MAINLINE";
+  attr: "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
   /**
    * 卡口状态
    */
-  state: "ONLINE" | "OFFLINE";
+  state?: "ONLINE" | "OFFLINE";
 }
 
 /**
@@ -4474,6 +4624,19 @@ export type Gantry = {
    */
   lat?: number;
   /**
+   * 火星坐标系
+   */
+  gcj02?: {
+    /**
+     * 卡口所在经度
+     */
+    lng?: number;
+    /**
+     * 卡口所在纬度
+     */
+    lat?: number;
+  };
+  /**
    * 上级卡口
    */
   parent?: string;
@@ -4488,7 +4651,7 @@ export type Gantry = {
   /**
    * 卡口属性
    */
-  attr?: "RAMP" | "MAINLINE";
+  attr?: "MAINLINE" | "INTERCITY" | "SVCRAMP" | "EXPORTRAMP" | "HUBRAMP";
   /**
    * 卡口状态
    */
