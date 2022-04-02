@@ -2550,7 +2550,7 @@ export interface ListTrackRecordsResponse {
     /**
      * 过车车辆行进方向
      */
-    carDirect?: 0 | 1 | 2 | 3;
+    carDirect?: number;
     /**
      * 过车数据相机名称
      */
@@ -2669,7 +2669,7 @@ export interface CreateTrackRecordRequest {
     /**
      * 过车车辆行进方向
      */
-    carDirect?: 0 | 1 | 2 | 3;
+    carDirect?: number;
     /**
      * 过车数据相机名称
      */
@@ -2776,7 +2776,7 @@ export interface CreateTrackRecordResponse {
     /**
      * 过车车辆行进方向
      */
-    carDirect?: 0 | 1 | 2 | 3;
+    carDirect?: number;
     /**
      * 过车数据相机名称
      */
@@ -2895,7 +2895,7 @@ export interface GetTrackRecordResponse {
     /**
      * 过车车辆行进方向
      */
-    carDirect?: 0 | 1 | 2 | 3;
+    carDirect?: number;
     /**
      * 过车数据相机名称
      */
@@ -3012,7 +3012,7 @@ export interface UpdateTrackRecordRequest {
     /**
      * 过车车辆行进方向
      */
-    carDirect?: 0 | 1 | 2 | 3;
+    carDirect?: number;
     /**
      * 过车数据相机名称
      */
@@ -3119,7 +3119,7 @@ export interface UpdateTrackRecordResponse {
     /**
      * 过车车辆行进方向
      */
-    carDirect?: 0 | 1 | 2 | 3;
+    carDirect?: number;
     /**
      * 过车数据相机名称
      */
@@ -5022,11 +5022,6 @@ export type Gantry = {
 export type TrackRecordSource = "DAHUA" | "DIRECT";
 
 /**
- * 过车数据车辆行进方向分类
- */
-export type TrackRecordDirect = 0 | 1 | 2 | 3;
-
-/**
  * 过车数据详情
  */
 export interface TrackRecordDoc {
@@ -5077,7 +5072,7 @@ export interface TrackRecordDoc {
   /**
    * 过车车辆行进方向
    */
-  carDirect?: 0 | 1 | 2 | 3;
+  carDirect?: number;
   /**
    * 过车数据相机名称
    */
@@ -5183,7 +5178,7 @@ export interface TrackRecordCreateBody {
   /**
    * 过车车辆行进方向
    */
-  carDirect?: 0 | 1 | 2 | 3;
+  carDirect?: number;
   /**
    * 过车数据相机名称
    */
@@ -5289,7 +5284,7 @@ export type TrackRecord = {
   /**
    * 过车车辆行进方向
    */
-  carDirect?: 0 | 1 | 2 | 3;
+  carDirect?: number;
   /**
    * 过车数据相机名称
    */

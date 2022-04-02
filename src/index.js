@@ -385,7 +385,7 @@ export default class SDK {
 
       if (!gantryId) throw new Error("gantryId is required for getGantry");
 
-      return fetch(`${this.base}/gantry/${gantryId}`, {
+      return fetch(`${this.base}/gantries/${gantryId}`, {
         method: "GET",
         headers: { Authorization: this.auth },
       });
@@ -402,7 +402,7 @@ export default class SDK {
       if (!gantryId) throw new Error("gantryId is required for updateGantry");
       if (!body) throw new Error("requetBody is required for updateGantry");
 
-      return fetch(`${this.base}/gantry/${gantryId}`, {
+      return fetch(`${this.base}/gantries/${gantryId}`, {
         method: "PUT",
         body,
         headers: { Authorization: this.auth },
@@ -418,7 +418,7 @@ export default class SDK {
 
       if (!gantryId) throw new Error("gantryId is required for deleteGantry");
 
-      return fetch(`${this.base}/gantry/${gantryId}`, {
+      return fetch(`${this.base}/gantries/${gantryId}`, {
         method: "DELETE",
         headers: { Authorization: this.auth },
       });
