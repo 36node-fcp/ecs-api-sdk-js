@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.1.21](https://github.com/36node-fcp/ecs-api-sdk-js/compare/v0.1.20...v0.1.21) (2022-04-02)
+
+
+### Features
+
+* count with illegal type ([d264754](https://github.com/36node-fcp/ecs-api-sdk-js/commit/d2647542e314a18e34a44d7e23032187ff9ad41f))
+
 ### [0.1.20](https://github.com/36node-fcp/ecs-api-sdk-js/compare/v0.1.19...v0.1.20) (2022-04-02)
 
 
