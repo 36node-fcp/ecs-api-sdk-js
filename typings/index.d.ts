@@ -1256,7 +1256,7 @@ export interface GetIllegalRecordCountsRequest {
     createAt_lt?: string;
     createAt_gt?: string;
     ns_like?: string;
-    _group?: ("createAt" | "gantryCode" | "code" | "ns")[];
+    _group?: ("createAt" | "gantryCode" | "code" | "type" | "ns")[];
   };
 }
 export interface GetIllegalRecordCountsResponse {
@@ -1294,6 +1294,10 @@ export interface GetIllegalRecordCountsResponse {
      * 违法代码
      */
     code?: string;
+    /**
+     * 违法类型
+     */
+    type?: string;
     /**
      * 所属命名空间
      */
@@ -3711,7 +3715,7 @@ export interface GetWarningCountsRequest {
     gantry?: string[];
     capTime_gte?: string;
     capTime_lte?: string;
-    _group?: ("createAt" | "gantry" | "code" | "level" | "ns")[];
+    _group?: ("createAt" | "gantry" | "code" | "type" | "level" | "ns")[];
   };
 }
 export interface GetWarningCountsResponse {
@@ -3753,6 +3757,10 @@ export interface GetWarningCountsResponse {
      * 违法等级
      */
     level?: string;
+    /**
+     * 违法类型
+     */
+    type?: string;
     /**
      * 所属命名空间
      */
@@ -3860,7 +3868,7 @@ export interface GroupDate {
   year?: string;
 }
 
-export type IllegalRecordCountGroup = "createAt" | "gantryCode" | "code" | "ns";
+export type IllegalRecordCountGroup = "createAt" | "gantryCode" | "code" | "type" | "ns";
 
 /**
  * Count of illegal record aggregation
@@ -3900,6 +3908,10 @@ export interface IllegalRecordCount {
    */
   code?: string;
   /**
+   * 违法类型
+   */
+  type?: string;
+  /**
    * 所属命名空间
    */
   ns?: string;
@@ -3909,7 +3921,7 @@ export interface IllegalRecordCount {
   count?: number;
 }
 
-export type WarningCountGroup = "createAt" | "gantry" | "code" | "level" | "ns";
+export type WarningCountGroup = "createAt" | "gantry" | "code" | "type" | "level" | "ns";
 
 /**
  * Count of illegal record aggregation
@@ -3952,6 +3964,10 @@ export interface WarningCount {
    * 违法等级
    */
   level?: string;
+  /**
+   * 违法类型
+   */
+  type?: string;
   /**
    * 所属命名空间
    */
