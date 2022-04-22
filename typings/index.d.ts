@@ -221,7 +221,7 @@ export interface ListIllegalRecordsRequest {
     capTime_gte?: string;
     capTime_lte?: string;
     createAt_gt?: string;
-    createAt_lt?: string;
+    expiredAt_gt?: string;
   };
 }
 export interface ListIllegalRecordsResponse {
@@ -1259,6 +1259,8 @@ export interface GetIllegalRecordCountsRequest {
     _sort?: string;
     createAt_lt?: string;
     createAt_gt?: string;
+    expiredAt_gt?: string;
+    expiredAt_lt?: string;
     ns_like?: string;
     _group?: ("createAt" | "gantryCode" | "code" | "type" | "ns")[];
   };
