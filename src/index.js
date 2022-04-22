@@ -707,6 +707,22 @@ export default class SDK {
       });
     },
     /**
+     * close an open warning
+     *
+     * @param {CloseWarningRequest} req closeWarning request
+     * @returns {Promise<CloseWarningResponse>} Expected response to a valid request
+     */
+    closeWarning: req => {
+      const { warningId } = req || {};
+
+      if (!warningId) throw new Error("warningId is required for closeWarning");
+
+      return fetch(`${this.base}/warnings/${warningId}/!close`, {
+        method: "PUT",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
      * Get warning counts
      *
      * @param {GetWarningCountsRequest} req getWarningCounts request

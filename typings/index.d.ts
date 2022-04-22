@@ -188,6 +188,10 @@ export interface WarningAPI {
    */
   deleteWarning(req: DeleteWarningRequest): Promise<void>;
   /**
+   * close an open warning
+   */
+  closeWarning(req: CloseWarningRequest): Promise<CloseWarningResponse>;
+  /**
    * Get warning counts
    */
   getWarningCounts(req: GetWarningCountsRequest): Promise<GetWarningCountsResponse>;
@@ -3253,6 +3257,7 @@ export interface ListWarningsRequest {
     gantry?: string[];
     capTime_gte?: string;
     capTime_lte?: string;
+    state?: ("OPEN" | "CLOSED")[];
   };
 }
 export interface ListWarningsResponse {
@@ -3317,6 +3322,18 @@ export interface ListWarningsResponse {
      * 所属地市
      */
     deptId?: string;
+    /**
+     * 状态
+     */
+    state?: "OPEN" | "CLOSED";
+    /**
+     * 关闭预警user
+     */
+    closeBy?: string;
+    /**
+     * 关闭预警时间
+     */
+    closeAt?: Date;
   } & {
     /**
      * mongodb id
@@ -3396,6 +3413,18 @@ export interface CreateWarningRequest {
      * 所属地市
      */
     deptId?: string;
+    /**
+     * 状态
+     */
+    state?: "OPEN" | "CLOSED";
+    /**
+     * 关闭预警user
+     */
+    closeBy?: string;
+    /**
+     * 关闭预警时间
+     */
+    closeAt?: Date;
   };
 }
 export interface CreateWarningResponse {
@@ -3463,6 +3492,18 @@ export interface CreateWarningResponse {
      * 所属地市
      */
     deptId?: string;
+    /**
+     * 状态
+     */
+    state?: "OPEN" | "CLOSED";
+    /**
+     * 关闭预警user
+     */
+    closeBy?: string;
+    /**
+     * 关闭预警时间
+     */
+    closeAt?: Date;
   } & {
     /**
      * mongodb id
@@ -3542,6 +3583,18 @@ export interface GetWarningResponse {
      * 所属地市
      */
     deptId?: string;
+    /**
+     * 状态
+     */
+    state?: "OPEN" | "CLOSED";
+    /**
+     * 关闭预警user
+     */
+    closeBy?: string;
+    /**
+     * 关闭预警时间
+     */
+    closeAt?: Date;
   } & {
     /**
      * mongodb id
@@ -3619,6 +3672,18 @@ export interface UpdateWarningRequest {
      * 所属地市
      */
     deptId?: string;
+    /**
+     * 状态
+     */
+    state?: "OPEN" | "CLOSED";
+    /**
+     * 关闭预警user
+     */
+    closeBy?: string;
+    /**
+     * 关闭预警时间
+     */
+    closeAt?: Date;
   };
 }
 export interface UpdateWarningResponse {
@@ -3686,6 +3751,18 @@ export interface UpdateWarningResponse {
      * 所属地市
      */
     deptId?: string;
+    /**
+     * 状态
+     */
+    state?: "OPEN" | "CLOSED";
+    /**
+     * 关闭预警user
+     */
+    closeBy?: string;
+    /**
+     * 关闭预警时间
+     */
+    closeAt?: Date;
   } & {
     /**
      * mongodb id
@@ -3699,6 +3776,97 @@ export interface UpdateWarningResponse {
 }
 export interface DeleteWarningRequest {
   warningId: string;
+}
+export interface CloseWarningRequest {
+  warningId: string;
+}
+export interface CloseWarningResponse {
+  /**
+   * 预警数据详情
+   */
+  body: {
+    /**
+     * 所属的部门
+     */
+    ns?: string;
+    /**
+     * 预警名称
+     */
+    name?: string;
+    /**
+     * 预警所属的类型
+     */
+    type?: string;
+    /**
+     * 预警代码，包含所有违章代码
+     */
+    code?: string;
+    /**
+     * 预警车牌
+     */
+    plate?: string;
+    /**
+     * 违法记录 Id
+     */
+    illegal?: string;
+    /**
+     * 预警等级
+     */
+    level?: number;
+    /**
+     * 最近一次经过卡口 Id
+     */
+    gantry?: string;
+    /**
+     * 最后一次发生地点
+     */
+    place?: string;
+    /**
+     * 最近一次经过卡口时间
+     */
+    capTime?: Date;
+    /**
+     * 过车图片
+     */
+    carImages?: string[];
+    /**
+     * 车牌图片
+     */
+    plateImages?: string[];
+    /**
+     * 经度
+     */
+    lng?: number;
+    /**
+     * 纬度
+     */
+    lat?: number;
+    /**
+     * 所属地市
+     */
+    deptId?: string;
+    /**
+     * 状态
+     */
+    state?: "OPEN" | "CLOSED";
+    /**
+     * 关闭预警user
+     */
+    closeBy?: string;
+    /**
+     * 关闭预警时间
+     */
+    closeAt?: Date;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
 }
 export interface GetWarningCountsRequest {
   query?: {
@@ -5364,6 +5532,8 @@ export type TrackRecord = {
   createBy?: string;
 };
 
+export type WarningState = "OPEN" | "CLOSED";
+
 /**
  * 预警数据详情
  */
@@ -5428,6 +5598,18 @@ export interface WarningDoc {
    * 所属地市
    */
   deptId?: string;
+  /**
+   * 状态
+   */
+  state?: "OPEN" | "CLOSED";
+  /**
+   * 关闭预警user
+   */
+  closeBy?: string;
+  /**
+   * 关闭预警时间
+   */
+  closeAt?: Date;
 }
 
 /**
@@ -5494,6 +5676,18 @@ export interface WarningCreateBody {
    * 所属地市
    */
   deptId?: string;
+  /**
+   * 状态
+   */
+  state?: "OPEN" | "CLOSED";
+  /**
+   * 关闭预警user
+   */
+  closeBy?: string;
+  /**
+   * 关闭预警时间
+   */
+  closeAt?: Date;
 }
 
 /**
@@ -5560,6 +5754,18 @@ export type Warning = {
    * 所属地市
    */
   deptId?: string;
+  /**
+   * 状态
+   */
+  state?: "OPEN" | "CLOSED";
+  /**
+   * 关闭预警user
+   */
+  closeBy?: string;
+  /**
+   * 关闭预警时间
+   */
+  closeAt?: Date;
 } & {
   /**
    * mongodb id
