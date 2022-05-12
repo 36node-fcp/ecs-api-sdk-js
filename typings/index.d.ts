@@ -13,6 +13,7 @@ declare class SDK {
   trackRecord: TrackRecordAPI;
   warning: WarningAPI;
   settings: SettingsAPI;
+  lawEnforcePoint: LawEnforcePointAPI;
 }
 
 export interface Options {
@@ -205,6 +206,28 @@ export interface SettingsAPI {
    * update setting
    */
   updateSetting(req: UpdateSettingRequest): Promise<UpdateSettingResponse>;
+}
+export interface LawEnforcePointAPI {
+  /**
+   * List lawEnforcePoint
+   */
+  listLawEnforcePoint(req: ListLawEnforcePointRequest): Promise<ListLawEnforcePointResponse>;
+  /**
+   * Create a lawEnforcePoint
+   */
+  createLawEnforcePoint(req: CreateLawEnforcePointRequest): Promise<CreateLawEnforcePointResponse>;
+  /**
+   * Find lawEnforcePoint by id
+   */
+  getLawEnforcePoint(req: GetLawEnforcePointRequest): Promise<GetLawEnforcePointResponse>;
+  /**
+   * Update lawEnforcePoint device
+   */
+  updateLawEnforcePoint(req: UpdateLawEnforcePointRequest): Promise<UpdateLawEnforcePointResponse>;
+  /**
+   * Delete lawEnforcePoint
+   */
+  deleteLawEnforcePoint(req: DeleteLawEnforcePointRequest): Promise<void>;
 }
 
 export interface ListIllegalRecordsRequest {
@@ -1539,6 +1562,7 @@ export interface ListGantryDevicesRequest {
     name_like?: string;
     gantry?: string[];
     state?: string[];
+    protocolType?: ("DAHUA" | "HAIKANG" | "DIRECT")[];
   };
 }
 export interface ListGantryDevicesResponse {
@@ -1571,7 +1595,7 @@ export interface ListGantryDevicesResponse {
     /**
      * 协议类型
      */
-    protocolType?: "DAHUA" | "HAIKANG";
+    protocolType?: "DAHUA" | "HAIKANG" | "DIRECT";
     /**
      * 厂商
      */
@@ -1637,7 +1661,7 @@ export interface CreateGantryDeviceRequest {
     /**
      * 协议类型
      */
-    protocolType?: "DAHUA" | "HAIKANG";
+    protocolType?: "DAHUA" | "HAIKANG" | "DIRECT";
     /**
      * 厂商
      */
@@ -1709,7 +1733,7 @@ export interface CreateGantryDeviceResponse {
     /**
      * 协议类型
      */
-    protocolType?: "DAHUA" | "HAIKANG";
+    protocolType?: "DAHUA" | "HAIKANG" | "DIRECT";
     /**
      * 厂商
      */
@@ -1784,7 +1808,7 @@ export interface GetGantryDeviceResponse {
     /**
      * 协议类型
      */
-    protocolType?: "DAHUA" | "HAIKANG";
+    protocolType?: "DAHUA" | "HAIKANG" | "DIRECT";
     /**
      * 厂商
      */
@@ -1848,7 +1872,7 @@ export interface UpdateGantryDeviceRequest {
     /**
      * 协议类型
      */
-    protocolType?: "DAHUA" | "HAIKANG";
+    protocolType?: "DAHUA" | "HAIKANG" | "DIRECT";
     /**
      * 厂商
      */
@@ -1920,7 +1944,7 @@ export interface UpdateGantryDeviceResponse {
     /**
      * 协议类型
      */
-    protocolType?: "DAHUA" | "HAIKANG";
+    protocolType?: "DAHUA" | "HAIKANG" | "DIRECT";
     /**
      * 厂商
      */
@@ -4016,6 +4040,148 @@ export interface UpdateSettingResponse {
     createBy?: string;
   };
 }
+export interface ListLawEnforcePointRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    _select?: string[];
+    name_like?: string;
+  };
+}
+export interface ListLawEnforcePointResponse {
+  body: ({
+    /**
+     * 第三方 Id
+     */
+    thirdId?: string;
+    /**
+     * 执法点名称
+     */
+    name?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  })[];
+  headers: {
+    "x-total-count"?: number;
+  };
+}
+export interface CreateLawEnforcePointRequest {
+  /**
+   * 创建执法点详情
+   */
+  body: {
+    /**
+     * 第三方 Id
+     */
+    thirdId: string;
+    /**
+     * 执法点名称
+     */
+    name: string;
+  };
+}
+export interface CreateLawEnforcePointResponse {
+  /**
+   * 执法点
+   */
+  body: {
+    /**
+     * 第三方 Id
+     */
+    thirdId?: string;
+    /**
+     * 执法点名称
+     */
+    name?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface GetLawEnforcePointRequest {
+  lawEnforcePointId: string;
+}
+export interface GetLawEnforcePointResponse {
+  /**
+   * 执法点
+   */
+  body: {
+    /**
+     * 第三方 Id
+     */
+    thirdId?: string;
+    /**
+     * 执法点名称
+     */
+    name?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpdateLawEnforcePointRequest {
+  lawEnforcePointId: string;
+  /**
+   * 执法点详情
+   */
+  body: {
+    /**
+     * 第三方 Id
+     */
+    thirdId?: string;
+    /**
+     * 执法点名称
+     */
+    name?: string;
+  };
+}
+export interface UpdateLawEnforcePointResponse {
+  /**
+   * 执法点
+   */
+  body: {
+    /**
+     * 第三方 Id
+     */
+    thirdId?: string;
+    /**
+     * 执法点名称
+     */
+    name?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface DeleteLawEnforcePointRequest {
+  lawEnforcePointId: string;
+}
 /**
  * Group of date
  */
@@ -4831,7 +4997,7 @@ export interface GantryDeviceDoc {
   /**
    * 协议类型
    */
-  protocolType?: "DAHUA" | "HAIKANG";
+  protocolType?: "DAHUA" | "HAIKANG" | "DIRECT";
   /**
    * 厂商
    */
@@ -4893,7 +5059,7 @@ export interface GantryDeviceCreateBody {
   /**
    * 协议类型
    */
-  protocolType?: "DAHUA" | "HAIKANG";
+  protocolType?: "DAHUA" | "HAIKANG" | "DIRECT";
   /**
    * 厂商
    */
@@ -4964,7 +5130,7 @@ export type GantryDevice = {
   /**
    * 协议类型
    */
-  protocolType?: "DAHUA" | "HAIKANG";
+  protocolType?: "DAHUA" | "HAIKANG" | "DIRECT";
   /**
    * 厂商
    */
@@ -5016,7 +5182,7 @@ export type GantryState = "ONLINE" | "OFFLINE";
 /**
  * 卡口协议类型分类
  */
-export type GantryProtocolType = "DAHUA" | "HAIKANG";
+export type GantryProtocolType = "DAHUA" | "HAIKANG" | "DIRECT";
 
 /**
  * 卡口厂商分类
@@ -5768,6 +5934,57 @@ export type Warning = {
    * 关闭预警时间
    */
   closeAt?: Date;
+} & {
+  /**
+   * mongodb id
+   */
+  id: string;
+  updateAt?: Date;
+  updateBy?: string;
+  createAt?: Date;
+  createBy?: string;
+};
+
+/**
+ * 执法点详情
+ */
+export interface LawEnforcePointDoc {
+  /**
+   * 第三方 Id
+   */
+  thirdId?: string;
+  /**
+   * 执法点名称
+   */
+  name?: string;
+}
+
+/**
+ * 创建执法点详情
+ */
+export interface LawEnforcePointCreateBody {
+  /**
+   * 第三方 Id
+   */
+  thirdId: string;
+  /**
+   * 执法点名称
+   */
+  name: string;
+}
+
+/**
+ * 执法点
+ */
+export type LawEnforcePoint = {
+  /**
+   * 第三方 Id
+   */
+  thirdId?: string;
+  /**
+   * 执法点名称
+   */
+  name?: string;
 } & {
   /**
    * mongodb id

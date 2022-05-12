@@ -774,4 +774,99 @@ export default class SDK {
       });
     },
   };
+  /**
+   * lawEnforcePoint's methods
+   */
+  lawEnforcePoint = {
+    /**
+     * List lawEnforcePoint
+     *
+     * @param {ListLawEnforcePointRequest} req listLawEnforcePoint request
+     * @returns {Promise<ListLawEnforcePointResponse>} A paged array of lawEnforcePoint
+     */
+    listLawEnforcePoint: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/lawEnforcePoint`, {
+        method: "GET",
+        query,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Create a lawEnforcePoint
+     *
+     * @param {CreateLawEnforcePointRequest} req createLawEnforcePoint request
+     * @returns {Promise<CreateLawEnforcePointResponse>} The lawEnforcePoint created
+     */
+    createLawEnforcePoint: req => {
+      const { body } = req || {};
+
+      if (!body)
+        throw new Error("requetBody is required for createLawEnforcePoint");
+
+      return fetch(`${this.base}/lawEnforcePoint`, {
+        method: "POST",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Find lawEnforcePoint by id
+     *
+     * @param {GetLawEnforcePointRequest} req getLawEnforcePoint request
+     * @returns {Promise<GetLawEnforcePointResponse>} Expected response to a valid request
+     */
+    getLawEnforcePoint: req => {
+      const { lawEnforcePointId } = req || {};
+
+      if (!lawEnforcePointId)
+        throw new Error("lawEnforcePointId is required for getLawEnforcePoint");
+
+      return fetch(`${this.base}/lawEnforcePoint/${lawEnforcePointId}`, {
+        method: "GET",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Update lawEnforcePoint device
+     *
+     * @param {UpdateLawEnforcePointRequest} req updateLawEnforcePoint request
+     * @returns {Promise<UpdateLawEnforcePointResponse>} The lawEnforcePoint
+     */
+    updateLawEnforcePoint: req => {
+      const { lawEnforcePointId, body } = req || {};
+
+      if (!lawEnforcePointId)
+        throw new Error(
+          "lawEnforcePointId is required for updateLawEnforcePoint"
+        );
+      if (!body)
+        throw new Error("requetBody is required for updateLawEnforcePoint");
+
+      return fetch(`${this.base}/lawEnforcePoint/${lawEnforcePointId}`, {
+        method: "PUT",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Delete lawEnforcePoint
+     *
+     * @param {DeleteLawEnforcePointRequest} req deleteLawEnforcePoint request
+     */
+    deleteLawEnforcePoint: req => {
+      const { lawEnforcePointId } = req || {};
+
+      if (!lawEnforcePointId)
+        throw new Error(
+          "lawEnforcePointId is required for deleteLawEnforcePoint"
+        );
+
+      return fetch(`${this.base}/lawEnforcePoint/${lawEnforcePointId}`, {
+        method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+  };
 }
