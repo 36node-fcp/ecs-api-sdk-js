@@ -121,9 +121,9 @@ export interface GantryAPI {
 }
 export interface WhitelistAPI {
   /**
-   * List whitelist
+   * List whitelists
    */
-  listWhitelist(req: ListWhitelistRequest): Promise<ListWhitelistResponse>;
+  listWhitelists(req: ListWhitelistsRequest): Promise<ListWhitelistsResponse>;
   /**
    * Create a whitelist
    */
@@ -209,9 +209,9 @@ export interface SettingsAPI {
 }
 export interface LawEnforcePointAPI {
   /**
-   * List lawEnforcePoint
+   * List lawEnforcePoints
    */
-  listLawEnforcePoint(req: ListLawEnforcePointRequest): Promise<ListLawEnforcePointResponse>;
+  listLawEnforcePoints(req: ListLawEnforcePointsRequest): Promise<ListLawEnforcePointsResponse>;
   /**
    * Create a lawEnforcePoint
    */
@@ -2378,7 +2378,7 @@ export interface UpdateGantryResponse {
 export interface DeleteGantryRequest {
   gantryId: string;
 }
-export interface ListWhitelistRequest {
+export interface ListWhitelistsRequest {
   query?: {
     _limit?: number;
     _offset?: number;
@@ -2387,7 +2387,7 @@ export interface ListWhitelistRequest {
     plate_like?: string;
   };
 }
-export interface ListWhitelistResponse {
+export interface ListWhitelistsResponse {
   body: ({
     /**
      * 车牌
@@ -4040,7 +4040,7 @@ export interface UpdateSettingResponse {
     createBy?: string;
   };
 }
-export interface ListLawEnforcePointRequest {
+export interface ListLawEnforcePointsRequest {
   query?: {
     _limit?: number;
     _offset?: number;
@@ -4049,7 +4049,7 @@ export interface ListLawEnforcePointRequest {
     name_like?: string;
   };
 }
-export interface ListLawEnforcePointResponse {
+export interface ListLawEnforcePointsResponse {
   body: ({
     /**
      * 第三方 Id

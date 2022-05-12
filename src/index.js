@@ -205,7 +205,7 @@ export default class SDK {
       if (!illegalTypeId)
         throw new Error("illegalTypeId is required for getIllegalType");
 
-      return fetch(`${this.base}/illegalType/${illegalTypeId}`, {
+      return fetch(`${this.base}/illegalTypes/${illegalTypeId}`, {
         method: "GET",
         headers: { Authorization: this.auth },
       });
@@ -224,7 +224,7 @@ export default class SDK {
       if (!body)
         throw new Error("requetBody is required for updateIllegalType");
 
-      return fetch(`${this.base}/illegalType/${illegalTypeId}`, {
+      return fetch(`${this.base}/illegalTypes/${illegalTypeId}`, {
         method: "PUT",
         body,
         headers: { Authorization: this.auth },
@@ -241,7 +241,7 @@ export default class SDK {
       if (!illegalTypeId)
         throw new Error("illegalTypeId is required for deleteIllegalType");
 
-      return fetch(`${this.base}/illegalType/${illegalTypeId}`, {
+      return fetch(`${this.base}/illegalTypes/${illegalTypeId}`, {
         method: "DELETE",
         headers: { Authorization: this.auth },
       });
@@ -429,15 +429,15 @@ export default class SDK {
    */
   whitelist = {
     /**
-     * List whitelist
+     * List whitelists
      *
-     * @param {ListWhitelistRequest} req listWhitelist request
-     * @returns {Promise<ListWhitelistResponse>} A paged array of whitelist
+     * @param {ListWhitelistsRequest} req listWhitelists request
+     * @returns {Promise<ListWhitelistsResponse>} A paged array of whitelist
      */
-    listWhitelist: req => {
+    listWhitelists: req => {
       const { query } = req || {};
 
-      return fetch(`${this.base}/whitelist`, {
+      return fetch(`${this.base}/whitelists`, {
         method: "GET",
         query,
         headers: { Authorization: this.auth },
@@ -454,7 +454,7 @@ export default class SDK {
 
       if (!body) throw new Error("requetBody is required for createWhitelist");
 
-      return fetch(`${this.base}/whitelist`, {
+      return fetch(`${this.base}/whitelists`, {
         method: "POST",
         body,
         headers: { Authorization: this.auth },
@@ -472,7 +472,7 @@ export default class SDK {
       if (!whitelistId)
         throw new Error("whitelistId is required for getWhitelist");
 
-      return fetch(`${this.base}/whitelist/${whitelistId}`, {
+      return fetch(`${this.base}/whitelists/${whitelistId}`, {
         method: "GET",
         headers: { Authorization: this.auth },
       });
@@ -490,7 +490,7 @@ export default class SDK {
         throw new Error("whitelistId is required for updateWhitelist");
       if (!body) throw new Error("requetBody is required for updateWhitelist");
 
-      return fetch(`${this.base}/whitelist/${whitelistId}`, {
+      return fetch(`${this.base}/whitelists/${whitelistId}`, {
         method: "PUT",
         body,
         headers: { Authorization: this.auth },
@@ -507,7 +507,7 @@ export default class SDK {
       if (!whitelistId)
         throw new Error("whitelistId is required for deleteWhitelist");
 
-      return fetch(`${this.base}/whitelist/${whitelistId}`, {
+      return fetch(`${this.base}/whitelists/${whitelistId}`, {
         method: "DELETE",
         headers: { Authorization: this.auth },
       });
@@ -779,15 +779,15 @@ export default class SDK {
    */
   lawEnforcePoint = {
     /**
-     * List lawEnforcePoint
+     * List lawEnforcePoints
      *
-     * @param {ListLawEnforcePointRequest} req listLawEnforcePoint request
-     * @returns {Promise<ListLawEnforcePointResponse>} A paged array of lawEnforcePoint
+     * @param {ListLawEnforcePointsRequest} req listLawEnforcePoints request
+     * @returns {Promise<ListLawEnforcePointsResponse>} A paged array of lawEnforcePoints
      */
-    listLawEnforcePoint: req => {
+    listLawEnforcePoints: req => {
       const { query } = req || {};
 
-      return fetch(`${this.base}/lawEnforcePoint`, {
+      return fetch(`${this.base}/lawEnforcePoints`, {
         method: "GET",
         query,
         headers: { Authorization: this.auth },
@@ -805,7 +805,7 @@ export default class SDK {
       if (!body)
         throw new Error("requetBody is required for createLawEnforcePoint");
 
-      return fetch(`${this.base}/lawEnforcePoint`, {
+      return fetch(`${this.base}/lawEnforcePoints`, {
         method: "POST",
         body,
         headers: { Authorization: this.auth },
@@ -823,7 +823,7 @@ export default class SDK {
       if (!lawEnforcePointId)
         throw new Error("lawEnforcePointId is required for getLawEnforcePoint");
 
-      return fetch(`${this.base}/lawEnforcePoint/${lawEnforcePointId}`, {
+      return fetch(`${this.base}/lawEnforcePoints/${lawEnforcePointId}`, {
         method: "GET",
         headers: { Authorization: this.auth },
       });
@@ -844,7 +844,7 @@ export default class SDK {
       if (!body)
         throw new Error("requetBody is required for updateLawEnforcePoint");
 
-      return fetch(`${this.base}/lawEnforcePoint/${lawEnforcePointId}`, {
+      return fetch(`${this.base}/lawEnforcePoints/${lawEnforcePointId}`, {
         method: "PUT",
         body,
         headers: { Authorization: this.auth },
@@ -863,7 +863,7 @@ export default class SDK {
           "lawEnforcePointId is required for deleteLawEnforcePoint"
         );
 
-      return fetch(`${this.base}/lawEnforcePoint/${lawEnforcePointId}`, {
+      return fetch(`${this.base}/lawEnforcePoints/${lawEnforcePointId}`, {
         method: "DELETE",
         headers: { Authorization: this.auth },
       });
