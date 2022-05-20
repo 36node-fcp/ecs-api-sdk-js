@@ -2050,6 +2050,10 @@ export interface ListGantriesResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 所属执法点 id
+     */
+    lawEnforcePoint?: string;
   } & {
     /**
      * mongodb id
@@ -2118,6 +2122,10 @@ export interface CreateGantryRequest {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 所属执法点 id
+     */
+    lawEnforcePoint?: string;
   };
 }
 export interface CreateGantryResponse {
@@ -2174,6 +2182,10 @@ export interface CreateGantryResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 所属执法点 id
+     */
+    lawEnforcePoint?: string;
   } & {
     /**
      * mongodb id
@@ -2242,6 +2254,10 @@ export interface GetGantryResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 所属执法点 id
+     */
+    lawEnforcePoint?: string;
   } & {
     /**
      * mongodb id
@@ -2308,6 +2324,10 @@ export interface UpdateGantryRequest {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 所属执法点 id
+     */
+    lawEnforcePoint?: string;
   };
 }
 export interface UpdateGantryResponse {
@@ -2364,6 +2384,10 @@ export interface UpdateGantryResponse {
      * 卡口状态
      */
     state?: "ONLINE" | "OFFLINE";
+    /**
+     * 所属执法点 id
+     */
+    lawEnforcePoint?: string;
   } & {
     /**
      * mongodb id
@@ -2533,6 +2557,7 @@ export interface ListTrackRecordsRequest {
     gantryName_like?: string;
     capTime_gte?: string;
     capTime_lte?: string;
+    lawEnforcePointName?: string[];
   };
 }
 export interface ListTrackRecordsResponse {
@@ -2601,6 +2626,10 @@ export interface ListTrackRecordsResponse {
      * 卡口代码
      */
     gantryCode?: string;
+    /**
+     * 卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
     /**
      * 过车数据时间戳
      */
@@ -2721,6 +2750,10 @@ export interface CreateTrackRecordRequest {
      */
     gantryCode?: string;
     /**
+     * 卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
+    /**
      * 过车数据时间戳
      */
     capTime: Date;
@@ -2827,6 +2860,10 @@ export interface CreateTrackRecordResponse {
      * 卡口代码
      */
     gantryCode?: string;
+    /**
+     * 卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
     /**
      * 过车数据时间戳
      */
@@ -2947,6 +2984,10 @@ export interface GetTrackRecordResponse {
      */
     gantryCode?: string;
     /**
+     * 卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
+    /**
      * 过车数据时间戳
      */
     capTime?: Date;
@@ -3064,6 +3105,10 @@ export interface UpdateTrackRecordRequest {
      */
     gantryCode?: string;
     /**
+     * 卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
+    /**
      * 过车数据时间戳
      */
     capTime?: Date;
@@ -3170,6 +3215,10 @@ export interface UpdateTrackRecordResponse {
      * 卡口代码
      */
     gantryCode?: string;
+    /**
+     * 卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
     /**
      * 过车数据时间戳
      */
@@ -3284,6 +3333,7 @@ export interface ListWarningsRequest {
     capTime_gte?: string;
     capTime_lte?: string;
     state?: ("OPEN" | "CLOSED")[];
+    lawEnforcePointName?: string[];
   };
 }
 export interface ListWarningsResponse {
@@ -3320,6 +3370,10 @@ export interface ListWarningsResponse {
      * 最近一次经过卡口 Id
      */
     gantry?: string;
+    /**
+     * 最近一次经过卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
     /**
      * 最后一次发生地点
      */
@@ -3412,6 +3466,10 @@ export interface CreateWarningRequest {
      */
     gantry?: string;
     /**
+     * 最近一次经过卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
+    /**
      * 最后一次发生地点
      */
     place?: string;
@@ -3490,6 +3548,10 @@ export interface CreateWarningResponse {
      * 最近一次经过卡口 Id
      */
     gantry?: string;
+    /**
+     * 最近一次经过卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
     /**
      * 最后一次发生地点
      */
@@ -3582,6 +3644,10 @@ export interface GetWarningResponse {
      */
     gantry?: string;
     /**
+     * 最近一次经过卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
+    /**
      * 最后一次发生地点
      */
     place?: string;
@@ -3671,6 +3737,10 @@ export interface UpdateWarningRequest {
      */
     gantry?: string;
     /**
+     * 最近一次经过卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
+    /**
      * 最后一次发生地点
      */
     place?: string;
@@ -3749,6 +3819,10 @@ export interface UpdateWarningResponse {
      * 最近一次经过卡口 Id
      */
     gantry?: string;
+    /**
+     * 最近一次经过卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
     /**
      * 最后一次发生地点
      */
@@ -3843,6 +3917,10 @@ export interface CloseWarningResponse {
      * 最近一次经过卡口 Id
      */
     gantry?: string;
+    /**
+     * 最近一次经过卡口所属执法点名称
+     */
+    lawEnforcePointName?: string;
     /**
      * 最后一次发生地点
      */
@@ -5247,6 +5325,10 @@ export interface GantryDoc {
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
+  /**
+   * 所属执法点 id
+   */
+  lawEnforcePoint?: string;
 }
 
 /**
@@ -5302,6 +5384,10 @@ export interface GantryCreateBody {
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
+  /**
+   * 所属执法点 id
+   */
+  lawEnforcePoint?: string;
 }
 
 /**
@@ -5357,6 +5443,10 @@ export type Gantry = {
    * 卡口状态
    */
   state?: "ONLINE" | "OFFLINE";
+  /**
+   * 所属执法点 id
+   */
+  lawEnforcePoint?: string;
 } & {
   /**
    * mongodb id
@@ -5441,6 +5531,10 @@ export interface TrackRecordDoc {
    * 卡口代码
    */
   gantryCode?: string;
+  /**
+   * 卡口所属执法点名称
+   */
+  lawEnforcePointName?: string;
   /**
    * 过车数据时间戳
    */
@@ -5548,6 +5642,10 @@ export interface TrackRecordCreateBody {
    */
   gantryCode?: string;
   /**
+   * 卡口所属执法点名称
+   */
+  lawEnforcePointName?: string;
+  /**
    * 过车数据时间戳
    */
   capTime: Date;
@@ -5654,6 +5752,10 @@ export type TrackRecord = {
    */
   gantryCode?: string;
   /**
+   * 卡口所属执法点名称
+   */
+  lawEnforcePointName?: string;
+  /**
    * 过车数据时间戳
    */
   capTime?: Date;
@@ -5739,6 +5841,10 @@ export interface WarningDoc {
    */
   gantry?: string;
   /**
+   * 最近一次经过卡口所属执法点名称
+   */
+  lawEnforcePointName?: string;
+  /**
    * 最后一次发生地点
    */
   place?: string;
@@ -5817,6 +5923,10 @@ export interface WarningCreateBody {
    */
   gantry?: string;
   /**
+   * 最近一次经过卡口所属执法点名称
+   */
+  lawEnforcePointName?: string;
+  /**
    * 最后一次发生地点
    */
   place?: string;
@@ -5894,6 +6004,10 @@ export type Warning = {
    * 最近一次经过卡口 Id
    */
   gantry?: string;
+  /**
+   * 最近一次经过卡口所属执法点名称
+   */
+  lawEnforcePointName?: string;
   /**
    * 最后一次发生地点
    */
