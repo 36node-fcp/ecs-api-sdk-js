@@ -3325,7 +3325,7 @@ export interface ListWarningsRequest {
     plate?: string[];
     plate_like?: string;
     ns_like?: string;
-    name_like?: string;
+    name?: string[];
     place_like?: string;
     type?: string;
     level?: number;
