@@ -4057,6 +4057,10 @@ export interface GetSettingsResponse {
      */
     illegalRampOverSpeed?: boolean;
     /**
+     * 匝道超速限制值
+     */
+    illegalRampOverSpeedNum?: number;
+    /**
      * 仅推送各大队辖区内违法
      */
     areaPush?: boolean;
@@ -4085,6 +4089,10 @@ export interface UpdateSettingRequest {
      */
     illegalRampOverSpeed?: boolean;
     /**
+     * 匝道超速限制值
+     */
+    illegalRampOverSpeedNum?: number;
+    /**
      * 仅推送各大队辖区内违法
      */
     areaPush?: boolean;
@@ -4103,6 +4111,10 @@ export interface UpdateSettingResponse {
      * 匝道超速
      */
     illegalRampOverSpeed?: boolean;
+    /**
+     * 匝道超速限制值
+     */
+    illegalRampOverSpeedNum?: number;
     /**
      * 仅推送各大队辖区内违法
      */
@@ -4969,6 +4981,10 @@ export interface SettingDoc {
    */
   illegalRampOverSpeed?: boolean;
   /**
+   * 匝道超速限制值
+   */
+  illegalRampOverSpeedNum?: number;
+  /**
    * 仅推送各大队辖区内违法
    */
   areaPush?: boolean;
@@ -4986,6 +5002,10 @@ export type Setting = {
    * 匝道超速
    */
   illegalRampOverSpeed?: boolean;
+  /**
+   * 匝道超速限制值
+   */
+  illegalRampOverSpeedNum?: number;
   /**
    * 仅推送各大队辖区内违法
    */
