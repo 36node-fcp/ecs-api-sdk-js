@@ -1370,6 +1370,10 @@ export interface ListIllegalTypesResponse {
      * 等级
      */
     level?: number;
+    /**
+     * true 表示违法记录为待确认状态，默认为false
+     */
+    needConfirm?: boolean;
   } & {
     /**
      * mongodb id
@@ -1409,6 +1413,10 @@ export interface CreateIllegalTypeRequest {
      * 等级
      */
     level: number;
+    /**
+     * true 表示违法记录为待确认状态，默认为false
+     */
+    needConfirm?: boolean;
   };
 }
 export interface CreateIllegalTypeResponse {
@@ -1436,6 +1444,10 @@ export interface CreateIllegalTypeResponse {
      * 等级
      */
     level?: number;
+    /**
+     * true 表示违法记录为待确认状态，默认为false
+     */
+    needConfirm?: boolean;
   } & {
     /**
      * mongodb id
@@ -1475,6 +1487,10 @@ export interface GetIllegalTypeResponse {
      * 等级
      */
     level?: number;
+    /**
+     * true 表示违法记录为待确认状态，默认为false
+     */
+    needConfirm?: boolean;
   } & {
     /**
      * mongodb id
@@ -1512,6 +1528,10 @@ export interface UpdateIllegalTypeRequest {
      * 等级
      */
     level?: number;
+    /**
+     * true 表示违法记录为待确认状态，默认为false
+     */
+    needConfirm?: boolean;
   };
 }
 export interface UpdateIllegalTypeResponse {
@@ -1539,6 +1559,10 @@ export interface UpdateIllegalTypeResponse {
      * 等级
      */
     level?: number;
+    /**
+     * true 表示违法记录为待确认状态，默认为false
+     */
+    needConfirm?: boolean;
   } & {
     /**
      * mongodb id
@@ -4905,6 +4929,10 @@ export interface IllegalTypeDoc {
    * 等级
    */
   level?: number;
+  /**
+   * true 表示违法记录为待确认状态，默认为false
+   */
+  needConfirm?: boolean;
 }
 
 /**
@@ -4931,6 +4959,10 @@ export interface IllegalTypeCreateBody {
    * 等级
    */
   level: number;
+  /**
+   * true 表示违法记录为待确认状态，默认为false
+   */
+  needConfirm?: boolean;
 }
 
 /**
@@ -4957,6 +4989,10 @@ export type IllegalType = {
    * 等级
    */
   level?: number;
+  /**
+   * true 表示违法记录为待确认状态，默认为false
+   */
+  needConfirm?: boolean;
 } & {
   /**
    * mongodb id
