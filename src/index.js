@@ -906,6 +906,23 @@ export default class SDK {
       });
     },
     /**
+     * Upsert a vehicle
+     *
+     * @param {UpsertVehicleRequest} req upsertVehicle request
+     * @returns {Promise<UpsertVehicleResponse>} The vehicle upserted
+     */
+    upsertVehicle: req => {
+      const { body } = req || {};
+
+      if (!body) throw new Error("requetBody is required for upsertVehicle");
+
+      return fetch(`${this.base}/vehicles/upsert`, {
+        method: "POST",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
      * Find vehicle by id
      *
      * @param {GetVehicleRequest} req getVehicle request

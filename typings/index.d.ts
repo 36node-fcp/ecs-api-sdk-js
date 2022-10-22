@@ -240,6 +240,10 @@ export interface VehicleAPI {
    */
   createVehicle(req: CreateVehicleRequest): Promise<CreateVehicleResponse>;
   /**
+   * Upsert a vehicle
+   */
+  upsertVehicle(req: UpsertVehicleRequest): Promise<UpsertVehicleResponse>;
+  /**
    * Find vehicle by id
    */
   getVehicle(req: GetVehicleRequest): Promise<GetVehicleResponse>;
@@ -4601,6 +4605,77 @@ export interface CreateVehicleRequest {
   };
 }
 export interface CreateVehicleResponse {
+  /**
+   * 车辆库
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 使用性质
+     */
+    property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+    /**
+     * 车牌种类
+     */
+    plateType?: string;
+    /**
+     * 所属公司
+     */
+    company?: string;
+    /**
+     * 车主姓名
+     */
+    ownerName?: string;
+    /**
+     * 车主手机号
+     */
+    ownerPhone?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpsertVehicleRequest {
+  /**
+   * 创建车辆库
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate: string;
+    /**
+     * 使用性质
+     */
+    property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+    /**
+     * 车牌种类
+     */
+    plateType: string;
+    /**
+     * 所属公司
+     */
+    company?: string;
+    /**
+     * 车主姓名
+     */
+    ownerName?: string;
+    /**
+     * 车主手机号
+     */
+    ownerPhone?: string;
+  };
+}
+export interface UpsertVehicleResponse {
   /**
    * 车辆库
    */
