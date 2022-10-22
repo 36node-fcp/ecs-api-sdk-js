@@ -4530,7 +4530,7 @@ export interface ListVehiclesRequest {
     plate?: string[];
     plate_like?: string;
     company_like?: string;
-    state?: ("TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL")[];
+    property?: ("TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL")[];
   };
 }
 export interface ListVehiclesResponse {
