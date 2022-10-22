@@ -14,6 +14,7 @@ declare class SDK {
   warning: WarningAPI;
   settings: SettingsAPI;
   lawEnforcePoint: LawEnforcePointAPI;
+  vehicle: VehicleAPI;
 }
 
 export interface Options {
@@ -229,6 +230,28 @@ export interface LawEnforcePointAPI {
    */
   deleteLawEnforcePoint(req: DeleteLawEnforcePointRequest): Promise<void>;
 }
+export interface VehicleAPI {
+  /**
+   * List vehicles
+   */
+  listVehicles(req: ListVehiclesRequest): Promise<ListVehiclesResponse>;
+  /**
+   * Create a vehicle
+   */
+  createVehicle(req: CreateVehicleRequest): Promise<CreateVehicleResponse>;
+  /**
+   * Find vehicle by id
+   */
+  getVehicle(req: GetVehicleRequest): Promise<GetVehicleResponse>;
+  /**
+   * Update vehicle
+   */
+  updateVehicle(req: UpdateVehicleRequest): Promise<UpdateVehicleResponse>;
+  /**
+   * Delete vehicle
+   */
+  deleteVehicle(req: DeleteVehicleRequest): Promise<void>;
+}
 
 export interface ListIllegalRecordsRequest {
   query?: {
@@ -381,6 +404,10 @@ export interface ListIllegalRecordsResponse {
      * 状态
      */
     state?: "DRAFT" | "OPEN" | "CLOSED";
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
   } & {
     /**
      * mongodb id
@@ -532,6 +559,10 @@ export interface CreateIllegalRecordRequest {
      * 状态
      */
     state?: "DRAFT" | "OPEN" | "CLOSED";
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
   };
 }
 export interface CreateIllegalRecordResponse {
@@ -671,6 +702,10 @@ export interface CreateIllegalRecordResponse {
      * 状态
      */
     state?: "DRAFT" | "OPEN" | "CLOSED";
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
   } & {
     /**
      * mongodb id
@@ -822,6 +857,10 @@ export interface ConfirmIllegalRecordResponse {
      * 状态
      */
     state?: "DRAFT" | "OPEN" | "CLOSED";
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
   } & {
     /**
      * mongodb id
@@ -973,6 +1012,10 @@ export interface GetIllegalRecordResponse {
      * 状态
      */
     state?: "DRAFT" | "OPEN" | "CLOSED";
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
   } & {
     /**
      * mongodb id
@@ -1122,6 +1165,10 @@ export interface UpdateIllegalRecordRequest {
      * 状态
      */
     state?: "DRAFT" | "OPEN" | "CLOSED";
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
   };
 }
 export interface UpdateIllegalRecordResponse {
@@ -1261,6 +1308,10 @@ export interface UpdateIllegalRecordResponse {
      * 状态
      */
     state?: "DRAFT" | "OPEN" | "CLOSED";
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
   } & {
     /**
      * mongodb id
@@ -1603,7 +1654,7 @@ export interface ListGantryDevicesResponse {
     /**
      * 卡口设备唯一识别码
      */
-    id?: string;
+    thirdId?: string;
     /**
      * 所属卡口 id
      */
@@ -1669,7 +1720,7 @@ export interface CreateGantryDeviceRequest {
     /**
      * 卡口设备唯一识别码
      */
-    id: string;
+    thirdId: string;
     /**
      * 所属卡口 id
      */
@@ -1741,7 +1792,7 @@ export interface CreateGantryDeviceResponse {
     /**
      * 卡口设备唯一识别码
      */
-    id?: string;
+    thirdId?: string;
     /**
      * 所属卡口 id
      */
@@ -1816,7 +1867,7 @@ export interface GetGantryDeviceResponse {
     /**
      * 卡口设备唯一识别码
      */
-    id?: string;
+    thirdId?: string;
     /**
      * 所属卡口 id
      */
@@ -1880,7 +1931,7 @@ export interface UpdateGantryDeviceRequest {
     /**
      * 卡口设备唯一识别码
      */
-    id?: string;
+    thirdId?: string;
     /**
      * 所属卡口 id
      */
@@ -1952,7 +2003,7 @@ export interface UpdateGantryDeviceResponse {
     /**
      * 卡口设备唯一识别码
      */
-    id?: string;
+    thirdId?: string;
     /**
      * 所属卡口 id
      */
@@ -2690,6 +2741,34 @@ export interface ListTrackRecordsResponse {
      * 过车数据所属部门
      */
     deptId?: string;
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
+    /**
+     * 卡口检索结束时间
+     */
+    gantryAt?: Date;
+    /**
+     * 违法检索结束时间
+     */
+    illegalAt?: Date;
+    /**
+     * 设置检索结束时间
+     */
+    settingAt?: Date;
+    /**
+     * 违法类型检索结束时间
+     */
+    illegalTypeAt?: Date;
+    /**
+     * 创建预警结束时间
+     */
+    warningAt?: Date;
+    /**
+     * 推送完成结束时间
+     */
+    mqttAt?: Date;
   } & {
     /**
      * mongodb id
@@ -2813,6 +2892,34 @@ export interface CreateTrackRecordRequest {
      * 过车数据所属部门
      */
     deptId?: string;
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
+    /**
+     * 卡口检索结束时间
+     */
+    gantryAt?: Date;
+    /**
+     * 违法检索结束时间
+     */
+    illegalAt?: Date;
+    /**
+     * 设置检索结束时间
+     */
+    settingAt?: Date;
+    /**
+     * 违法类型检索结束时间
+     */
+    illegalTypeAt?: Date;
+    /**
+     * 创建预警结束时间
+     */
+    warningAt?: Date;
+    /**
+     * 推送完成结束时间
+     */
+    mqttAt?: Date;
   };
 }
 export interface CreateTrackRecordResponse {
@@ -2924,6 +3031,34 @@ export interface CreateTrackRecordResponse {
      * 过车数据所属部门
      */
     deptId?: string;
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
+    /**
+     * 卡口检索结束时间
+     */
+    gantryAt?: Date;
+    /**
+     * 违法检索结束时间
+     */
+    illegalAt?: Date;
+    /**
+     * 设置检索结束时间
+     */
+    settingAt?: Date;
+    /**
+     * 违法类型检索结束时间
+     */
+    illegalTypeAt?: Date;
+    /**
+     * 创建预警结束时间
+     */
+    warningAt?: Date;
+    /**
+     * 推送完成结束时间
+     */
+    mqttAt?: Date;
   } & {
     /**
      * mongodb id
@@ -3047,6 +3182,34 @@ export interface GetTrackRecordResponse {
      * 过车数据所属部门
      */
     deptId?: string;
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
+    /**
+     * 卡口检索结束时间
+     */
+    gantryAt?: Date;
+    /**
+     * 违法检索结束时间
+     */
+    illegalAt?: Date;
+    /**
+     * 设置检索结束时间
+     */
+    settingAt?: Date;
+    /**
+     * 违法类型检索结束时间
+     */
+    illegalTypeAt?: Date;
+    /**
+     * 创建预警结束时间
+     */
+    warningAt?: Date;
+    /**
+     * 推送完成结束时间
+     */
+    mqttAt?: Date;
   } & {
     /**
      * mongodb id
@@ -3168,6 +3331,34 @@ export interface UpdateTrackRecordRequest {
      * 过车数据所属部门
      */
     deptId?: string;
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
+    /**
+     * 卡口检索结束时间
+     */
+    gantryAt?: Date;
+    /**
+     * 违法检索结束时间
+     */
+    illegalAt?: Date;
+    /**
+     * 设置检索结束时间
+     */
+    settingAt?: Date;
+    /**
+     * 违法类型检索结束时间
+     */
+    illegalTypeAt?: Date;
+    /**
+     * 创建预警结束时间
+     */
+    warningAt?: Date;
+    /**
+     * 推送完成结束时间
+     */
+    mqttAt?: Date;
   };
 }
 export interface UpdateTrackRecordResponse {
@@ -3279,6 +3470,34 @@ export interface UpdateTrackRecordResponse {
      * 过车数据所属部门
      */
     deptId?: string;
+    /**
+     * 收到违法时间
+     */
+    receiveAt?: Date;
+    /**
+     * 卡口检索结束时间
+     */
+    gantryAt?: Date;
+    /**
+     * 违法检索结束时间
+     */
+    illegalAt?: Date;
+    /**
+     * 设置检索结束时间
+     */
+    settingAt?: Date;
+    /**
+     * 违法类型检索结束时间
+     */
+    illegalTypeAt?: Date;
+    /**
+     * 创建预警结束时间
+     */
+    warningAt?: Date;
+    /**
+     * 推送完成结束时间
+     */
+    mqttAt?: Date;
   } & {
     /**
      * mongodb id
@@ -3358,6 +3577,8 @@ export interface ListWarningsRequest {
     capTime_lte?: string;
     state?: ("OPEN" | "CLOSED")[];
     lawEnforcePointName?: string[];
+    updateAt_lt?: string;
+    updateAt_gt?: string;
   };
 }
 export interface ListWarningsResponse {
@@ -4296,6 +4517,247 @@ export interface UpdateLawEnforcePointResponse {
 export interface DeleteLawEnforcePointRequest {
   lawEnforcePointId: string;
 }
+export interface ListVehiclesRequest {
+  query?: {
+    _limit?: number;
+    _offset?: number;
+    _sort?: string;
+    _select?: string[];
+    plate?: string[];
+    plate_like?: string;
+    company_like?: string;
+    state?: ("TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL")[];
+  };
+}
+export interface ListVehiclesResponse {
+  body: ({
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 使用性质
+     */
+    property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+    /**
+     * 车牌种类
+     */
+    plateType?: string;
+    /**
+     * 所属公司
+     */
+    company?: string;
+    /**
+     * 车主姓名
+     */
+    ownerName?: string;
+    /**
+     * 车主手机号
+     */
+    ownerPhone?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  })[];
+  headers: {
+    "x-total-count"?: number;
+  };
+}
+export interface CreateVehicleRequest {
+  /**
+   * 创建车辆库
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate: string;
+    /**
+     * 使用性质
+     */
+    property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+    /**
+     * 车牌种类
+     */
+    plateType: string;
+    /**
+     * 所属公司
+     */
+    company?: string;
+    /**
+     * 车主姓名
+     */
+    ownerName?: string;
+    /**
+     * 车主手机号
+     */
+    ownerPhone?: string;
+  };
+}
+export interface CreateVehicleResponse {
+  /**
+   * 车辆库
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 使用性质
+     */
+    property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+    /**
+     * 车牌种类
+     */
+    plateType?: string;
+    /**
+     * 所属公司
+     */
+    company?: string;
+    /**
+     * 车主姓名
+     */
+    ownerName?: string;
+    /**
+     * 车主手机号
+     */
+    ownerPhone?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface GetVehicleRequest {
+  vehicleId: string;
+}
+export interface GetVehicleResponse {
+  /**
+   * 车辆库
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 使用性质
+     */
+    property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+    /**
+     * 车牌种类
+     */
+    plateType?: string;
+    /**
+     * 所属公司
+     */
+    company?: string;
+    /**
+     * 车主姓名
+     */
+    ownerName?: string;
+    /**
+     * 车主手机号
+     */
+    ownerPhone?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface UpdateVehicleRequest {
+  vehicleId: string;
+  /**
+   * 车辆库详情
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 使用性质
+     */
+    property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+    /**
+     * 车牌种类
+     */
+    plateType?: string;
+    /**
+     * 所属公司
+     */
+    company?: string;
+    /**
+     * 车主姓名
+     */
+    ownerName?: string;
+    /**
+     * 车主手机号
+     */
+    ownerPhone?: string;
+  };
+}
+export interface UpdateVehicleResponse {
+  /**
+   * 车辆库
+   */
+  body: {
+    /**
+     * 车牌
+     */
+    plate?: string;
+    /**
+     * 使用性质
+     */
+    property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+    /**
+     * 车牌种类
+     */
+    plateType?: string;
+    /**
+     * 所属公司
+     */
+    company?: string;
+    /**
+     * 车主姓名
+     */
+    ownerName?: string;
+    /**
+     * 车主手机号
+     */
+    ownerPhone?: string;
+  } & {
+    /**
+     * mongodb id
+     */
+    id: string;
+    updateAt?: Date;
+    updateBy?: string;
+    createAt?: Date;
+    createBy?: string;
+  };
+}
+export interface DeleteVehicleRequest {
+  vehicleId: string;
+}
 /**
  * Group of date
  */
@@ -4618,6 +5080,10 @@ export interface IllegalRecordDoc {
    * 状态
    */
   state?: "DRAFT" | "OPEN" | "CLOSED";
+  /**
+   * 收到违法时间
+   */
+  receiveAt?: Date;
 }
 
 /**
@@ -4756,6 +5222,10 @@ export interface IllegalRecordCreateBody {
    * 状态
    */
   state?: "DRAFT" | "OPEN" | "CLOSED";
+  /**
+   * 收到违法时间
+   */
+  receiveAt?: Date;
 }
 
 /**
@@ -4894,6 +5364,10 @@ export type IllegalRecord = {
    * 状态
    */
   state?: "DRAFT" | "OPEN" | "CLOSED";
+  /**
+   * 收到违法时间
+   */
+  receiveAt?: Date;
 } & {
   /**
    * mongodb id
@@ -5115,7 +5589,7 @@ export interface GantryDeviceDoc {
   /**
    * 卡口设备唯一识别码
    */
-  id?: string;
+  thirdId?: string;
   /**
    * 所属卡口 id
    */
@@ -5177,7 +5651,7 @@ export interface GantryDeviceCreateBody {
   /**
    * 卡口设备唯一识别码
    */
-  id: string;
+  thirdId: string;
   /**
    * 所属卡口 id
    */
@@ -5248,7 +5722,7 @@ export type GantryDevice = {
   /**
    * 卡口设备唯一识别码
    */
-  id?: string;
+  thirdId?: string;
   /**
    * 所属卡口 id
    */
@@ -5627,6 +6101,34 @@ export interface TrackRecordDoc {
    * 过车数据所属部门
    */
   deptId?: string;
+  /**
+   * 收到违法时间
+   */
+  receiveAt?: Date;
+  /**
+   * 卡口检索结束时间
+   */
+  gantryAt?: Date;
+  /**
+   * 违法检索结束时间
+   */
+  illegalAt?: Date;
+  /**
+   * 设置检索结束时间
+   */
+  settingAt?: Date;
+  /**
+   * 违法类型检索结束时间
+   */
+  illegalTypeAt?: Date;
+  /**
+   * 创建预警结束时间
+   */
+  warningAt?: Date;
+  /**
+   * 推送完成结束时间
+   */
+  mqttAt?: Date;
 }
 
 /**
@@ -5737,6 +6239,34 @@ export interface TrackRecordCreateBody {
    * 过车数据所属部门
    */
   deptId?: string;
+  /**
+   * 收到违法时间
+   */
+  receiveAt?: Date;
+  /**
+   * 卡口检索结束时间
+   */
+  gantryAt?: Date;
+  /**
+   * 违法检索结束时间
+   */
+  illegalAt?: Date;
+  /**
+   * 设置检索结束时间
+   */
+  settingAt?: Date;
+  /**
+   * 违法类型检索结束时间
+   */
+  illegalTypeAt?: Date;
+  /**
+   * 创建预警结束时间
+   */
+  warningAt?: Date;
+  /**
+   * 推送完成结束时间
+   */
+  mqttAt?: Date;
 }
 
 /**
@@ -5847,6 +6377,34 @@ export type TrackRecord = {
    * 过车数据所属部门
    */
   deptId?: string;
+  /**
+   * 收到违法时间
+   */
+  receiveAt?: Date;
+  /**
+   * 卡口检索结束时间
+   */
+  gantryAt?: Date;
+  /**
+   * 违法检索结束时间
+   */
+  illegalAt?: Date;
+  /**
+   * 设置检索结束时间
+   */
+  settingAt?: Date;
+  /**
+   * 违法类型检索结束时间
+   */
+  illegalTypeAt?: Date;
+  /**
+   * 创建预警结束时间
+   */
+  warningAt?: Date;
+  /**
+   * 推送完成结束时间
+   */
+  mqttAt?: Date;
 } & {
   /**
    * mongodb id
@@ -6155,6 +6713,112 @@ export type LawEnforcePoint = {
    * 执法点名称
    */
   name?: string;
+} & {
+  /**
+   * mongodb id
+   */
+  id: string;
+  updateAt?: Date;
+  updateBy?: string;
+  createAt?: Date;
+  createBy?: string;
+};
+
+export type VehicleProp =
+  | "TWOANDONE"
+  | "ROADTRANSPORT"
+  | "TRAVELTRANSPORT"
+  | "DANGERCHAMICAL"
+  | "SMALL";
+
+/**
+ * 车辆库详情
+ */
+export interface VehicleDoc {
+  /**
+   * 车牌
+   */
+  plate?: string;
+  /**
+   * 使用性质
+   */
+  property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+  /**
+   * 车牌种类
+   */
+  plateType?: string;
+  /**
+   * 所属公司
+   */
+  company?: string;
+  /**
+   * 车主姓名
+   */
+  ownerName?: string;
+  /**
+   * 车主手机号
+   */
+  ownerPhone?: string;
+}
+
+/**
+ * 创建车辆库
+ */
+export interface VehicleCreateBody {
+  /**
+   * 车牌
+   */
+  plate: string;
+  /**
+   * 使用性质
+   */
+  property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+  /**
+   * 车牌种类
+   */
+  plateType: string;
+  /**
+   * 所属公司
+   */
+  company?: string;
+  /**
+   * 车主姓名
+   */
+  ownerName?: string;
+  /**
+   * 车主手机号
+   */
+  ownerPhone?: string;
+}
+
+/**
+ * 车辆库
+ */
+export type Vehicle = {
+  /**
+   * 车牌
+   */
+  plate?: string;
+  /**
+   * 使用性质
+   */
+  property?: "TWOANDONE" | "ROADTRANSPORT" | "TRAVELTRANSPORT" | "DANGERCHAMICAL" | "SMALL";
+  /**
+   * 车牌种类
+   */
+  plateType?: string;
+  /**
+   * 所属公司
+   */
+  company?: string;
+  /**
+   * 车主姓名
+   */
+  ownerName?: string;
+  /**
+   * 车主手机号
+   */
+  ownerPhone?: string;
 } & {
   /**
    * mongodb id

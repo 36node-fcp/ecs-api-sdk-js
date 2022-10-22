@@ -869,4 +869,92 @@ export default class SDK {
       });
     },
   };
+  /**
+   * vehicle's methods
+   */
+  vehicle = {
+    /**
+     * List vehicles
+     *
+     * @param {ListVehiclesRequest} req listVehicles request
+     * @returns {Promise<ListVehiclesResponse>} A paged array of vehicle
+     */
+    listVehicles: req => {
+      const { query } = req || {};
+
+      return fetch(`${this.base}/vehicles`, {
+        method: "GET",
+        query,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Create a vehicle
+     *
+     * @param {CreateVehicleRequest} req createVehicle request
+     * @returns {Promise<CreateVehicleResponse>} The vehicle created
+     */
+    createVehicle: req => {
+      const { body } = req || {};
+
+      if (!body) throw new Error("requetBody is required for createVehicle");
+
+      return fetch(`${this.base}/vehicles`, {
+        method: "POST",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Find vehicle by id
+     *
+     * @param {GetVehicleRequest} req getVehicle request
+     * @returns {Promise<GetVehicleResponse>} Expected response to a valid request
+     */
+    getVehicle: req => {
+      const { vehicleId } = req || {};
+
+      if (!vehicleId) throw new Error("vehicleId is required for getVehicle");
+
+      return fetch(`${this.base}/vehicles/${vehicleId}`, {
+        method: "GET",
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Update vehicle
+     *
+     * @param {UpdateVehicleRequest} req updateVehicle request
+     * @returns {Promise<UpdateVehicleResponse>} The vehicle
+     */
+    updateVehicle: req => {
+      const { vehicleId, body } = req || {};
+
+      if (!vehicleId)
+        throw new Error("vehicleId is required for updateVehicle");
+      if (!body) throw new Error("requetBody is required for updateVehicle");
+
+      return fetch(`${this.base}/vehicles/${vehicleId}`, {
+        method: "PUT",
+        body,
+        headers: { Authorization: this.auth },
+      });
+    },
+    /**
+     * Delete vehicle
+     *
+     * @param {DeleteVehicleRequest} req deleteVehicle request
+     */
+    deleteVehicle: req => {
+      const { vehicleId } = req || {};
+
+      if (!vehicleId)
+        throw new Error("vehicleId is required for deleteVehicle");
+
+      return fetch(`${this.base}/vehicles/${vehicleId}`, {
+        method: "DELETE",
+        headers: { Authorization: this.auth },
+      });
+    },
+  };
 }
